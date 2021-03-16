@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<typeAliases>
+		
+		<typeAlias alias="member" type="com.spring.biz.member.MemberVO"/>
+		<typeAlias alias="logvo" type="com.spring.biz.member.LoginVO"/>
+		<typeAlias alias="blog" type="com.spring.biz.blog.BlogVO"/>
+		<typeAlias alias="recipe" type="com.spring.biz.recipe.RecipeVO"/>
+		<typeAlias alias="mylike" type="com.spring.biz.mylike.MylikeVO"/>
+
+	</typeAliases>
+	
+</configuration>

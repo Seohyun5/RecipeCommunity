@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mylikeDAO">
+	
+	<insert id="insertRecipe" parameterType="recipe">
+		INSERT INTO RECIPE (SUBJECT, WRITTEN, CONTENT, FILENAME)
+		VALUES (#{subject}, #{written}, #{content}, #{filename})
+	</insert>
+	
+	<update id="updateRecipe" parameterType="recipe">
+		UPDATE RECIPE
+		SET SUBJECT = #{subject}, WRITTEN = #{written}, CONTENT = #{content}, FILENAME = #{filename}
+		WHERE RECIPENO = #{recipeno}
+	</update>
+	
+	<delete id="deleteRecipe" parameterType="int">
+		DELETE * FROM RECIPE WHERE RECIPENO = #{recipeno}
+	</delete>
+	
+	<select id="getRecipeList" resultType="recipe">
+		SELECT * FROM RECIPE
+	</select>
+	
+	<select id="getMyrecipeList" parameterType="String" resultType="recipe">
+		SELECT * FROM RECIPE WHERE ID = #{id}
+	</select>
+	
+	<select id="getRecipe" parameterType="int" resultType="recipe">
+		SELECT * FROM RECIPE WHERE RECIPENO = #{recipeno}
+	</select>
+	
+</mapper>
