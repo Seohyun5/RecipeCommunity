@@ -5,7 +5,7 @@
 <mapper namespace="memberDAO">
 	
 	<insert id="insertMember" parameterType="member">
-		INSERT INTO MEMBER (ID, PASSWORD, NAME, NICKNAME, EMAIL, PHONE)
+		INSERT INTO MEMBER 
 		VALUES (#{id}, #{password}, #{name}, #{nickname}, #{email}, #{phone})
 	</insert>
 	
@@ -27,8 +27,8 @@
 		SELECT * FROM MEMBER WHERE ID = #{id} and PASSWORD = #{password}
 	</select>
 	
-	<select id="checkId" parameterType="String">
-		SELECT COUNT(NAME) FROM MEMBER WHERE ID = #{id}
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT COUNT(ID) FROM MEMBER WHERE ID = #{id}
 	</select>
 	
 	<select id="checkNickname" parameterType="String">

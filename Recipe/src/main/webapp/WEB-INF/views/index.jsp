@@ -26,43 +26,27 @@
     <!-- Main Template Styles-->
     <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
-    <script src="resources/js/modernizr.min.js">
+    <script src="resources/js/modernizr.min.js"></script>
+    <script type="text/javascript">
     
 	$(document).ready(function () {
-		/* 회원가입 성공 후  model attribute에 바인딩한 객체를 확인, 한 번만 알리기 위해선 ajax사용이 답인가? */
-        /* var signedUp= '${signedUp.id}';
-        if(signedUp != ""){
-        	alert("회원가입을 축하합니다. 이메일 인증 후 사용할 수 있습니다.");
-        }
-        signedUp = ""; */
-		 $("#id").blur(function () {
+		
+		$("#id").blur(function () {
 			 var signup_id = $("#id").val();
 				console.log(signup_id);
+				
+				$.ajax({
+					type : 'POST',
+					url : '${pageContext.request.contextPath}/idCheck.do',
+					data : {"signup_id" : signup_id}
+				
 				if(signup_id != ""){
 			 	checkId(signup_id);
 				}else{
 					$("#idCheck_result").html("");
 				}
 		 });
-	/* 아이디 중복체크 == 성공!!
-		리턴값에 따른 후처리 필요
-	*/
-		/* $('#signup-form').submit(
-    		function () {
-    			var formData = $('#signup-form').serialize();
-    			alert("signUp() 실행");
-				$.ajax({
-					type : 'POST',
-					url : '${pageContext.request.contextPath}/signup.do',
-					data : formData,
-					dataType : 'json'
-				}).done(function (data) {
-					console.log(data);
-				}).fail(function (request, status, error) {
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				})
-			}
-		); */
+	
 		 function checkId(signup_id) {
 				$.ajax({
 					type : 'POST',
@@ -75,6 +59,7 @@
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			})
 		}
+		 
 		function idResult(data) {
 			if(data==0){
 				$("#idCheck_result").html("사용가능한 아이디입니다.").css("color","green");
@@ -134,6 +119,23 @@
         <!-- Toolbar Dropdown-->
         <div class="toolbar-dropdown">
           <!-- Account Section-->
+          
+          <!-- 로그인 후 로그아웃, 마이페이지버튼 -->
+          <c:if test="${!empty member}">
+	         <div class="toolbar-section" id="account">
+	         <form action="logout.do" method="post">
+	            <p class="text-muted text-sm mt-4"><h4>${member.id }<span>님</span><h4></p>
+	            <p class="text-muted text-sm mt-4">환영합니다</p>
+	            <button class="btn btn-primary" type="submit">Log Out</button>
+	            <!-- <a class="btn btn-primary mx-0 scale-up delay-1" href="shop-boxed-ls.jsp">Log Out</a> -->
+	            <!-- <button class="btn btn-primary btn-block" type="submit"><a href="account-wishlist.jsp">My page</button> -->
+
+	            <!-- <a class="btn btn-primary mx-0 scale-up delay-1" href="getWishlists.do?id=${member.id}">My page</a> -->
+
+	          </form>
+	         </div>
+          </c:if>
+          
           <c:if test="${empty member}">
           <div class="toolbar-section" id="account">
             <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -145,10 +147,12 @@
               	<!-- 로그인 -->
                 <form action="login.do" method="post" autocomplete="off" id="login-form">
                   <div class="form-group input-group">
-                    <input class="form-control" type="id" placeholder="ID" required><span class="input-group-addon"><i class="material-icons mail"></i></span>
+                    <input class="form-control" type="text" placeholder="ID" name="id" required>
+                    <span class="input-group-addon"><i class="material-icons mail"></i></span>
                   </div>
                   <div class="form-group input-group">
-                    <input class="form-control" type="password" placeholder="Password" required><span class="input-group-addon"><i class="material-icons lock"></i></span>
+                    <input class="form-control" type="password" placeholder="Password" name="password" required>
+                    <span class="input-group-addon"><i class="material-icons lock"></i></span>
                   </div>
                   <div class="custom-control custom-checkbox form-group">
                     <input class="custom-control-input" type="checkbox" id="logged" checked>

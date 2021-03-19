@@ -19,6 +19,11 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
+	public String idChk(int blogno) {
+		return blogDAO.idChk(blogno);
+	}
+	
+	@Override
 	public int updateBlog(BlogVO bvo) {
 		return blogDAO.updateBlog(bvo);
 	}

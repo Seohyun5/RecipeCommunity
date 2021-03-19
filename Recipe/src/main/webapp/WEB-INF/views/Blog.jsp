@@ -65,18 +65,21 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade show active" id="login" role="tabpanel">
-                <form autocomplete="off" id="login-form">
+                <!-- 로그인 -->
+                <form action="login.do" method="post" autocomplete="off" id="login-form">
                   <div class="form-group input-group">
-                    <input class="form-control" type="email" placeholder="Email" required><span class="input-group-addon"><i class="material-icons mail"></i></span>
+                    <input class="form-control" type="text" placeholder="ID" name="id" required>
+                    <span class="input-group-addon"><i class="material-icons mail"></i></span>
                   </div>
                   <div class="form-group input-group">
-                    <input class="form-control" type="password" placeholder="Password" required><span class="input-group-addon"><i class="material-icons lock"></i></span>
+                    <input class="form-control" type="password" placeholder="Password" name="password" required>
+                    <span class="input-group-addon"><i class="material-icons lock"></i></span>
                   </div>
                   <div class="custom-control custom-checkbox form-group">
                     <input class="custom-control-input" type="checkbox" id="logged" checked>
-                    <label class="custom-control-label" for="logged">Keep me logged in</label>
+                    <label class="custom-control-label" for="logged">로그인 유지</label>
                   </div>
-                  <button class="btn btn-primary btn-block" type="submit">Log In</button>
+                  <button class="btn btn-primary btn-block" type="submit">로그인</button>
                 </form>
               </div>
               <div class="tab-pane fade" id="signup" role="tabpanel">
@@ -124,7 +127,6 @@
       </article>
       </c:forEach>
       <hr>
-      
       <!-- Pagination-->
       <nav class="pagination">
         <div class="column">

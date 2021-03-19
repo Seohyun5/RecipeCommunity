@@ -21,6 +21,10 @@ public class BlogDAO {
 		return mybatis.insert("blogDAO.insertBlog", bvo);
 	}
 
+	public String idChk(int blogno) {
+		return mybatis.selectOne("blogDAO.idChk", blogno);
+	}
+	
 	public int updateBlog(BlogVO bvo) {
 		return mybatis.update("blogDAO.updateBlog", bvo);
 	}

@@ -5,9 +5,14 @@
 <mapper namespace="blogDAO">
 	
 	<insert id="insertBlog" parameterType="blog">
-		INSERT INTO BLOG (SUBJECT, WRITTEN, CONTENT, FILENAME)
-		VALUES (#{subject}, #{written}, #{content}, #{filename})
+		INSERT INTO BLOG (BLOGNO, SUBJECT, WRITTEN, CONTENT, FILENAME, DATE, ID)
+		VALUES (NO_BLOG.NEXTVAL, #{subject}, #{written}, #{content}, #{filename}, SYSDATE, #{id})
 	</insert>
+	
+	<select id="idChk" parameterType="int" resultType="String">
+		SELECT ID FROM BLOG
+		WHERE BLOGNO = #{blogno}
+	</select>
 	
 	<update id="updateBlog" parameterType="blog">
 		UPDATE BLOG

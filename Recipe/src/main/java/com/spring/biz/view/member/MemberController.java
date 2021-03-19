@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.spring.biz.member.LoginVO;
 import com.spring.biz.member.MemberService;
@@ -65,10 +66,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
-	public String logout(HttpSession session) {
-		session.removeAttribute("member");
-		session.invalidate();
-		return "main.do";
+	public String logout(HttpSession session, SessionStatus status) {
+		status.setComplete();
+		return "redirect:main.do";
 	}
 	
 }

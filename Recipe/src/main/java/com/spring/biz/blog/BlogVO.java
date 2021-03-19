@@ -87,7 +87,7 @@ public class BlogVO {
 		return id;
 	}
 	
-	public void setCount(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

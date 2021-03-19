@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface BlogService {
 	public int insertBlog(BlogVO bvo); //글쓰기
+	public String idChk(int blogno); //글 본인확인
 	public int updateBlog(BlogVO bvo); //글수정
 	public void deleteBlog(int blogno); //글삭제
 	public List<BlogVO> getBlogList(); //글 전체목록
