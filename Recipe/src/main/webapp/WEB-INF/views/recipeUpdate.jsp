@@ -40,8 +40,8 @@
       <nav class="site-menu">
         <ul>
           <li><a href="main.do"><span>Home</span></a></li>
-          <li class="active"><a href="getRecipeList.do"><span>Recipe</span></a></li>
-          <li><a href="getBlogList.do"><span>Blog</span></a></li>
+          <li><a href="getRecipeList.do"><span>Recipe</span></a></li>
+          <li class="active"><a href="getBlogList.do"><span>Blog</span></a></li>
           <li><a href="like.do"><span>Mypage</span></a>
             <ul class="sub-menu">
               <li><a href="myRecipe.do">My Recipe</a></li>
@@ -108,91 +108,36 @@
     <!-- Page Title-->
     <div class="page-title">
       <div class="container">
-        <h1>레시피 상세페이지(제목)</h1>
+        <h1>RECIPE UPDATE</h1>
       </div>
     </div>
     <!-- Page Content-->
-    <div class="container padding-bottom-2x mb-4">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <!-- Post Meta-->
-          <div class="blog-post-meta">
-            <div class="column"><span>by&nbsp;</span>${recipe.nickname }<span class="divider"></span><span>in&nbsp;</span><a href="#">${recipe.category }</a></div>
-            <div class="column"><span><i class="material-icons date_range"></i>&nbsp;${recipe.date }</span></div>
+    <div class="container padding-bottom-3x mb-2">
+    <!-- Write Form-->
+                
+      <form action="updateRecipe.do" class="row" method="post">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="comment-name">요리명</label>
+            <input class="form-control" type="text" id="recipetitle" placeholder=${recipe.subject } name="subject" required>
           </div>
-          <!-- Post Content -->
-          <h2 class="margin-top-2x">${recipe.subject }</h2>
-          <p>${recipe.content }</p>
-          <div class="col-12 text-right">
-          <button href="updateRjsp.do?recipeno=${recipe.recipeno }" class="btn btn-primary" type="submit">수정</button>
-          <button href="deleteRecipe.do?recipeno=${recipe.recipeno }" class="btn btn-primary" type="submit">삭제</button>
-          </div>
-          <!-- Post Tags + Share-->
-          <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 pb-4">
-            <div class="pb-2"><span class="d-inline-block align-middle text-sm text-muted">Share post:&nbsp;&nbsp;&nbsp;</span><a class="social-button shape-rounded sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-rounded sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-rounded sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-rounded sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
-          </div>
-          <!-- Post Navigation-->
-          <div class="entry-navigation">
-            <div class="column text-left"><a class="btn btn-outline-secondary btn-sm" href="#"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전</a></div>
-            <div class="column"><a class="btn btn-outline-secondary view-all" href="blog.html" data-toggle="tooltip" data-placement="top" title="All entries"><i class="material-icons menu"></i></a></div>
-            <div class="column text-right"><a class="btn btn-outline-secondary btn-sm" href="#">다음&nbsp;<i class="material-icons keyboard_arrow_right"></i></a></div>
-          </div>
-          <!-- Comments-->
-          <section class="padding-top-3x" id="comments">
-            <h3 class="padding-bottom-1x">댓글</h3>
-            <!-- Comment-->
-            <div class="comment">
-              <div class="comment-author-ava"><img src="img/reviews/01.jpg" alt="Comment author"></div>
-              <div class="comment-body">
-                <div class="comment-header">
-                  <h4 class="comment-title">Francis Burton</h4>
-                </div>
-                <p class="comment-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-                <div class="comment-footer">
-                  <div class="column"><span class="comment-meta">2 days ago</span></div>
-                  <div class="column"><a class="reply-link" href="#"><i class="material-icons reply"></i>Reply</a></div>
-                </div>
-                <!-- Comment reply-->
-                <div class="comment comment-reply">
-                  <div class="comment-author-ava"><img src="img/reviews/02.jpg" alt="Comment author"></div>
-                  <div class="comment-body">
-                    <div class="comment-header">
-                      <h4 class="comment-title">Maggie Scott</h4>
-                    </div>
-                    <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <div class="comment-footer"><span class="comment-meta">1 day ago</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Comment-->
-            <div class="comment">
-              <div class="comment-author-ava"><img src="img/reviews/03.jpg" alt="Comment author"></div>
-              <div class="comment-body">
-                <div class="comment-header">
-                  <h4 class="comment-title">Jacob Hammond</h4>
-                </div>
-                <p class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                <div class="comment-footer">
-                  <div class="column"><span class="comment-meta">5 days ago</span></div>
-                  <div class="column"><a class="reply-link" href="#"><i class="material-icons reply"></i>Reply</a></div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <!-- Comment Form-->
-          <form class="row" method="post">
-            <div class="col-12">
-              <div class="form-group">
-                <textarea class="form-control" rows="7" id="comment-text" placeholder="댓글을 입력하세요" required></textarea>
-              </div>
-            </div>
-            <div class="col-12 text-right">
-              <button class="btn btn-primary" type="submit">입력</button>
-            </div>
-          </form>
         </div>
-      </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="comment-text">내용</label>
+            <textarea class="form-control" rows="17" id="recipecontent" placeholder=${recipe.content } name="content" required></textarea>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="comment-name">첨부파일</label>
+            <input class="form-control" type="text" id="recipetitle" placeholder="제목을 입력하세요" required>
+          </div>
+        </div>
+        <div class="col-12 text-right">
+          <button class="btn btn-primary" type="submit">수정</button>
+        </div>
+      </form>
     </div>
     <!-- Site Footer-->
     <footer class="site-footer">

@@ -113,19 +113,18 @@
     </div>
     <!-- Page Content-->
     <div class="container padding-bottom-3x mb-2">
-    <!-- Comment Form-->
-                
-      <form class="row" method="post">
+    <!-- Comment Form--> 
+      <form action="insertRecipe.do" class="row" method="post">
         <div class="col-sm-12">
           <div class="form-group">
-            <label for="comment-name">제목</label>
-            <input class="form-control" type="text" id="blogtitle" placeholder="제목을 입력하세요" required>
+            <label for="comment-name">요리명</label>
+            <input class="form-control" type="text" id="recipetitle" placeholder="요리명을 입력하세요" name="subject" required>
           </div>
         </div>
         <div class="col-12">
           <div class="form-group">
             <label for="comment-text">내용</label>
-            <textarea class="form-control" rows="17" id="blogcontent" placeholder="내용을 입력하세요" required></textarea>
+            <textarea class="form-control" rows="17" id="recipecontent" placeholder="내용을 입력하세요" name="content" required></textarea>
           </div>
         </div>
         <div class="col-sm-12">

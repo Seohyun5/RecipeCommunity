@@ -20,7 +20,10 @@ public class RecipeDAO {
 	public int insertRecipe(RecipeVO rvo) {
 		return mybatis.insert("recipeDAO.insertRecipe", rvo);
 	}
-	
+
+	public String idChk(int recipeno) {
+		return mybatis.selectOne("recipeDAO.idChk", recipeno);
+	}
 	public int updateRecipe(RecipeVO rvo) {
 		return mybatis.update("recipeDAO.updateRecipe", rvo);
 	}

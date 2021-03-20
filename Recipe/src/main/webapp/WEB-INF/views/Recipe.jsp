@@ -127,19 +127,20 @@
           <!-- Products Grid-->
           <div class="row mb-2">
             <!-- Item-->
+            <c:forEach var="item" items="${recipeList}">
             <div class="col-lg-4 col-sm-6">
               <div class="product-card mb-30">
-                <div class="product-card-thumb"> <a class="product-card-link" href="shop-single.html"></a><img src="img/shop/th04.jpg" alt="Product">
+                <div class="product-card-thumb"> <a class="product-card-link" href="getRecipe.do?recipeno=${item.recipeno }"></a><img src="img/shop/th04.jpg" alt="Product">
                   <div class="product-card-buttons">
                     <button class="btn btn-white btn-sm btn-wishlist" data-toggle="tooltip" title="Wishlist"><i class="material-icons favorite_border"></i></button>
                   </div>
                 </div>
                 <div class="product-card-details">
-                  <h3 class="product-card-title"><a href="shop-single.html">File Cabinet</a></h3>
-                  <h4 class="product-card-price">$265.00</h4>
+                  <h3 class="product-card-title"><a href="getRecipe.do?recipeno=${item.recipeno }">${item.subject }</a></h3>
                 </div>
               </div>
             </div>
+            </c:forEach>
           </div>
           <!-- Pagination-->
           <nav class="pagination">

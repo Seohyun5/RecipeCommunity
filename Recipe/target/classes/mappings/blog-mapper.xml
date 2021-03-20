@@ -16,7 +16,7 @@
 	
 	<update id="updateBlog" parameterType="blog">
 		UPDATE BLOG
-		SET SUBJECT = #{subject}, WRITTEN = #{written}, CONTENT = #{content}, FILENAME = #{filename}
+		SET SUBJECT = #{subject}, CONTENT = #{content}, FILENAME = #{filename}
 		WHERE BLOGNO = #{blogno}
 	</update>
 	

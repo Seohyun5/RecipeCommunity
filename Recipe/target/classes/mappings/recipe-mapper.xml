@@ -9,9 +9,14 @@
 		VALUES (#{subject}, #{written}, #{content}, #{filename})
 	</insert>
 	
+	<select id="idChk" parameterType="int" resultType="String">
+		SELECT ID FROM RECIPE
+		WHERE RECIPENO = #{recipeno}
+	</select>
+	
 	<update id="updateRecipe" parameterType="recipe">
-		UPDATE RECIPE
-		SET SUBJECT = #{subject}, WRITTEN = #{written}, CONTENT = #{content}, FILENAME = #{filename}
+		UPDATE RECIPE 
+		SET SUBJECT = #{subject}, CONTENT = #{content}, FILENAME = #{filename}
 		WHERE RECIPENO = #{recipeno}
 	</update>
 	

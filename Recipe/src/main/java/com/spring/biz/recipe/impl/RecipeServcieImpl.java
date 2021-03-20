@@ -17,6 +17,11 @@ public class RecipeServcieImpl implements RecipeService {
 	public int insertRecipe(RecipeVO rvo) {
 		return recipeDAO.insertRecipe(rvo);
 	}
+	
+	@Override
+	public String idChk(int recipeno) {
+		return recipeDAO.idChk(recipeno);
+	}
 
 	@Override
 	public int updateRecipe(RecipeVO rvo) {

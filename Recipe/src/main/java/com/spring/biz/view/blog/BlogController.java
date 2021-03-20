@@ -53,10 +53,12 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/updateBlog.do")
-	public String updateBlog(BlogVO bvo) {
+	public String updateBlog(BlogVO bvo, Model model) {
 		System.out.println("===Controller의 updateBlog() 실행===");
 		System.out.println("bvo : " + bvo);
 		int result = blogService.updateBlog(bvo);
+		BlogVO blog = blogService.getBlog(bvo.getBlogno());
+		model.addAttribute("blog", blog);
 		return "blogSingle";
 	}
 	
@@ -97,6 +99,6 @@ public class BlogController {
 		System.out.println("===Controller의 getBlog() 실행===");
 		BlogVO bvo = blogService.getBlog(blogno);
 		model.addAttribute("blog", bvo);
-		return "Blog";
+		return "blogSingle";
 	}
 }
