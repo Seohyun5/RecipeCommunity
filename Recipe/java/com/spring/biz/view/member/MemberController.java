@@ -22,6 +22,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	private LoginVO logvo;
 
 	public MemberController() {
 		System.out.println("===MemberController() 객체 생성===");
@@ -68,7 +69,31 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
 	public String logout(HttpSession session, SessionStatus status) {
 		status.setComplete();
-		return "redirect:main.do";
+		return "redirect:index";
+	}
+	
+	@RequestMapping(value = "updateMember.do")
+	public String updateMember(MemberVO vo) {
+		memberService.updateMember(vo);
+		return "redirect:myInfo";
+	}
+	
+	@RequestMapping(value = "updateMyinfo.do")
+	public String updateMyinfo() {
+		return "checkPw";
+	}
+	
+	@RequestMapping(value = "checkPw.do")
+	public String checkPw(String password, HttpSession sess) {
+		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		logvo.setId(mvo.getId());
+		logvo.setPassword(password);
+		int chkpw = memberService.checkPw(logvo);
+		if(chkpw > 0) {
+			return "updateMyinfo";
+		}else {
+			return "redirect:checkPw";
+		}
 	}
 	
 }

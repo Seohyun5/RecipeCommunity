@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.spring.biz.member.MemberVO;
 import com.spring.biz.mylike.MylikeService;
 import com.spring.biz.mylike.MylikeVO;
+import com.spring.biz.recipe.RecipeVO;
 
 public class MylikeController {
 	@Autowired
@@ -22,14 +23,19 @@ public class MylikeController {
 	}
 	
 	@RequestMapping(value = "/insertMylike.do")
-	public String insertMylike(int recipeno, HttpSession sess) {
+	public String insertMylike(HttpSession sess) {
 		System.out.println("===Controller의 insertMylike() 실행===");
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		RecipeVO rvo = (RecipeVO) sess.getAttribute("recipe");
 		lvo.setId(mvo.getId());
-		lvo.setRecipeno(recipeno);
-		
-		mylikeService.insertLike(lvo);
-		return "상세레시피화면.jsp";
+		lvo.setRecipeno(rvo.getRecipeno());
+		int cnt = mylikeService.selectLike(lvo);
+		if(cnt == 0) {
+			mylikeService.insertLike(lvo);
+		}else {
+			mylikeService.deleteLike(lvo);
+		}
+		return "redirect:recipeSingle";
 	}
 	
 	@RequestMapping(value = "/deleteMylike.do")

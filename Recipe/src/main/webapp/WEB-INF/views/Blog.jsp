@@ -44,10 +44,10 @@
           <li class="active"><a href="getBlogList.do"><span>Blog</span></a></li>
           <li><a href="like.do"><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="myRecipe.do">My Recipe</a></li>
-              <li><a href="myBlog.do">My Blog</a></li>
-              <li><a href="like.do">Like</a></li>
-              <li><a href="myInfo.do">My Info</a></li>
+              <li><a href="getMyrecipeList.do">My Recipe</a></li>
+              <li><a href="getMyblogList.do">My Blog</a></li>
+              <li><a href="mylike.do">Like</a></li>
+              <li><a href="myinfo.do">My Info</a></li>
             </ul>
           </li>
         </ul>

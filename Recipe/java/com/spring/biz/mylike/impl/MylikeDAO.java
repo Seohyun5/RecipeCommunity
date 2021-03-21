@@ -17,8 +17,8 @@ public class MylikeDAO {
 		System.out.println("===MylikeDAO() 객체 생성===");
 	}
 	
-	public String selectLike(MylikeVO lvo) {
-		return mybatis.selectOne("mylikeDAO.selectLike", lvo);
+	public int selectMylike(MylikeVO lvo) {
+		return mybatis.selectOne("mylikeDAO.selectMylike", lvo);
 	}
 	
 	public void insertMylike(MylikeVO lvo) {

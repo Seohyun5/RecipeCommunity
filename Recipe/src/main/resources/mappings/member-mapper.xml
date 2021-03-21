@@ -34,4 +34,8 @@
 	<select id="checkNickname" parameterType="String">
 		SELECT COUNT(NAME) FROM MEMBER WHERE NICKNAME = #{nickname}
 	</select>
+	
+	<select id="checkPw" parameterType="logvo" resultType="int">
+		SELECT * FROM MEMBER WHERE ID = #{id} and PASSWORD = #{password}
+	</select>
 </mapper>

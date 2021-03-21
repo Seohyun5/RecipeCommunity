@@ -14,8 +14,8 @@ public class MylikeServiceImpl implements MylikeService {
 	private MylikeDAO mylikeDAO;
 	
 	@Override
-	public String selectLike(MylikeVO lvo) {
-		return mylikeDAO.selectLike(lvo);
+	public int selectLike(MylikeVO lvo) {
+		return mylikeDAO.selectMylike(lvo);
 	}
 
 	@Override

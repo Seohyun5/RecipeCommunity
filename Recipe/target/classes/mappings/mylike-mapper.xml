@@ -4,13 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mylikeDAO">
 	
+	<select id="selectLike" parameterType="mylike" resultType="int">
+		SELECT * FROM MYLIKE
+		WHERE ID = #{id} AND RECIPENO = #{recipeno}
+	</select>
+	
 	<insert id="insertMylike" parameterType="mylike">
-		INSERT INTO MYLIKE (ID, RECIPENO)
+		INSERT INTO MYLIKE
 		VALUES (#{id}, #{recipeno})
 	</insert>
 	
 	<delete id="deleteMylike" parameterType="mylike">
-		DELETE * FROM MYLIKE WHERE ID = #{id} AND RECIPENO = #{recipeno}
+		DELETE * FROM MYLIKE
+		WHERE ID = #{id} AND RECIPENO = #{recipeno}
 	</delete>
 	
 	<select id="getMylikeList" parameterType="String" resultType="recipe">

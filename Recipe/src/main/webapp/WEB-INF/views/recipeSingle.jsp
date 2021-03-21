@@ -129,7 +129,8 @@
           </div>
           <!-- Post Tags + Share-->
           <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 pb-4">
-            <div class="pb-2"><span class="d-inline-block align-middle text-sm text-muted">Share post:&nbsp;&nbsp;&nbsp;</span><a class="social-button shape-rounded sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-rounded sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-rounded sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-rounded sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
+            <div class="pb-2"></div>
+            <a class="btn btn-outline-secondary btn-sm text-danger" href="insertMylike.do"><i class="material-icons favorite_border"></i>&nbsp;LIKE</a>
           </div>
           <!-- Post Navigation-->
           <div class="entry-navigation">
