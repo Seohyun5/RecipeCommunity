@@ -2,15 +2,20 @@ package com.spring.biz.view.blog;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.UploadContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.biz.blog.BlogService;
 import com.spring.biz.blog.BlogVO;
@@ -26,13 +31,26 @@ public class BlogController {
 		System.out.println("===BlogController() 객체 생성===");
 	}
 	
-	@RequestMapping(value = "/insertBlog.do")
-	public String insertBlog(BlogVO bvo, HttpSession sess) {
+	@RequestMapping(value = "/insertBlog.do", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity insertBlog(BlogVO bvo, HttpSession sess, 
+			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		System.out.println("===Controller의 insertBlog() 실행===");
 		System.out.println("bvo : " + bvo);
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
 		bvo.setWritten(mvo.getNickname());
 		bvo.setId(mvo.getId());
+		
+		List<String> fileList = upload(multipartRequest);
+		List<ImageVO> imageFileList = new ArrayList<ImageVO>();
+		if(fileList != null && fileList.size() != 0) {
+			for(String fileName : fileList) {
+				ImageVO imageVO = new ImageVO();
+				imageVO.setImageFileName(fileName);
+				imageFileList.add(imageVO);
+			}
+			
+		}
 		int result = blogService.insertBlog(bvo);
 		return "blogSingle";
 	}
@@ -101,4 +119,5 @@ public class BlogController {
 		model.addAttribute("blog", bvo);
 		return "blogSingle";
 	}
+	
 }

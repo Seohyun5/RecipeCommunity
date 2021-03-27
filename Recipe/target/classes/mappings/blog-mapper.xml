@@ -6,8 +6,21 @@
 	
 	<insert id="insertBlog" parameterType="blog">
 		INSERT INTO BLOG (BLOGNO, SUBJECT, WRITTEN, CONTENT, FILENAME, DATE, ID)
-		VALUES (NO_BLOG.NEXTVAL, #{subject}, #{written}, #{content}, #{filename}, SYSDATE, #{id})
+		VALUES (NO_BLOG.NEXTVAL, #{subject}, #{written}, #{content}, null, SYSDATE, #{id})
 	</insert>
+	
+	<insert id="insertNewBImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL ">
+			INTO BLOGIMG(IMAGEFILENO, IMAGEFILENAME, REGDATE, BLOGNO) 
+			VALUES (#{item.imageFileNo}, #{item.imageFileName}, SYSDATE, #{item.blogno})
+		</foreach>
+	</insert>
+	
+	<select id="selectNewBImageFileNO" resultType="int">
+		<![CDATA[
+			SELECT NVL(MAX(IMAGEFILENO),0) FROM BLOGIMG
+		]]>
+	</select>
 	
 	<select id="idChk" parameterType="int" resultType="String">
 		SELECT ID FROM BLOG

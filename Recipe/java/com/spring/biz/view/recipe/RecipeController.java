@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +39,7 @@ public class RecipeController {
 	}
 	
 	@RequestMapping(value = "/updateRjsp.do", method=RequestMethod.GET)
-	public String updateRjsp(@RequestParam int recipeno, Model model, HttpSession sess) {
+	public String updateRjsp(@RequestParam("recipeno") int recipeno, Model model, HttpSession sess) {
 		System.out.println("===Controller의 updateRjsp() 실행===");
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
 		String logid = mvo.getId();
@@ -63,9 +64,9 @@ public class RecipeController {
 	}
 	
 	@RequestMapping(value = "/deleteRecipe.do", method=RequestMethod.GET)
-	public String deleteRecipe(@RequestParam int recipeno, HttpSession sess) {
+	public String deleteRecipe(int recipeno, @ModelAttribute("member") MemberVO mvo) {
 		System.out.println("===Controller의 deleteRecipe() 실행===");
-		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+//		MemberVO mvo = (MemberVO) sess.getAttribute("member");
 		String logid = mvo.getId();
 		String recipeid = recipeService.idChk(recipeno);
 		if(logid.equals(recipeid)) {

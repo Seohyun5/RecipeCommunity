@@ -32,32 +32,26 @@
 	$(document).ready(function () {
 		
 		$("#id").blur(function () {
-			 var signup_id = $("#id").val();
-				console.log(signup_id);
-				
-				$.ajax({
-					type : 'POST',
-					url : '${pageContext.request.contextPath}/idCheck.do',
-					data : {"signup_id" : signup_id}
-				
-				if(signup_id != ""){
-			 	checkId(signup_id);
-				}else{
-					$("#idCheck_result").html("");
-				}
-		 });
+			 var id = $("#id").val();
+			console.log(id);
+			if(id != ""){
+				checkId(id);
+			}else{
+				$("#idCheck_result").html("");
+			}
+		});
 	
-		 function checkId(signup_id) {
+		 function checkId(id) {
 				$.ajax({
 					type : 'POST',
 					url : '${pageContext.request.contextPath}/idCheck.do',
-					data : {"signup_id" : signup_id}
+					data : {"id" : id}
 				}).done(function (data) {
-				console.log(data);
-				idResult(data);
-			}).fail(function (request,status,error) {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			})
+					console.log(data);
+					idResult(data);
+				}).fail(function (request,status,error) {
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				})
 		}
 		 
 		function idResult(data) {
@@ -68,16 +62,16 @@
 			}
 		}
 		$("#pw").blur(function () {
-			 	pwCheck();
-		 	});
+		 	pwCheck();
+		});
 		$("#pw2").blur(function () {
 			pwCheck();
 		});
 		function pwCheck() {
 			var pw1 = $("#pw").val();
-  			 var pw2 = $("#pw2").val();
-				console.log(pw1);
-				if(pw2 == "" || pw1 ==""){
+  			var pw2 = $("#pw2").val();
+			console.log(pw1);
+				if(pw2 == "" || pw1 == ""){
 					$("#pwCheck_result").html("비밀번호를 입력해주세요").css("color","red");
 				}else if(pw1 == pw2){
 					$("#pwCheck_result").html("비밀번호가 일치합니다").css("color","green");

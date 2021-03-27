@@ -44,10 +44,10 @@ public class MemberController {
 		if(result>0) {
 			System.out.println("회원가입 완료");
 			session.setAttribute("signedUp", vo);
-			return "index";
+			return "redirect:main.do";
 		}else {
 			System.out.println("회원가입 실패");
-			return "index";
+			return "main.do";
 		}
 	}
 	
