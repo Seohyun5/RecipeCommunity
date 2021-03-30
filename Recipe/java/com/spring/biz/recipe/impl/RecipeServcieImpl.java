@@ -1,6 +1,7 @@
 package com.spring.biz.recipe.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class RecipeServcieImpl implements RecipeService {
 	private RecipeDAO recipeDAO;
 	
 	@Override
-	public int insertRecipe(RecipeVO rvo) {
-		return recipeDAO.insertRecipe(rvo);
+	public int insertRecipe(Map recipeMap) {
+		return recipeDAO.insertRecipe(recipeMap);
 	}
 	
 	@Override

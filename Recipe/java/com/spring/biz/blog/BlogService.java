@@ -1,9 +1,10 @@
 package com.spring.biz.blog;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BlogService {
-	public int insertBlog(BlogVO bvo); //글쓰기
+	public int insertBlog(Map blogMap); //글쓰기
 	public String idChk(int blogno); //글 본인확인
 	public int updateBlog(BlogVO bvo); //글수정
 	public void deleteBlog(int blogno); //글삭제

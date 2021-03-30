@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="blogDAO">
 	
-	<insert id="insertBlog" parameterType="blog">
+	<insert id="insertBlog" parameterType="Map">
 		INSERT INTO BLOG (BLOGNO, SUBJECT, WRITTEN, CONTENT, FILENAME, DATE, ID)
 		VALUES (NO_BLOG.NEXTVAL, #{subject}, #{written}, #{content}, null, SYSDATE, #{id})
 	</insert>

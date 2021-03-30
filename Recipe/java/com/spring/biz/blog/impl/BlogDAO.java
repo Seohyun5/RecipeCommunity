@@ -1,9 +1,11 @@
 package com.spring.biz.blog.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.spring.biz.blog.BlogVO;
@@ -17,8 +19,8 @@ public class BlogDAO {
 		System.out.println("===BlogDAO() 객체 생성===");
 	}
 	
-	public int insertBlog(BlogVO bvo) {
-		return mybatis.insert("blogDAO.insertBlog", bvo);
+	public int insertBlog(Map blogMap) throws DataAccessException {
+		return mybatis.insert("blogDAO.insertBlog", blogMap);
 	}
 
 	public String idChk(int blogno) {

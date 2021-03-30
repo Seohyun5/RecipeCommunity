@@ -154,7 +154,10 @@
                 <li><a href="#">12</a></li>
               </ul>
             </div>
-            <div class="column text-right hidden-xs-down"><a class="btn btn-outline-secondary btn-sm" href="#">Next&nbsp;<i class="material-icons keyboard_arrow_right"></i></a></div>
+            <div class="column text-right hidden-xs-down">
+              <a class="btn btn-outline-secondary btn-sm" href="#">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i>
+              <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
+            </div>
           </nav>
         </div>
         <!-- Sidebar          -->

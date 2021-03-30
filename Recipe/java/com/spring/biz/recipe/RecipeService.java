@@ -1,9 +1,10 @@
 package com.spring.biz.recipe;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RecipeService {
-	int insertRecipe(RecipeVO rvo); //레시피쓰기
+	int insertRecipe(Map recipeMap); //레시피쓰기
 	public String idChk(int recipeno); //글 본인확인
 	int updateRecipe(RecipeVO rvo); //레시피수정
 	void deleteRecipe(int recipeno); //레시피삭제

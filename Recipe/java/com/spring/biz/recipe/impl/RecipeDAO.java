@@ -1,6 +1,7 @@
 package com.spring.biz.recipe.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class RecipeDAO {
 		System.out.println("===RecipeDAO() 객체 생성===");
 	}
 	
-	public int insertRecipe(RecipeVO rvo) {
-		return mybatis.insert("recipeDAO.insertRecipe", rvo);
+	public int insertRecipe(Map recipeMap) {
+		return mybatis.insert("recipeDAO.insertRecipe", recipeMap);
 	}
 
 	public String idChk(int recipeno) {

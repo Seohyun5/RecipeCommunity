@@ -8,26 +8,24 @@ public class RecipeVO {
 	private String subject;
 	private String written;
 	private String content;
-	private String filename;
 	private Date date;
-	private int count;
+//	private int count;
 	private String id;
 	
 	public RecipeVO() {
 		super();
 	}
 
-	public RecipeVO(int recipeno, String category, String subject, String written, String content, String filename,
-			Date date, int count, String id) {
+	public RecipeVO(int recipeno, String category, String subject, String written, String content,
+			Date date, String id) {
 		super();
 		this.recipeno = recipeno;
 		this.category = category;
 		this.subject = subject;
 		this.written = written;
 		this.content = content;
-		this.filename = filename;
 		this.date = date;
-		this.count = count;
+//		this.count = count;
 		this.id = id;
 	}
 
@@ -71,14 +69,6 @@ public class RecipeVO {
 		this.content = content;
 	}
 
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
 	public Date getDate() {
 		return date;
 	}
@@ -87,13 +77,13 @@ public class RecipeVO {
 		this.date = date;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
+//	public int getCount() {
+//		return count;
+//	}
+//
+//	public void setCount(int count) {
+//		this.count = count;
+//	}
 	
 	public String getId() {
 		return id;

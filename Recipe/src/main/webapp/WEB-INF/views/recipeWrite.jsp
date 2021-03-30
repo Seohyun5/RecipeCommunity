@@ -115,6 +115,20 @@
     <div class="container padding-bottom-3x mb-2">
     <!-- Comment Form--> 
       <form action="insertRecipe.do" class="row" method="post">
+      	<div class="col-sm-6">
+          <div class="form-group">
+            <label for="select-input">카테고리 </label>
+            <select name="category" class="form-control" id="select-input" required>
+              <option>카테고리를 선택해주세요 </option>
+              <option value="한식">한식</option>
+              <option value="양식">양식</option>
+              <option value="일식">일식</option>
+              <option value="중식">중식</option>
+              <option value="제과제빵">제과제빵</option>
+              <option value="음료">음료</option>
+            </select>
+          </div>
+        </div>
         <div class="col-sm-12">
           <div class="form-group">
             <label for="comment-name">요리명</label>
@@ -127,12 +141,15 @@
             <textarea class="form-control" rows="17" id="recipecontent" placeholder="내용을 입력하세요" name="content" required></textarea>
           </div>
         </div>
-        <div class="col-sm-12">
-          <div class="form-group">
-            <label for="comment-name">첨부파일</label>
-            <input class="form-control" type="text" id="blogtitle" placeholder="제목을 입력하세요" required>
-          </div>
-        </div>
+        <div class="col-sm-6">
+              <div class="form-group">
+                <label for="checkout-ln">첨부파일</label>
+                <div class="custom-file">
+                <input name = "main_image" class="custom-file-input" type="file" id="file-input1" required>
+                <label class="custom-file-label" for="file-input1"></label>
+              </div>
+              </div>
+            </div>
         <div class="col-12 text-right">
           <button class="btn btn-primary" type="submit">등록</button>
         </div>

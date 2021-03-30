@@ -1,6 +1,7 @@
 package com.spring.biz.blog.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class BlogServiceImpl implements BlogService {
 	private BlogDAO blogDAO;
 	
 	@Override
-	public int insertBlog(BlogVO bvo) {
-		return blogDAO.insertBlog(bvo); 
+	public int insertBlog(Map blogMap) {
+		return blogDAO.insertBlog(blogMap); 
 	}
 
 	@Override
