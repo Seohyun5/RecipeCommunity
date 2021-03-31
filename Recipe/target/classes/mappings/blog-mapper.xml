@@ -5,14 +5,14 @@
 <mapper namespace="blogDAO">
 	
 	<insert id="insertBlog" parameterType="Map">
-		INSERT INTO BLOG (BLOGNO, SUBJECT, WRITTEN, CONTENT, FILENAME, DATE, ID)
-		VALUES (NO_BLOG.NEXTVAL, #{subject}, #{written}, #{content}, null, SYSDATE, #{id})
+		INSERT INTO BLOG (BLOGNO, SUBJECT, WRITTEN, CONTENT, DATE, ID)
+		VALUES (NO_BLOG.NEXTVAL, #{subject}, #{written}, #{content}, SYSDATE, #{id})
 	</insert>
 	
-	<insert id="insertNewBImage" parameterType="java.util.Map">
+	<insert id="insertNewBImage" parameterType="Map">
 		<foreach item="item" collection="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL ">
-			INTO BLOGIMG(IMAGEFILENO, IMAGEFILENAME, REGDATE, BLOGNO) 
-			VALUES (#{item.imageFileNo}, #{item.imageFileName}, SYSDATE, #{item.blogno})
+			INTO BLOGIMG(IMAGEFILENO, IMAGEFILENAME, BLOGNO) 
+			VALUES (#{item.imageFileNo}, #{item.imageFileName}, #{item.blogno})
 		</foreach>
 	</insert>
 	

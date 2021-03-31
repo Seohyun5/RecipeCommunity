@@ -114,7 +114,7 @@
     <!-- Page Content-->
     <div class="container padding-bottom-3x mb-2">
     <!-- Comment Form--> 
-      <form action="insertRecipe.do" class="row" method="post">
+      <form action="insertRecipe.do" class="row" method="post" enctype="multipart/form-data">
       	<div class="col-sm-6">
           <div class="form-group">
             <label for="select-input">카테고리 </label>

@@ -5,9 +5,13 @@
 <mapper namespace="recipeDAO">
 	
 	<insert id="insertRecipe" parameterType="Map">
-		INSERT INTO RECIPE (SUBJECT, WRITTEN, CONTENT, FILENAME)
-		VALUES (#{subject}, #{written}, #{content}, NULL)
+		INSERT INTO RECIPE (CATEGORY, SUBJECT, WRITTEN, CONTENT, ID)
+		VALUES (#{category}, #{subject}, #{written}, #{content}, #{id})
 	</insert>
+	
+	<!-- <insert id="insertRimage" parameterType="rimage">
+		INSERT INTO	
+	</insert> -->
 	
 	<select id="idChk" parameterType="int" resultType="String">
 		SELECT ID FROM RECIPE
