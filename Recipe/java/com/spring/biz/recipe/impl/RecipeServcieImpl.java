@@ -16,7 +16,10 @@ public class RecipeServcieImpl implements RecipeService {
 	
 	@Override
 	public int insertRecipe(Map recipeMap) {
-		return recipeDAO.insertRecipe(recipeMap);
+		int recipeno = recipeDAO.insertRecipe(recipeMap);
+		recipeMap.put("recipeno", recipeno);
+		recipeDAO.
+		return recipeno;
 	}
 	
 	@Override
