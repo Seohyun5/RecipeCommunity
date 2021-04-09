@@ -1,11 +1,13 @@
 package com.spring.biz.recipe.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.biz.recipe.RecipeImageVO;
 import com.spring.biz.recipe.RecipeService;
 import com.spring.biz.recipe.RecipeVO;
 
@@ -17,8 +19,11 @@ public class RecipeServcieImpl implements RecipeService {
 	@Override
 	public int insertRecipe(Map recipeMap) {
 		int recipeno = recipeDAO.insertRecipe(recipeMap);
-		recipeMap.put("recipeno", recipeno);
-		recipeDAO.
+		ArrayList<RecipeImageVO> rimageFileList = (ArrayList) recipeMap.get("rimageFileList");
+		for(RecipeImageVO rimageVO : rimageFileList) {
+			rimageVO.setRecipeno(recipeno);
+		}
+		recipeDAO.insertNewImage(rimageFileList);
 		return recipeno;
 	}
 	

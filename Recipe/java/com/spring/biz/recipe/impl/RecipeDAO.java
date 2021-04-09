@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -23,18 +22,16 @@ public class RecipeDAO {
 	}
 	
 	public int insertRecipe(Map recipeMap) throws DataAccessException {
-		return mybatis.insert("recipeDAO.insertRecipe", recipeMap);
+		mybatis.insert("recipeDAO.insertRecipe", recipeMap);
+		return (Integer) recipeMap.get("recipeno");
 	}
 	
-	public void insertNewImage(Map recipeMap) throws DataAccessException {
-		List<RecipeImageVO> rimageFileList = (ArrayList)recipeMap.get("rimageFileList");
-		int recipeno = (Integer)recipeMap.get("recipeno");
-		int rimageFileNO = selectNewImageFileNo();
-		for(RecipeImageVO rimageVO : rimageFileList) {
-			rimageVO.setImageFileNO(++rimageFileNO);
-			rimageVO.setRecipeno(recipeno);
+	public void insertNewImage(List rimageFileList) throws DataAccessException {
+		for(int i=0; i<rimageFileList.size(); i++) {
+			RecipeImageVO rimageVO=(RecipeImageVO) rimageFileList.get(i);
+			System.out.println(rimageVO);
+			mybatis.insert("recipeDAO.insertRimage", rimageVO);
 		}
-		SqlSession.insert("mapper.recipe.insertRimage", rimageFileList);
 	}
 
 	public String idChk(int recipeno) {

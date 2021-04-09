@@ -11,6 +11,8 @@
 		<typeAlias alias="blog" type="com.spring.biz.blog.BlogVO"/>
 		<typeAlias alias="recipe" type="com.spring.biz.recipe.RecipeVO"/>
 		<typeAlias alias="mylike" type="com.spring.biz.mylike.MylikeVO"/>
+		<typeAlias alias="rimage" type="com.spring.biz.recipe.RecipeImageVO"/>
+		<typeAlias alias="bimage" type="com.spring.biz.blog.BlogImageVO"/>
 
 	</typeAliases>
 	

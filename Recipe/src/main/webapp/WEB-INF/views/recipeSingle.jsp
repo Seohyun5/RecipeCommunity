@@ -117,15 +117,15 @@
         <div class="col-lg-10">
           <!-- Post Meta-->
           <div class="blog-post-meta">
-            <div class="column"><span>by&nbsp;</span>${recipe.nickname }<span class="divider"></span><span>in&nbsp;</span><a href="#">${recipe.category }</a></div>
+            <div class="column"><span>by&nbsp;</span>${recipe.written }<span class="divider"></span><span>in&nbsp;</span><a href="#">${recipe.category }</a></div>
             <div class="column"><span><i class="material-icons date_range"></i>&nbsp;${recipe.date }</span></div>
           </div>
           <!-- Post Content -->
           <h2 class="margin-top-2x">${recipe.subject }</h2>
           <p>${recipe.content }</p>
           <div class="col-12 text-right">
-          <button href="updateRjsp.do?recipeno=${recipe.recipeno }" class="btn btn-primary" type="submit">수정</button>
-          <button href="deleteRecipe.do?recipeno=${recipe.recipeno }" class="btn btn-primary" type="submit">삭제</button>
+          <a href="updateRjsp.do?recipeno=${recipe.recipeno }" class="btn btn-primary btn-sm">수정</a>
+          <a href="deleteRecipe.do?recipeno=${recipe.recipeno }" class="btn btn-primary btn-sm">삭제</a>
           </div>
           <!-- Post Tags + Share-->
           <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 pb-4">

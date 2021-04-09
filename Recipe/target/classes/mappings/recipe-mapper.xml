@@ -5,13 +5,22 @@
 <mapper namespace="recipeDAO">
 	
 	<insert id="insertRecipe" parameterType="Map">
-		INSERT INTO RECIPE (CATEGORY, SUBJECT, WRITTEN, CONTENT, ID)
-		VALUES (#{category}, #{subject}, #{written}, #{content}, #{id})
+		<selectKey resultType="int" keyProperty="recipeno" order="BEFORE">
+			select sq_recipeno.nextval from dual
+		</selectKey>
+		INSERT INTO RECIPE (RECIPENO, CATEGORY, SUBJECT, WRITTEN, CONTENT, REGDATE, ID)
+		VALUES (#{recipeno}, #{category}, #{subject}, #{written}, #{content}, SYSDATE, #{id})
 	</insert>
 	
-	<!-- <insert id="insertRimage" parameterType="rimage">
-		INSERT INTO	
-	</insert> -->
+	<insert id="insertRimage" parameterType="rimage">
+		<selectKey resultType="int" keyProperty="rimageFileNo" order="BEFORE">
+			select sq_rimgno.nextval from dual
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RECIPEIMG (RIMAGEFILENO, RIMAGEFILENAME, RECIPENO) 
+		VALUES (#{rimageFileNo}, #{rimageFileName}, #{recipeno})
+		]]>
+	</insert>
 	
 	<select id="idChk" parameterType="int" resultType="String">
 		SELECT ID FROM RECIPE
@@ -25,7 +34,7 @@
 	</update>
 	
 	<delete id="deleteRecipe" parameterType="int">
-		DELETE * FROM RECIPE WHERE RECIPENO = #{recipeno}
+		DELETE FROM RECIPE WHERE RECIPENO = #{recipeno}
 	</delete>
 	
 	<select id="getRecipeList" resultType="recipe">

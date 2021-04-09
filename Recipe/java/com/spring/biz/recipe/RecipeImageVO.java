@@ -6,32 +6,25 @@ import java.util.Date;
 
 public class RecipeImageVO {
 	
-	private int imageFileNO;
-	private String imageFileName;
-	private Date regDate;
+	private int rimageFileNO;
+	private String rimageFileName;
 	private int recipeno;
 	
-	public int getImageFileNO() {
-		return imageFileNO;
+	public int getRimageFileNO() {
+		return rimageFileNO;
 	}
-	public void setImageFileNO(int imageFileNO) {
-		this.imageFileNO = imageFileNO;
+	public void setRimageFileNO(int rimageFileNO) {
+		this.rimageFileNO = rimageFileNO;
 	}
-	public String getImageFileName() {
-		return imageFileName;
+	public String getRimageFileName() {
+		return rimageFileName;
 	}
-	public void setImageFileName(String imageFileName) {
+	public void setRimageFileName(String rimageFileName) {
 		try {
-			this.imageFileName = URLEncoder.encode(imageFileName, "UTF-8");
+			this.rimageFileName = URLEncoder.encode(rimageFileName, "UTF-8");
 		}catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-	}
-	public Date getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
 	}
 	public int getRecipeno() {
 		return recipeno;

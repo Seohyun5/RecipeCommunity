@@ -46,10 +46,11 @@ public class RecipeController {
 	
 	@RequestMapping(value = "/insertRecipe.do", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity insertRecipe(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) 
+	public String insertRecipe(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) 
 			throws Exception {
 		System.out.println("===Controller의 insertRecipe() 실행===");
 		
+		String rimageFileName = null;
 		Map recipeMap = new HashMap();
 		Enumeration enu = multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()) {
@@ -67,23 +68,25 @@ public class RecipeController {
 		
 		List<String> rfileList = upload(multipartRequest);
 		List<RecipeImageVO> rimageFileList = new ArrayList<RecipeImageVO>();
+		
 		if(rfileList != null && rfileList.size() != 0) {
 			for(String rfileName : rfileList) {
 				RecipeImageVO rimageVO = new RecipeImageVO();
-				rimageVO.setImageFileName(rfileName);
+				rimageVO.setRimageFileName(rfileName);
 				rimageFileList.add(rimageVO);
 			}
 			
 			recipeMap.put("rimageFileList", rimageFileList);
 		}
 		
-		String message = new String();
+		String message = null;
+		int recipeno = 0;
 		
 		try {
-			int recipeno = recipeService.insertRecipe(recipeMap);
+			recipeno = recipeService.insertRecipe(recipeMap);
 			if(rimageFileList!=null && rimageFileList.size()!=0) {
 				for(RecipeImageVO rimageVO : rimageFileList) {
-					String rimageFileName = rimageVO.getImageFileName();
+					rimageFileName = rimageVO.getRimageFileName();
 					File srcFile = new File(RECIPE_IMAGE_REPO + "\\" + "temp" + "\\" + rimageFileName);
 					File destDir = new File(RECIPE_IMAGE_REPO + "\\" + recipeno);
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
@@ -96,7 +99,7 @@ public class RecipeController {
 		}catch(Exception e) {
 			if(rimageFileList!=null && rimageFileList.size()!=0) {
 				for(RecipeImageVO rimageVO : rimageFileList) {
-					String rimageFileName = rimageVO.getImageFileName();
+					rimageFileName = rimageVO.getRimageFileName();
 					File srcFile = new File(RECIPE_IMAGE_REPO + "\\" + "temp" + "\\" + rimageFileName);
 					srcFile.delete();
 				}
@@ -110,7 +113,7 @@ public class RecipeController {
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		ResponseEntity resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-		return resEnt;
+		return "redirect:/getRecipe.do?recipeno="+recipeno;
 	}
 	
 	private List<String> upload(MultipartHttpServletRequest multipartRequest)
@@ -144,7 +147,10 @@ public class RecipeController {
 	@RequestMapping(value = "/updateRjsp.do", method=RequestMethod.GET)
 	public String updateRjsp(@RequestParam("recipeno") int recipeno, Model model, HttpSession sess) {
 		System.out.println("===Controller의 updateRjsp() 실행===");
+		//로그인 안 한 상태에서 수정 누르면 바로 널포인트익셉션 에러
+		//if문으로 로그인/아웃 나눠서 안내문 띄우거나 해야함
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		System.out.println(mvo.getId());
 		String logid = mvo.getId();
 		String recipeid = recipeService.idChk(recipeno);
 		if(logid.equals(recipeid)) {
@@ -167,14 +173,17 @@ public class RecipeController {
 	}
 	
 	@RequestMapping(value = "/deleteRecipe.do", method=RequestMethod.GET)
-	public String deleteRecipe(int recipeno, @ModelAttribute("member") MemberVO mvo) {
+	public String deleteRecipe(int recipeno, Model model, HttpSession sess) {
+		//파라미터에 @ModelAttribute("member") MemberVO mvo 넣었는데 작동 안 함
 		System.out.println("===Controller의 deleteRecipe() 실행===");
-//		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		System.out.println(mvo.getId());
 		String logid = mvo.getId();
 		String recipeid = recipeService.idChk(recipeno);
+		System.out.println(recipeid);
 		if(logid.equals(recipeid)) {
 			recipeService.deleteRecipe(recipeno);
-			return "Recipe";
+			return "redirect:/getRecipeList.do";
 		}else {
 			return "redirect:recipeSingle";
 		}
