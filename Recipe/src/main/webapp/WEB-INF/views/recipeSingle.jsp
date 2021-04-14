@@ -123,6 +123,11 @@
           <!-- Post Content -->
           <h2 class="margin-top-2x">${recipe.subject }</h2>
           <p>${recipe.content }</p>
+          <c:forEach var="rimg" items="${rimageList }">
+          	<div class="gallery-item" data-hash="one">
+            	<a href="/rdownload.do?recipeno=${recipe.recipeno }&rfilename=${rimg.rimageFileName }" data-size="555x480"> 
+                <img src="<c:url value='/rdownload.do?recipeno=${recipe.recipeno }&rfilename=${rimg.rimageFileName }' />" alt="Recipe"></a></div>
+          </c:forEach>
           <div class="col-12 text-right">
           <a href="updateRjsp.do?recipeno=${recipe.recipeno }" class="btn btn-primary btn-sm">수정</a>
           <a href="deleteRecipe.do?recipeno=${recipe.recipeno }" class="btn btn-primary btn-sm">삭제</a>

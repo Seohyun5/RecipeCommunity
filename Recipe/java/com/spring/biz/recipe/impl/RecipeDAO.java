@@ -57,4 +57,7 @@ public class RecipeDAO {
 		return mybatis.selectOne("recipeDAO.getRecipe", recipeno);
 	}
 	
+	public List<RecipeImageVO> getRimageList(int recipeno){
+		return mybatis.selectList("recipeDAO.getRimageList", recipeno);
+	}
 }

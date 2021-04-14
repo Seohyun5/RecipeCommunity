@@ -11,4 +11,5 @@ public interface RecipeService {
 	List<RecipeVO> getRecipeList(); //레시피 전체목록
 	List<RecipeVO> getMyrecipeList(String id); //나의 레시피 목록
 	RecipeVO getRecipe(int recipeno); //레시피 상세조회
+	List<RecipeImageVO> getRimageList(int recipeno); //레시피 이미지 조회
 }

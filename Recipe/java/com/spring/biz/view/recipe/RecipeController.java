@@ -1,6 +1,7 @@
 package com.spring.biz.view.recipe;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -46,11 +48,12 @@ public class RecipeController {
 	
 	@RequestMapping(value = "/insertRecipe.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertRecipe(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) 
+	public String insertRecipe(MultipartHttpServletRequest multipartRequest, HttpServletResponse response, Model model) 
 			throws Exception {
 		System.out.println("===Controller의 insertRecipe() 실행===");
 		
 		String rimageFileName = null;
+		
 		Map recipeMap = new HashMap();
 		Enumeration enu = multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()) {
@@ -113,7 +116,9 @@ public class RecipeController {
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		ResponseEntity resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-		return "redirect:/getRecipe.do?recipeno="+recipeno;
+		List<RecipeVO> list = recipeService.getRecipeList();
+		model.addAttribute("recipeList", list);
+		return "Recipe";
 	}
 	
 	private List<String> upload(MultipartHttpServletRequest multipartRequest)
@@ -212,6 +217,23 @@ public class RecipeController {
 		System.out.println("===Controller의 getRecipe() 실행===");
 		RecipeVO rvo = recipeService.getRecipe(recipeno);
 		model.addAttribute("recipe", rvo);
+		List<RecipeImageVO> rimageFileList = recipeService.getRimageList(recipeno);
+		model.addAttribute("rimageList", rimageFileList);
 		return "recipeSingle";
+	}
+	
+	@RequestMapping(value = "/rdownload.do", method = RequestMethod.GET)
+	public void rdownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("레시피 이미지 download!!!");
+		String recipeno = request.getParameter("recipeno");
+		String filename = request.getParameter("filename");
+		OutputStream out = response.getOutputStream();
+		String filepath = RECIPE_IMAGE_REPO + "\\" + recipeno + "\\" + filename;
+		File rimage = new File(filepath);
+		if(rimage.exists()) {
+			System.out.println(rimage.getName());
+		}
+		
+		
 	}
 }

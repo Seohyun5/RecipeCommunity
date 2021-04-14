@@ -27,6 +27,13 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
     <script src="resources/js/modernizr.min.js"></script>
+    <script type="text/javascript">
+    var cnt=1;
+    function fn_addFile(){
+    	$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
+    	cnt++;
+    }
+    </script>
   </head>
   <!-- Body-->
   <body>
@@ -145,7 +152,7 @@
               <div class="form-group">
                 <label for="checkout-ln">첨부파일</label>
                 <div class="custom-file">
-                <input name = "main_image" class="custom-file-input" type="file" id="file-input1" required>
+                <input name = "main_image" class="custom-file-input" type="button" id="file-input1" onClick="fn_addFile()" required>
                 <label class="custom-file-label" for="file-input1"></label>
               </div>
               </div>

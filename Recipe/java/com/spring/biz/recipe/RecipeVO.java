@@ -9,7 +9,6 @@ public class RecipeVO {
 	private String written;
 	private String content;
 	private Date date;
-//	private int count;
 	private String id;
 	
 	public RecipeVO() {
@@ -25,7 +24,6 @@ public class RecipeVO {
 		this.written = written;
 		this.content = content;
 		this.date = date;
-//		this.count = count;
 		this.id = id;
 	}
 

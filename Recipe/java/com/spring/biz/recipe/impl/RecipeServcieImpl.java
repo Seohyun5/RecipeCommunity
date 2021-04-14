@@ -56,5 +56,10 @@ public class RecipeServcieImpl implements RecipeService {
 	public RecipeVO getRecipe(int recipeno) {
 		return recipeDAO.getRecipe(recipeno);
 	}
+	
+	@Override
+	public List<RecipeImageVO> getRimageList(int recipeno){
+		return recipeDAO.getRimageList(recipeno);
+	}
 
 }
