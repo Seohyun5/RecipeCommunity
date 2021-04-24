@@ -95,7 +95,7 @@
       <nav class="site-menu">
         <ul>
           <li class="active"><a href="main.do"><span>Home</span></a></li>
-          <li><a href="getRecipeList.do"><span>Recipe</span></a></li>
+          <li><a href="recipePaging.do"><span>Recipe</span></a></li>
           <li><a href="getBlogList.do"><span>Blog</span></a></li>
           <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.biz.paging.PagingVO;
 import com.spring.biz.recipe.RecipeImageVO;
 import com.spring.biz.recipe.RecipeService;
 import com.spring.biz.recipe.RecipeVO;
@@ -61,5 +62,19 @@ public class RecipeServcieImpl implements RecipeService {
 	public List<RecipeImageVO> getRimageList(int recipeno){
 		return recipeDAO.getRimageList(recipeno);
 	}
+	
+	@Override
+	public String getFileName(int recipeno) {
+		return recipeDAO.getFileName(recipeno);
+	}
 
+	@Override
+	public int countTotal() {
+		return recipeDAO.countTotal();
+	}
+	
+	@Override
+	public List<RecipeVO> selectRecipe(PagingVO vo){
+		return recipeDAO.selectRecipe(vo);
+	}
 }

@@ -1,6 +1,9 @@
 package com.spring.biz.view.recipe;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -9,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,9 +35,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.spring.biz.blog.BlogImageVO;
 import com.spring.biz.blog.BlogVO;
 import com.spring.biz.member.MemberVO;
+import com.spring.biz.paging.PagingVO;
 import com.spring.biz.recipe.RecipeImageVO;
 import com.spring.biz.recipe.RecipeService;
 import com.spring.biz.recipe.RecipeVO;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 public class RecipeController {
@@ -198,6 +205,7 @@ public class RecipeController {
 	public String getRecipeList(Model model) {
 		System.out.println("===Controller의 getRecipeList() 실행===");
 		List<RecipeVO> list = recipeService.getRecipeList();
+		System.out.println("리스트 원소 개수 : " + list.size());
 		model.addAttribute("recipeList", list);
 		return "Recipe";
 	}
@@ -226,7 +234,9 @@ public class RecipeController {
 	public void rdownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("레시피 이미지 download!!!");
 		String recipeno = request.getParameter("recipeno");
-		String filename = request.getParameter("filename");
+		String filename = request.getParameter("rfilename");
+		System.out.println(recipeno + "&" + filename);
+		
 		OutputStream out = response.getOutputStream();
 		String filepath = RECIPE_IMAGE_REPO + "\\" + recipeno + "\\" + filename;
 		File rimage = new File(filepath);
@@ -234,6 +244,79 @@ public class RecipeController {
 			System.out.println(rimage.getName());
 		}
 		
+		response.setHeader("Cache-Control","no-cache");
+		response.addHeader("Content-disposition", "attachment; filename="+filename);
+		FileInputStream in = new FileInputStream(rimage); 
+		byte[] buffer=new byte[1024*8];
+		while(true){
+			int count=in.read(buffer);
+			if(count==-1)  
+				break;
+			out.write(buffer,0,count);
+		}
 		
+		in.close();
+		out.close();
 	}
+	
+	@RequestMapping(value = "/rthumbnails.do", method = RequestMethod.GET)
+	public void rthumbnails(int recipeno, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("레시피 이미지 썸네일!!!");
+		System.out.println(recipeno);
+		String filename = recipeService.getFileName(recipeno);
+		System.out.println(filename);
+		
+		OutputStream out = response.getOutputStream();
+		String filepath = RECIPE_IMAGE_REPO + "\\" + recipeno + "\\" + filename;
+		
+		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+		
+		File rimage=new File(filepath);
+		System.out.println(rimage.exists());
+		if (rimage.exists()) { 
+			System.out.println(rimage.getName());
+			BufferedImage buffimage = Thumbnails.of(rimage).size(190,190).outputFormat("jpeg").asBufferedImage();
+			
+			ImageIO.write(buffimage, "jpeg", jpegOutputStream);
+		}
+		byte[] imgByte = jpegOutputStream.toByteArray();
+		
+		response.setHeader("Cache-Control", "no-store");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+		response.setContentType("image/jpeg");
+		out.write(imgByte);
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value = "/recipePaging.do")
+	public String recipePaging(PagingVO vo, Model model,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		System.out.println("===Controller의 recipePaging() 실행===");
+		//cntPerPage = 한 페이지 당 글 갯수
+		
+		int total = recipeService.countTotal();
+		
+		if(nowPage==null && cntPerPage==null) {
+			nowPage = "1";
+			cntPerPage = "9";
+		}else if(nowPage==null) {
+			nowPage = "1";
+		}else if(cntPerPage==null) {
+			cntPerPage = "9";
+		}
+		
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<RecipeVO> list = recipeService.selectRecipe(vo);
+		model.addAttribute("recipeList", list);
+		model.addAttribute("paging", vo);
+		
+		System.out.println("startPage : " + vo.getStartPage() + "endPage : " + vo.getEndPage());
+		System.out.println("lastPage : " + vo.getLastPage());
+		System.out.println("start : " + vo.getStart() + "end : " + vo.getEnd());
+		return "Recipe";
+	}
+			
 }

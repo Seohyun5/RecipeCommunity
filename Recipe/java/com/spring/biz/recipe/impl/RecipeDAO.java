@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.spring.biz.paging.PagingVO;
 import com.spring.biz.recipe.RecipeImageVO;
 import com.spring.biz.recipe.RecipeVO;
 
@@ -59,5 +60,17 @@ public class RecipeDAO {
 	
 	public List<RecipeImageVO> getRimageList(int recipeno){
 		return mybatis.selectList("recipeDAO.getRimageList", recipeno);
+	}
+	
+	public String getFileName(int recipeno) {
+		return mybatis.selectOne("recipeDAO.getFileName", recipeno);
+	}
+	
+	public int countTotal() {
+		return mybatis.selectOne("recipeDAO.countTotal");
+	}
+	
+	public List<RecipeVO> selectRecipe(PagingVO vo){
+		return mybatis.selectList("recipeDAO.selectRecipe", vo);
 	}
 }

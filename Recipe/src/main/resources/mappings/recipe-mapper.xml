@@ -61,4 +61,26 @@
 		WHERE RECIPENO = #{recipeno}
 	</select>
 	
+	<select id="getFileName" parameterType="int" resultType="String">
+		SELECT RIMAGEFILENAME FROM RECIPEIMG 
+		WHERE RECIPENO = #{recipeno}
+	</select>
+	
+	<select id="countTotal" resultType="int">
+		SELECT COUNT(RECIPENO) FROM RECIPE
+	</select>
+	
+	<select id="selectRecipe" parameterType="paging" resultType="recipe">
+		<!-- SELECT * FROM 
+			(SELECT ROWNUM RN, A.* FROM  
+				(SELECT * FROM RECIPE ORDER BY REGDATE DESC) A)
+				WHERE RN BETWEEN #{start} AND #{end} -->
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			 FROM RECIPE
+			 ) RECIPE
+			 	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
 </mapper>

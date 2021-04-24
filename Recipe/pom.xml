@@ -56,6 +56,13 @@
 			<version>1.4</version>
 		</dependency>
 		
+		<!-- thumbnail -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
+		
 		<!--추가: 오라클 JDBC 라이브러리 등록 -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>

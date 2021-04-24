@@ -13,6 +13,7 @@
 		<typeAlias alias="mylike" type="com.spring.biz.mylike.MylikeVO"/>
 		<typeAlias alias="rimage" type="com.spring.biz.recipe.RecipeImageVO"/>
 		<typeAlias alias="bimage" type="com.spring.biz.blog.BlogImageVO"/>
+		<typeAlias alias="paging" type="com.spring.biz.paging.PagingVO"/>
 
 	</typeAliases>
 	

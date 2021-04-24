@@ -130,7 +130,7 @@
             <c:forEach var="item" items="${recipeList}">
             <div class="col-lg-4 col-sm-6">
               <div class="product-card mb-30">
-                <div class="product-card-thumb"> <a class="product-card-link" href="getRecipe.do?recipeno=${item.recipeno }"></a><img src="img/shop/th04.jpg" alt="Product">
+                <div class="product-card-thumb"> <a class="product-card-link" href="getRecipe.do?recipeno=${item.recipeno }"></a><img src="<c:url value='/rthumbnails.do?recipeno=${item.recipeno }' />" alt="Product">
                   <div class="product-card-buttons">
                     <button class="btn btn-white btn-sm btn-wishlist" data-toggle="tooltip" title="Wishlist"><i class="material-icons favorite_border"></i></button>
                   </div>
@@ -144,22 +144,23 @@
           </div>
           <!-- Pagination-->
           <nav class="pagination">
+          	<div class="column text-left hidden-xs-down">
+              <a class="btn btn-outline-secondary btn-sm" href="#"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
+            </div>
+          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
             <div class="column">
               <ul class="pages">
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li>...</li>
-                <li><a href="#">12</a></li>
+                <li><a href="recipePaging.do?nowPage=${i }">${i }</a></li>
               </ul>
             </div>
+          </c:forEach>
             <div class="column text-right hidden-xs-down">
               <a class="btn btn-outline-secondary btn-sm" href="#">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i>
               <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
             </div>
           </nav>
         </div>
+        
         <!-- Sidebar          -->
         <div class="col-lg-3 col-md-4 order-md-1">
           <div class="sidebar-toggle position-left"><i class="material-icons filter_list"></i></div>

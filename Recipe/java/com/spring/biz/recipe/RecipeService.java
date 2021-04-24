@@ -3,6 +3,8 @@ package com.spring.biz.recipe;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.biz.paging.PagingVO;
+
 public interface RecipeService {
 	int insertRecipe(Map recipeMap); //레시피쓰기
 	public String idChk(int recipeno); //글 본인확인
@@ -12,4 +14,7 @@ public interface RecipeService {
 	List<RecipeVO> getMyrecipeList(String id); //나의 레시피 목록
 	RecipeVO getRecipe(int recipeno); //레시피 상세조회
 	List<RecipeImageVO> getRimageList(int recipeno); //레시피 이미지 조회
+	String getFileName(int recipeno);
+	int countTotal(); //전체 글 수 조회
+	List<RecipeVO> selectRecipe(PagingVO vo);
 }
