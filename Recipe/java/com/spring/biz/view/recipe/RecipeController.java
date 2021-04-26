@@ -313,10 +313,15 @@ public class RecipeController {
 		model.addAttribute("recipeList", list);
 		model.addAttribute("paging", vo);
 		
-		System.out.println("startPage : " + vo.getStartPage() + "endPage : " + vo.getEndPage());
+		System.out.println("startPage : " + vo.getStartPage() + ", endPage : " + vo.getEndPage());
 		System.out.println("lastPage : " + vo.getLastPage());
-		System.out.println("start : " + vo.getStart() + "end : " + vo.getEnd());
+		System.out.println("start : " + vo.getStart() + ", end : " + vo.getEnd());
+		System.out.println("prev : " + vo.getPrev() + ", prevPage : " + vo.getPrevPage());
+		System.out.println("next : " + vo.getNext() + ", nextPage : " + vo.getNextPage());
 		return "Recipe";
 	}
-			
+	
+//	@RequestMapping(value = "/prevPaging.do")
+//	public String prevPaging()
+	
 }

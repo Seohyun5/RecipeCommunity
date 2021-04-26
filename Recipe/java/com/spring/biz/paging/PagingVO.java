@@ -5,6 +5,8 @@ public class PagingVO {
 	//startPage : 한 화면에서 시작하는 페이지 넘버
 	//endPage : 한 화면에서 끝나는 페이지 넘버
 	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
+	private boolean prev, next;
+	private int prevPage, nextPage;
 	
 	public PagingVO() {}
 
@@ -12,13 +14,23 @@ public class PagingVO {
 		setTotal(total);
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
-		calcLastPage(getTotal(), getCntPerPage());
-		calcStartEndPage(getNowPage());
-		calcStartEnd(getNowPage(), getCntPerPage());
+		calcData(total, nowPage, cntPerPage);
+		calcStartEndPage(nowPage);
 	}
 	
-	public void calcLastPage(int total, int cntPerPage) {
+	public void calcData(int total, int nowPage, int cntPerPage) {
 		setLastPage((int)Math.ceil((double)total/(double)cntPerPage));
+		setEnd(nowPage * cntPerPage);
+		setStart(getEnd() - cntPerPage + 1);
+		
+		if(nowPage-1 >= 1) {
+			setPrev(true);
+			setPrevPage(nowPage-1);
+		}else {setPrev(false);}
+		if(nowPage+1 <= getLastPage()) {
+			setNext(true);
+			setNextPage(nowPage+1);
+		}else {setNext(false);}
 	}
 	
 	public void calcStartEndPage(int nowPage) {
@@ -33,10 +45,6 @@ public class PagingVO {
 		}
 	}
 	
-	public void calcStartEnd(int nowPage, int cntPerPage) {
-		setEnd(nowPage * cntPerPage);
-		setStart(getEnd() - cntPerPage + 1);
-	}
 
 	public int getNowPage() {
 		return nowPage;
@@ -102,13 +110,36 @@ public class PagingVO {
 		this.end = end;
 	}
 
-//	public int getCntPage() {
-//		return cntPage;
-//	}
-//
-//	public void setCntPage(int cntPage) {
-//		this.cntPage = cntPage;
-//	}
+	public boolean getPrev() {
+		return prev;
+	}
+
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
 	
+	public boolean getNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+	
+	public int getPrevPage() {
+		return prevPage;
+	}
+	
+	public void setPrevPage(int prevPage) {
+		this.prevPage = prevPage;
+	}
+	
+	public int getNextPage() {
+		return nextPage;
+	}
+	
+	public void setNextPage(int nextPage) {
+		this.nextPage = nextPage;
+	}
 	
 }

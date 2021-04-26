@@ -145,7 +145,9 @@
           <!-- Pagination-->
           <nav class="pagination">
           	<div class="column text-left hidden-xs-down">
-              <a class="btn btn-outline-secondary btn-sm" href="#"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
+          	<c:if test="${paging.prev == true }">
+              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
+            </c:if>  
             </div>
           <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
             <div class="column">
@@ -155,7 +157,9 @@
             </div>
           </c:forEach>
             <div class="column text-right hidden-xs-down">
-              <a class="btn btn-outline-secondary btn-sm" href="#">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i>
+            <c:if test="${paging.next == true }">
+              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+            </c:if>
               <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
             </div>
           </nav>
