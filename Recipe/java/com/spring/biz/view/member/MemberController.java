@@ -36,6 +36,13 @@ public class MemberController {
 		return memberService.checkId(signup_id);
 	}
 	
+	@RequestMapping(value = "/nicknameCheck.do", method = RequestMethod.POST)
+	public @ResponseBody int nicknameCheck(HttpServletRequest request) {
+		System.out.println("nicknameCheck()");
+		String nickname = request.getParameter("nickname");
+		System.out.println(nickname);
+		return memberService.checkNickname(nickname);
+	}
 	@RequestMapping(value = "/insertMember.do", method = RequestMethod.POST)
 	public String insertMember(MemberVO vo, HttpSession session) {
 		System.out.println("===insertMember() 실행===");

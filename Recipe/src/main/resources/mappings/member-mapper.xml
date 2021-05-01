@@ -31,8 +31,8 @@
 		SELECT COUNT(ID) FROM MEMBER WHERE ID = #{id}
 	</select>
 	
-	<select id="checkNickname" parameterType="String">
-		SELECT COUNT(NAME) FROM MEMBER WHERE NICKNAME = #{nickname}
+	<select id="checkNickname" parameterType="String" resultType="int">
+		SELECT COUNT(ID) FROM MEMBER WHERE NICKNAME = #{nickname}
 	</select>
 	
 	<select id="checkPw" parameterType="logvo" resultType="int">

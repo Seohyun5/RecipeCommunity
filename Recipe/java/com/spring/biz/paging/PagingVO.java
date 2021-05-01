@@ -4,16 +4,25 @@ public class PagingVO {
 	
 	//startPage : 한 화면에서 시작하는 페이지 넘버
 	//endPage : 한 화면에서 끝나는 페이지 넘버
-	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
+	private int nowPage, startPage, endPage, total, lastPage, start, end;
 	private boolean prev, next;
 	private int prevPage, nextPage;
+	private int cntPerPage = 9;
+	private String category;
 	
 	public PagingVO() {}
 
-	public PagingVO(int total, int nowPage, int cntPerPage) {
+	public PagingVO(int total, int nowPage) {
 		setTotal(total);
 		setNowPage(nowPage);
-		setCntPerPage(cntPerPage);
+		calcData(total, nowPage, cntPerPage);
+		calcStartEndPage(nowPage);
+	}
+	
+	public PagingVO(int total, int nowPage, String category) {
+		setTotal(total);
+		setNowPage(nowPage);
+		setCategory(category);
 		calcData(total, nowPage, cntPerPage);
 		calcStartEndPage(nowPage);
 	}
@@ -140,6 +149,14 @@ public class PagingVO {
 	
 	public void setNextPage(int nextPage) {
 		this.nextPage = nextPage;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 }

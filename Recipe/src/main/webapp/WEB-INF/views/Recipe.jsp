@@ -173,11 +173,11 @@
             <section class="widget widget-categories pt-0">
               <h3 class="widget-title">카테고리</h3>
               <ul>
-                <li><a href="#">한식</a></li>
+                <li><a href="categoryPaging.do?category=korean">한식</a></li>
                 <li><a href="#">양식</a></li>
-                <li><a href="#">일식</a></li>
+                <li><a href="categoryPaging.do?category=japanese">일식</a></li>
                 <li><a href="#">중식</a></li>
-                <li><a href="#">제과제빵</a></li>
+                <li><a href="categoryPaging.do?category=bread">제과제빵</a></li>
                 <li><a href="#">음료</a></li>
               </ul>
             </section>

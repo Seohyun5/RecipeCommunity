@@ -16,5 +16,7 @@ public interface RecipeService {
 	List<RecipeImageVO> getRimageList(int recipeno); //레시피 이미지 조회
 	String getFileName(int recipeno);
 	int countTotal(); //전체 글 수 조회
+	int countCategoryTotal(String category); //카테고리별 글 수 조회
 	List<RecipeVO> selectRecipe(PagingVO vo);
+	List<RecipeVO> selectCategory(PagingVO vo);
 }

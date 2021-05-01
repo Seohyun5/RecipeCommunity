@@ -27,6 +27,7 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
     <script src="resources/js/modernizr.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript">
     
 	$(document).ready(function () {
@@ -79,8 +80,39 @@
 					$("#pwCheck_result").html("비밀번호가 일치하지 않습니다.").css("color","red");
 				}
 		}
+		
+		$("#nickname").blur(function () {
+			var nickname = $("#nickname").val();
+			console.log(nickname);
+			if(nickname != ""){
+				checkNickname(nickname);
+			}else{
+				$("#nicknameCheck_result").html("");
+			}
+		});
+	
+		 function checkNickname(nickname) {
+				$.ajax({
+					type : 'POST',
+					url : '${pageContext.request.contextPath}/nicknameCheck.do',
+					data : {"nickname" : nickname}
+				}).done(function (data) {
+					console.log(data);
+					nicknameResult(data);
+				}).fail(function (request,status,error) {
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				})
+		}
+		 
+		function nicknameResult(data) {
+			if(data==0){
+				$("#nicknameCheck_result").html("사용가능한 닉네임입니다.").css("color","green");
+			}else{
+				$("#nicknameCheck_result").html("이미 사용중인 닉네임입니다.").css("color","red");
+			}
+		}
 	});
-    
+	    
     </script>
   </head>
   <!-- Body-->
@@ -96,11 +128,9 @@
         <ul>
           <li class="active"><a href="main.do"><span>Home</span></a></li>
           <li><a href="recipePaging.do"><span>Recipe</span></a></li>
-          <li><a href="getBlogList.do"><span>Blog</span></a></li>
           <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">
               <li><a href="account-orders.html">My Recipe</a></li>
-              <li><a href="account-wishlist.html">My Blog</a></li>
               <li><a href="account-wishlist.html">Like</a></li>
               <li><a href="account-profile.html">My Info</a></li>
             </ul>
@@ -118,7 +148,7 @@
           <c:if test="${!empty member}">
 	         <div class="toolbar-section" id="account">
 	         <form action="logout.do" method="post">
-	            <p class="text-muted text-sm mt-4"><h4>${member.id }<span>님</span><h4></p>
+	            <p class="text-muted text-sm mt-4"><h4>${member.nickname }<span>님</span><h4></p>
 	            <p class="text-muted text-sm mt-4">환영합니다</p>
 	            <button class="btn btn-primary" type="submit">Log Out</button>
 	            <!-- <a class="btn btn-primary mx-0 scale-up delay-1" href="shop-boxed-ls.jsp">Log Out</a> -->
@@ -172,7 +202,8 @@
                     <input class="form-control" type="text" placeholder="이름" name="name" required>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="text" placeholder="닉네임" name="nickname" required>
+                    <input class="form-control" type="text" placeholder="닉네임" id="nickname" name="nickname" required>
+                    <div id="nicknameCheck_result"></div>
                   </div>
                   <div class="form-group">
                     <input class="form-control" type="email" placeholder="이메일" name="email" required>
@@ -211,26 +242,8 @@
     </section>
     <!-- Top Categories-->
     <section class="container padding-top-3x padding-bottom-3x">
-      <h3 class="text-center mb-30">Top Categories</h3>
+      <h3 class="text-center mb-30">Recent Recipes</h3>
       <div class="row">
-        <div class="col-md-3 col-sm-6 mb-30"><a class="category-card flex-wrap text-center pt-0" href="shop-boxed-ls.html">
-            <div class="category-card-thumb w-100"><img src="img/shop/categories/03.jpg" alt="Category"></div>
-            <div class="category-card-info w-100">
-              <h3 class="category-card-title">Seating</h3>
-              <h4 class="category-card-subtitle">Starting from $269.00</h4>
-            </div></a></div>
-        <div class="col-md-3 col-sm-6 mb-30"><a class="category-card flex-wrap text-center pt-0" href="shop-boxed-ls.html">
-            <div class="category-card-thumb w-100"><img src="img/shop/categories/04.jpg" alt="Category"></div>
-            <div class="category-card-info w-100">
-              <h3 class="category-card-title">Cabinets</h3>
-              <h4 class="category-card-subtitle">Starting from $220.00</h4>
-            </div></a></div>
-        <div class="col-md-3 col-sm-6 mb-30"><a class="category-card flex-wrap text-center pt-0" href="shop-boxed-ls.html">
-            <div class="category-card-thumb w-100"><img src="img/shop/categories/05.jpg" alt="Category"></div>
-            <div class="category-card-info w-100">
-              <h3 class="category-card-title">Tables</h3>
-              <h4 class="category-card-subtitle">Starting from $198.00</h4>
-            </div></a></div>
         <div class="col-md-3 col-sm-6 mb-30"><a class="category-card flex-wrap text-center pt-0" href="shop-boxed-ls.html">
             <div class="category-card-thumb w-100"><img src="img/shop/categories/02.jpg" alt="Category"></div>
             <div class="category-card-info w-100">

@@ -74,7 +74,17 @@ public class RecipeServcieImpl implements RecipeService {
 	}
 	
 	@Override
+	public int countCategoryTotal(String category) {
+		return recipeDAO.countCategoryTotal(category);
+	}
+	
+	@Override
 	public List<RecipeVO> selectRecipe(PagingVO vo){
 		return recipeDAO.selectRecipe(vo);
+	}
+	
+	@Override
+	public List<RecipeVO> selectCategory(PagingVO vo){
+		return recipeDAO.selectCategory(vo);
 	}
 }

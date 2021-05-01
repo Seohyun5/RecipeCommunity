@@ -70,6 +70,11 @@
 		SELECT COUNT(RECIPENO) FROM RECIPE
 	</select>
 	
+	<select id="countCategoryTotal" parameterType="String" resultType="int">
+		SELECT COUNT(RECIPENO) FROM RECIPE
+		WHERE CATEGORY = #{category}
+	</select>
+	
 	<select id="selectRecipe" parameterType="paging" resultType="recipe">
 		<!-- SELECT * FROM 
 			(SELECT ROWNUM RN, A.* FROM  
@@ -79,6 +84,19 @@
 			(SELECT RECIPE.*, 
 			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
 			 FROM RECIPE
+			 ) RECIPE
+			 	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectCategory" parameterType="paging" resultType="recipe">
+		<!-- SELECT * FROM 
+			(SELECT ROWNUM RN, A.* FROM  
+				(SELECT * FROM RECIPE ORDER BY REGDATE DESC) A)
+				WHERE RN BETWEEN #{start} AND #{end} -->
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			 FROM RECIPE WHERE CATEGORY = #{category}
 			 ) RECIPE
 			 	WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>

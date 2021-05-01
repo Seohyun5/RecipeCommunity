@@ -70,7 +70,15 @@ public class RecipeDAO {
 		return mybatis.selectOne("recipeDAO.countTotal");
 	}
 	
+	public int countCategoryTotal(String category) {
+		return mybatis.selectOne("recipeDAO.countCategoryTotal", category);
+	}
+	
 	public List<RecipeVO> selectRecipe(PagingVO vo){
 		return mybatis.selectList("recipeDAO.selectRecipe", vo);
+	}
+	
+	public List<RecipeVO> selectCategory(PagingVO vo){
+		return mybatis.selectList("recipeDAO.selectCategory", vo);
 	}
 }

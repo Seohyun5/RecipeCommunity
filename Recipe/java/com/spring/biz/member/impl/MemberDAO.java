@@ -43,4 +43,8 @@ public class MemberDAO {
 	public int checkPw(LoginVO logvo) {
 		return mybatis.selectOne("memberDAO.checkPw", logvo);
 	}
+	
+	public int checkNickname(String nickname) {
+		return mybatis.selectOne("memberDAO.checkNickname", nickname);
+	}
 }

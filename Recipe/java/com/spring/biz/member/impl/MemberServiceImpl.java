@@ -49,4 +49,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.checkPw(logvo);
 	}
 
+	@Override
+	public int checkNickname(String nickname) {
+		return memberDAO.checkNickname(nickname);
+	}
 }
