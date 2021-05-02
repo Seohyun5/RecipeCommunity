@@ -127,7 +127,7 @@
       <nav class="site-menu">
         <ul>
           <li class="active"><a href="main.do"><span>Home</span></a></li>
-          <li><a href="recipePaging.do"><span>Recipe</span></a></li>
+          <li><a href="recipePaging.do?category="><span>Recipe</span></a></li>
           <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">
               <li><a href="account-orders.html">My Recipe</a></li>

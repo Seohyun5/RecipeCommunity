@@ -40,14 +40,12 @@
       <nav class="site-menu">
         <ul>
           <li><a href="main.do"><span>Home</span></a></li>
-          <li class="active"><a href="getRecipeList.do"><span>Recipe</span></a></li>
-          <li><a href="getBlogList.do"><span>Blog</span></a></li>
-          <li><a href="like.do"><span>Mypage</span></a>
+          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="myRecipe.do">My Recipe</a></li>
-              <li><a href="myBlog.do">My Blog</a></li>
-              <li><a href="like.do">Like</a></li>
-              <li><a href="myInfo.do">My Info</a></li>
+              <li><a href="account-orders.html">My Recipe</a></li>
+              <li><a href="account-wishlist.html">Like</a></li>
+              <li><a href="account-profile.html">My Info</a></li>
             </ul>
           </li>
         </ul>
@@ -136,7 +134,7 @@
                   </div>
                 </div>
                 <div class="product-card-details">
-                  <h3 class="product-card-title"><a href="getRecipe.do?recipeno=${item.recipeno }">${item.subject }</a></h3>
+                  <h3 class="product-card-title"><a href="getRecipe.do?recipeno=${item.recipeno }&nowPage=${paging.nowPage}">${item.subject }</a></h3>
                 </div>
               </div>
             </div>
@@ -146,19 +144,19 @@
           <nav class="pagination">
           	<div class="column text-left hidden-xs-down">
           	<c:if test="${paging.prev == true }">
-              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
+              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
             </c:if>  
             </div>
           <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
             <div class="column">
               <ul class="pages">
-                <li><a href="recipePaging.do?nowPage=${i }">${i }</a></li>
+                <li><a href="recipePaging.do?nowPage=${i }&category=${paging.category}">${i }</a></li>
               </ul>
             </div>
           </c:forEach>
             <div class="column text-right hidden-xs-down">
             <c:if test="${paging.next == true }">
-              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }&category=${paging.category}">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
             </c:if>
               <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
             </div>
@@ -173,19 +171,20 @@
             <section class="widget widget-categories pt-0">
               <h3 class="widget-title">카테고리</h3>
               <ul>
-                <li><a href="categoryPaging.do?category=korean">한식</a></li>
-                <li><a href="#">양식</a></li>
-                <li><a href="categoryPaging.do?category=japanese">일식</a></li>
-                <li><a href="#">중식</a></li>
-                <li><a href="categoryPaging.do?category=bread">제과제빵</a></li>
-                <li><a href="#">음료</a></li>
+              	<li><a href="recipePaging.do?category=">전체</a></li>
+                <li><a href="recipePaging.do?category=korean">한식</a></li>
+                <li><a href="recipePaging.do?category=western">양식</a></li>
+                <li><a href="recipePaging.do?category=japanese">일식</a></li>
+                <li><a href="recipePaging.do?category=chinese">중식</a></li>
+                <li><a href="recipePaging.do?category=bread">제과제빵</a></li>
+                <li><a href="recipePaging.do?category=drink">음료</a></li>
               </ul>
             </section>
             <!-- Widget Sorting-->
             <section class="widget widget-icon-list">
               <h3 class="widget-title">정렬</h3>
               <ul>
-                <li><a href="#"><i class="material-icons sort"></i>기본</a></li>
+                <li><a href="recipePaging.do?category=${paging.category} "><i class="material-icons sort"></i>기본</a></li>
                 <li><a href="#"><i class="material-icons vertical_align_top"></i>오래된순</a></li>
                 <li><a href="#"><i class="material-icons sort_by_alpha"></i>가나다순</a></li>
               </ul>

@@ -40,14 +40,12 @@
       <nav class="site-menu">
         <ul>
           <li><a href="main.do"><span>Home</span></a></li>
-          <li class="active"><a href="getRecipeList.do"><span>Recipe</span></a></li>
-          <li><a href="getBlogList.do"><span>Blog</span></a></li>
-          <li><a href="like.do"><span>Mypage</span></a>
+          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="myRecipe.do">My Recipe</a></li>
-              <li><a href="myBlog.do">My Blog</a></li>
-              <li><a href="like.do">Like</a></li>
-              <li><a href="myInfo.do">My Info</a></li>
+              <li><a href="account-orders.html">My Recipe</a></li>
+              <li><a href="account-wishlist.html">Like</a></li>
+              <li><a href="account-profile.html">My Info</a></li>
             </ul>
           </li>
         </ul>
@@ -108,7 +106,7 @@
     <!-- Page Title-->
     <div class="page-title">
       <div class="container">
-        <h1>레시피 상세페이지(제목)</h1>
+        <h1>RECIPE</h1>
       </div>
     </div>
     <!-- Page Content-->
@@ -117,7 +115,7 @@
         <div class="col-lg-10">
           <!-- Post Meta-->
           <div class="blog-post-meta">
-            <div class="column"><span>by&nbsp;</span>${recipe.written }<span class="divider"></span><span>in&nbsp;</span><a href="#">${recipe.category }</a></div>
+            <div class="column"><span>by&nbsp;</span>${recipe.written }<span class="divider"></span><span>in&nbsp;</span><a href="recipePaging.do?category=${recipe.category }">${recipe.category }</a></div>
             <div class="column"><span><i class="material-icons date_range"></i>&nbsp;${recipe.date }</span></div>
           </div>
           <!-- Post Content -->
@@ -125,7 +123,7 @@
           <p>${recipe.content }</p>
           <c:forEach var="rimg" items="${rimageList }">
           	<div class="gallery-item" data-hash="one">
-            	<a href="/rdownload.do?recipeno=${recipe.recipeno }&rfilename=${rimg.rimageFileName }" data-size="555x480"> 
+            	<!-- <a href="/rdownload.do?recipeno=${recipe.recipeno }&rfilename=${rimg.rimageFileName }" data-size="555x480"> --> 
                 <img src="<c:url value='/rdownload.do?recipeno=${recipe.recipeno }&rfilename=${rimg.rimageFileName }' />" alt="Recipe"></a></div>
           </c:forEach>
           <div class="col-12 text-right">
@@ -140,7 +138,7 @@
           <!-- Post Navigation-->
           <div class="entry-navigation">
             <div class="column text-left"><a class="btn btn-outline-secondary btn-sm" href="#"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전</a></div>
-            <div class="column"><a class="btn btn-outline-secondary view-all" href="blog.html" data-toggle="tooltip" data-placement="top" title="All entries"><i class="material-icons menu"></i></a></div>
+            <div class="column"><a class="btn btn-outline-secondary view-all" href="recipePaging.do?category=${recipe.category }" data-toggle="tooltip" data-placement="top" title="목록"><i class="material-icons menu"></i></a></div>
             <div class="column text-right"><a class="btn btn-outline-secondary btn-sm" href="#">다음&nbsp;<i class="material-icons keyboard_arrow_right"></i></a></div>
           </div>
           <!-- Comments-->

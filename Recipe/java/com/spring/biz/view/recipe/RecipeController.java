@@ -294,13 +294,14 @@ public class RecipeController {
 	
 	@RequestMapping(value = "/recipePaging.do")
 	public String recipePaging(Model model,
-			@RequestParam(value="nowPage", required=false)String nowPage) {
+			@RequestParam(value="nowPage", required=false)String nowPage, 
+			@RequestParam(value="category", required=false)String category) {
 		System.out.println("===Controller의 recipePaging() 실행===");
-		
+		if(category.equals("")) {
 		int total = recipeService.countTotal();
 		if(nowPage==null) {nowPage = "1";}
 		
-		pagingVO = new PagingVO(total, Integer.parseInt(nowPage));
+		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), category);
 		List<RecipeVO> list = recipeService.selectRecipe(pagingVO);
 		model.addAttribute("recipeList", list);
 		model.addAttribute("paging", pagingVO);
@@ -311,6 +312,32 @@ public class RecipeController {
 		System.out.println("prev : " + pagingVO.getPrev() + ", prevPage : " + pagingVO.getPrevPage());
 		System.out.println("next : " + pagingVO.getNext() + ", nextPage : " + pagingVO.getNextPage());
 		return "Recipe";
+		}else {
+			System.out.println("현재 카테고리 : " + category);
+			
+			if(category.equals("korean")) {
+				category = "한식";
+			}else if(category.equals("western")) {
+				category = "양식";
+			}else if(category.equals("japanese")) {
+				category = "일식";
+			}else if(category.equals("chinese")) {
+				category = "중식";
+			}else if(category.equals("bread")) {
+				category = "제과제빵";
+			}else if(category.equals("drink")) {
+				category = "음료";
+			}
+			
+			int total = recipeService.countCategoryTotal(category);
+			if(nowPage==null) {nowPage = "1";}
+			pagingVO = new PagingVO(total, Integer.parseInt(nowPage), category);
+			List<RecipeVO> list = recipeService.selectCategory(pagingVO);
+			
+			model.addAttribute("recipeList", list);
+			model.addAttribute("paging", pagingVO);
+			return "Recipe";
+		}
 	}
 	
 	@RequestMapping(value = "/categoryPaging.do")
