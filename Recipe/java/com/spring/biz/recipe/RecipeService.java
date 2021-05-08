@@ -19,4 +19,6 @@ public interface RecipeService {
 	int countCategoryTotal(String category); //카테고리별 글 수 조회
 	List<RecipeVO> selectRecipe(PagingVO vo);
 	List<RecipeVO> selectCategory(PagingVO vo);
+	int countSearchTotal(String keyword); //검색 결과 글 수 조회
+	List<RecipeVO> searchRecipe(PagingVO vo);
 }

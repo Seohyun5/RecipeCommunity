@@ -9,6 +9,7 @@ public class PagingVO {
 	private int prevPage, nextPage;
 	private int cntPerPage = 9;
 	private String category;
+	private String keyword;
 	
 	public PagingVO() {}
 
@@ -26,6 +27,15 @@ public class PagingVO {
 		calcData(total, nowPage, cntPerPage);
 		calcStartEndPage(nowPage);
 	}
+	
+	public PagingVO(String keyword, int total, int nowPage) {
+		setKeyword(keyword);
+		setTotal(total);
+		setNowPage(nowPage);
+		calcData(total, nowPage, cntPerPage);
+		calcStartEndPage(nowPage);
+	}
+	
 	
 	public void calcData(int total, int nowPage, int cntPerPage) {
 		setLastPage((int)Math.ceil((double)total/(double)cntPerPage));
@@ -157,6 +167,14 @@ public class PagingVO {
 	
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 }

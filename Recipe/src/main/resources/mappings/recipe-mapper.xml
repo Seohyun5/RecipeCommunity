@@ -49,13 +49,6 @@
 		SELECT * FROM RECIPE WHERE RECIPENO = #{recipeno}
 	</select>
 	
-	<!-- 
-	<resultMap id="rimgResult" type="rimage">
-		<result property="" column="" />
-		<result property="" column="" />
-		<result property="" column="" />
-	</resultMap>
-	 -->
 	<select id="getRimageList" parameterType="int" resultType="rimage">
 		SELECT * FROM RECIPEIMG 
 		WHERE RECIPENO = #{recipeno}
@@ -101,4 +94,17 @@
 			 	WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
+	<select id="countSearchTotal" parameterType="String" resultType="int">
+		SELECT COUNT(RECIPENO) FROM RECIPE
+		WHERE SUBJECT LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="searchRecipe" parameterType="paging" resultType="recipe">
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			 FROM RECIPE WHERE SUBJECT LIKE '%' || #{keyword} || '%'
+			 ) RECIPE
+			 	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
 </mapper>

@@ -27,13 +27,6 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
     <script src="resources/js/modernizr.min.js"></script>
-    <script type="text/javascript">
-    var cnt=1;
-    function fn_addFile(){
-    	$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-    	cnt++;
-    }
-    </script>
   </head>
   <!-- Body-->
   <body>
@@ -47,14 +40,12 @@
       <nav class="site-menu">
         <ul>
           <li><a href="main.do"><span>Home</span></a></li>
-          <li class="active"><a href="getRecipeList.do"><span>Recipe</span></a></li>
-          <li><a href="getBlogList.do"><span>Blog</span></a></li>
-          <li><a href="like.do"><span>Mypage</span></a>
+          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="myRecipe.do">My Recipe</a></li>
-              <li><a href="myBlog.do">My Blog</a></li>
-              <li><a href="like.do">Like</a></li>
-              <li><a href="myInfo.do">My Info</a></li>
+              <li><a href="account-orders.html">My Recipe</a></li>
+              <li><a href="account-wishlist.html">Like</a></li>
+              <li><a href="account-profile.html">My Info</a></li>
             </ul>
           </li>
         </ul>
@@ -65,53 +56,18 @@
         <!-- Toolbar Dropdown-->
         <div class="toolbar-dropdown">
           <!-- Account Section-->
+          <!-- 글 수정 화면 : 무조건 로그인 상태-->
           <div class="toolbar-section" id="account">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li class="nav-item"><a class="nav-link active" href="#login" data-toggle="tab" role="tab">Log In</a></li>
-              <li class="nav-item"><a class="nav-link" href="#signup" data-toggle="tab" role="tab">Sign Up</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane fade show active" id="login" role="tabpanel">
-                <!-- 로그인 -->
-                <form action="login.do" method="post" autocomplete="off" id="login-form">
-                  <div class="form-group input-group">
-                    <input class="form-control" type="text" placeholder="ID" name="id" required>
-                    <span class="input-group-addon"><i class="material-icons mail"></i></span>
-                  </div>
-                  <div class="form-group input-group">
-                    <input class="form-control" type="password" placeholder="Password" name="password" required>
-                    <span class="input-group-addon"><i class="material-icons lock"></i></span>
-                  </div>
-                  <div class="custom-control custom-checkbox form-group">
-                    <input class="custom-control-input" type="checkbox" id="logged" checked>
-                    <label class="custom-control-label" for="logged">로그인 유지</label>
-                  </div>
-                  <button class="btn btn-primary btn-block" type="submit">로그인</button>
-                </form>
-              </div>
-              <div class="tab-pane fade" id="signup" role="tabpanel">
-                <form autocomplete="off" id="signup-form">
-                  <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Full Name" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="email" placeholder="Email" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="password" placeholder="Password" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="password" placeholder="Confirm Password" required>
-                  </div>
-                  <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
-                  <p class="text-muted text-sm mt-4">OR sign up with your social account</p><a class="media-btn media-facebook" href="#"><i class="socicon-facebook"></i><span>Signup with Facebook</span></a><a class="media-btn media-google" href="#"><i class="socicon-googleplus"></i><span>Signup with Google+</span></a><a class="media-btn media-twitter" href="#"><i class="socicon-twitter"></i><span>Signup with Twitter</span></a>
-                </form>
-              </div>
-            </div>
-          </div>
+	      	<form action="logout.do" method="post">
+	      		<p class="text-muted text-sm mt-4"><h4>${member.nickname }<span>님</span><h4></p>
+	            <p class="text-muted text-sm mt-4">환영합니다</p>
+	            <button class="btn btn-primary" type="submit">Log Out</button>
+	         </form>
+	      </div>
         </div>
       </div>
     </header>
+    
     <!-- Page Title-->
     <div class="page-title">
       <div class="container">
@@ -149,14 +105,14 @@
           </div>
         </div>
         <div class="col-sm-6">
-              <div class="form-group">
-                <label for="checkout-ln">첨부파일</label>
-                <div class="custom-file">
-                <input name = "main_image" class="custom-file-input" type="button" id="file-input1" onClick="fn_addFile()" required>
-                <label class="custom-file-label" for="file-input1"></label>
+          <div class="form-group">
+            <label for="checkout-ln">첨부파일</label>
+              <div class="custom-file" id="d_file" onClick="fn_addFile()">
+                <input name = "main_image" class="custom-file-input" type="button" required>
+                <label class="custom-file-label" for="d_file"></label>
               </div>
-              </div>
-            </div>
+          </div>
+        </div>
         <div class="col-12 text-right">
           <button class="btn btn-primary" type="submit">등록</button>
         </div>

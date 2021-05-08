@@ -81,4 +81,12 @@ public class RecipeDAO {
 	public List<RecipeVO> selectCategory(PagingVO vo){
 		return mybatis.selectList("recipeDAO.selectCategory", vo);
 	}
+	
+	public int countSearchTotal(String keyword) {
+		return mybatis.selectOne("recipeDAO.countSearchTotal", keyword);
+	}
+	
+	public List<RecipeVO> searchRecipe(PagingVO vo){
+		return mybatis.selectList("recipeDAO.searchRecipe", vo);
+	}
 }

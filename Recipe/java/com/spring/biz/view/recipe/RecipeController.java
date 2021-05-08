@@ -163,17 +163,22 @@ public class RecipeController {
 		System.out.println("===Controller의 updateRjsp() 실행===");
 		//로그인 안 한 상태에서 수정 누르면 바로 널포인트익셉션 에러
 		//if문으로 로그인/아웃 나눠서 안내문 띄우거나 해야함
-		MemberVO mvo = (MemberVO) sess.getAttribute("member");
-		System.out.println(mvo.getId());
-		String logid = mvo.getId();
-		String recipeid = recipeService.idChk(recipeno);
-		if(logid.equals(recipeid)) {
-			RecipeVO rvo = recipeService.getRecipe(recipeno);
-			model.addAttribute("recipe", rvo);
-			return "recipeUpdate";
-		}else {
-			return "redirect:recipeSingle";
-		}
+		// ===> jsp에서 로그아웃 상태면 아예 수정 버튼 띄우지 않음 & 현재 로그인한 아이디와 해당 글의 아이디 일치하는 경우에만 수정 버튼 나타남 
+//		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+//		System.out.println(mvo.getId());
+//		String logid = mvo.getId();
+//		String recipeid = recipeService.idChk(recipeno);
+//		if(logid.equals(recipeid)) {
+//			RecipeVO rvo = recipeService.getRecipe(recipeno);
+//			model.addAttribute("recipe", rvo);
+//			return "recipeUpdate";
+//		}else {
+//			return "redirect:recipeSingle";
+//		}
+		
+		RecipeVO rvo = recipeService.getRecipe(recipeno);
+		model.addAttribute("recipe", rvo);
+		return "recipeUpdate";
 	}
 	
 	@RequestMapping(value = "/updateRecipe.do")
@@ -190,17 +195,19 @@ public class RecipeController {
 	public String deleteRecipe(int recipeno, Model model, HttpSession sess) {
 		//파라미터에 @ModelAttribute("member") MemberVO mvo 넣었는데 작동 안 함
 		System.out.println("===Controller의 deleteRecipe() 실행===");
-		MemberVO mvo = (MemberVO) sess.getAttribute("member");
-		System.out.println(mvo.getId());
-		String logid = mvo.getId();
-		String recipeid = recipeService.idChk(recipeno);
-		System.out.println(recipeid);
-		if(logid.equals(recipeid)) {
-			recipeService.deleteRecipe(recipeno);
-			return "redirect:/getRecipeList.do";
-		}else {
-			return "redirect:recipeSingle";
-		}
+//		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+//		System.out.println(mvo.getId());
+//		String logid = mvo.getId();
+//		String recipeid = recipeService.idChk(recipeno);
+//		System.out.println(recipeid);
+//		if(logid.equals(recipeid)) {
+//			recipeService.deleteRecipe(recipeno);
+//			return "redirect:/getRecipeList.do";
+//		}else {
+//			return "redirect:recipeSingle";
+//		}
+		recipeService.deleteRecipe(recipeno);
+		return "redirect:/recipePaging.do?category=";
 	}
 	
 	@RequestMapping(value = "/getRecipeList.do")
@@ -223,8 +230,11 @@ public class RecipeController {
 	}
 	
 	@RequestMapping(value = "/getRecipe.do", method=RequestMethod.GET)
-	public String getRecipe(@RequestParam int recipeno, Model model) {
+	public String getRecipe(@RequestParam int recipeno, 
+			@RequestParam(value="category", required=false)String category, Model model) {
 		System.out.println("===Controller의 getRecipe() 실행===");
+		System.out.println("직전 카테고리 : " + category);
+		model.addAttribute("category", category);
 		RecipeVO rvo = recipeService.getRecipe(recipeno);
 		model.addAttribute("recipe", rvo);
 		List<RecipeImageVO> rimageFileList = recipeService.getRimageList(recipeno);
@@ -265,6 +275,10 @@ public class RecipeController {
 	public void rthumbnails(int recipeno, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("레시피 이미지 썸네일!!!");
 		System.out.println(recipeno);
+//		List<String> fileList = recipeService.getFileName(recipeno);
+//		String filename = null;
+//		filename = (String) fileList.get(0);
+		
 		String filename = recipeService.getFileName(recipeno);
 		System.out.println(filename);
 		
@@ -340,37 +354,19 @@ public class RecipeController {
 		}
 	}
 	
-	@RequestMapping(value = "/categoryPaging.do")
-	public String categoryPaging(Model model, 
-			@RequestParam(value="nowPage", required=false)String nowPage, 
-			@RequestParam(value="category", required=false)String category) {
-		
-		System.out.println("현재 카테고리 : " + category);
-		
-		if(category.equals("korean")) {
-			category = "한식";
-		}else if(category.equals("western")) {
-			category = "양식";
-		}else if(category.equals("japanese")) {
-			category = "일식";
-		}else if(category.equals("chinese")) {
-			category = "중식";
-		}else if(category.equals("bread")) {
-			category = "제과제빵";
-		}else if(category.equals("drink")) {
-			category = "음료";
-		}
-		
-		int total = recipeService.countCategoryTotal(category);
-		if(nowPage==null) {nowPage = "1";}
-		pagingVO = new PagingVO(total, Integer.parseInt(nowPage), category);
-		List<RecipeVO> list = recipeService.selectCategory(pagingVO);
+	@RequestMapping(value = "/searchRecipe.do")
+	public String searchRecipe(Model model, 
+			@RequestParam(value="keyword", required=false)String keyword, 
+			@RequestParam(value="nowPage", required=false)String nowPage) {
+		int total = recipeService.countSearchTotal(keyword);
+		if(nowPage==null) {nowPage="1";}
+		pagingVO = new PagingVO(keyword, total, Integer.parseInt(nowPage));
+		List<RecipeVO> list = recipeService.searchRecipe(pagingVO);
 		
 		model.addAttribute("recipeList", list);
 		model.addAttribute("paging", pagingVO);
 		return "Recipe";
 	}
-//	@RequestMapping(value = "/prevPaging.do")
-//	public String prevPaging()
+
 	
 }

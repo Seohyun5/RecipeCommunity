@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Recipe</title>
+    <title>Recipe Community</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Unishop - Universal E-Commerce Template">
     <meta name="keywords" content="shop, e-commerce, modern, flat style, responsive, online store, business, mobile, blog, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
@@ -27,6 +27,93 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
     <script src="resources/js/modernizr.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+	$(document).ready(function () {
+		
+		$("#id").blur(function () {
+			 var id = $("#id").val();
+			console.log(id);
+			if(id != ""){
+				checkId(id);
+			}else{
+				$("#idCheck_result").html("");
+			}
+		});
+	
+		 function checkId(id) {
+				$.ajax({
+					type : 'POST',
+					url : '${pageContext.request.contextPath}/idCheck.do',
+					data : {"id" : id}
+				}).done(function (data) {
+					console.log(data);
+					idResult(data);
+				}).fail(function (request,status,error) {
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				})
+		}
+		 
+		function idResult(data) {
+			if(data==0){
+				$("#idCheck_result").html("사용가능한 아이디입니다.").css("color","green");
+			}else{
+				$("#idCheck_result").html("이미 사용중인 아이디입니다.").css("color","red");
+			}
+		}
+		$("#pw").blur(function () {
+		 	pwCheck();
+		});
+		$("#pw2").blur(function () {
+			pwCheck();
+		});
+		function pwCheck() {
+			var pw1 = $("#pw").val();
+  			var pw2 = $("#pw2").val();
+			console.log(pw1);
+				if(pw2 == "" || pw1 == ""){
+					$("#pwCheck_result").html("비밀번호를 입력해주세요").css("color","red");
+				}else if(pw1 == pw2){
+					$("#pwCheck_result").html("비밀번호가 일치합니다").css("color","green");
+				}else{
+					$("#pwCheck_result").html("비밀번호가 일치하지 않습니다.").css("color","red");
+				}
+		}
+		
+		$("#nickname").blur(function () {
+			var nickname = $("#nickname").val();
+			console.log(nickname);
+			if(nickname != ""){
+				checkNickname(nickname);
+			}else{
+				$("#nicknameCheck_result").html("");
+			}
+		});
+	
+		 function checkNickname(nickname) {
+				$.ajax({
+					type : 'POST',
+					url : '${pageContext.request.contextPath}/nicknameCheck.do',
+					data : {"nickname" : nickname}
+				}).done(function (data) {
+					console.log(data);
+					nicknameResult(data);
+				}).fail(function (request,status,error) {
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				})
+		}
+		 
+		function nicknameResult(data) {
+			if(data==0){
+				$("#nicknameCheck_result").html("사용가능한 닉네임입니다.").css("color","green");
+			}else{
+				$("#nicknameCheck_result").html("이미 사용중인 닉네임입니다.").css("color","red");
+			}
+		}
+	});
+	    
+    </script>
   </head>
   <!-- Body-->
   <body>
@@ -39,8 +126,8 @@
       <!-- Main Navigation-->
       <nav class="site-menu">
         <ul>
-          <li><a href="main.do"><span>Home</span></a></li>
-          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li class="active"><a href="main.do"><span>Home</span></a></li>
+          <li><a href="recipePaging.do?category="><span>Recipe</span></a></li>
           <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">
               <li><a href="account-orders.html">My Recipe</a></li>
@@ -56,14 +143,27 @@
         <!-- Toolbar Dropdown-->
         <div class="toolbar-dropdown">
           <!-- Account Section-->
+          
+          <!-- 로그인 상태 -->
+          <c:if test="${!empty member}">
+	      <div class="toolbar-section" id="account">
+	      	<form action="logout.do" method="post">
+	        	<p class="text-muted text-sm mt-4"><h4>${member.nickname }<span>님</span><h4></p>
+	            <p class="text-muted text-sm mt-4">환영합니다</p>
+	            <button class="btn btn-primary" type="submit">Log Out</button>
+	        </form>
+	      </div>
+          </c:if>
+          <!-- 로그아웃 상태 -->
+          <c:if test="${empty member}">
           <div class="toolbar-section" id="account">
             <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li class="nav-item"><a class="nav-link active" href="#login" data-toggle="tab" role="tab">Log In</a></li>
-              <li class="nav-item"><a class="nav-link" href="#signup" data-toggle="tab" role="tab">Sign Up</a></li>
+              <li class="nav-item"><a class="nav-link active" href="#login" data-toggle="tab" role="tab">로그인</a></li>
+              <li class="nav-item"><a class="nav-link" href="#signup" data-toggle="tab" role="tab">회원가입</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade show active" id="login" role="tabpanel">
-                <!-- 로그인 -->
+              	<!-- 로그인 -->
                 <form action="login.do" method="post" autocomplete="off" id="login-form">
                   <div class="form-group input-group">
                     <input class="form-control" type="text" placeholder="ID" name="id" required>
@@ -81,28 +181,42 @@
                 </form>
               </div>
               <div class="tab-pane fade" id="signup" role="tabpanel">
-                <form autocomplete="off" id="signup-form">
+                <form method="post" autocomplete="off" id="signup-form" action="insertMember.do">
                   <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Full Name" required>
+                    <input class="form-control" type="text" placeholder="아이디" id="id" name="id" required>
+                    <div id="idCheck_result"></div>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="email" placeholder="Email" required>
+                    <input class="form-control" type="password" placeholder="비밀번호" id="pw" required>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="password" placeholder="Password" required>
+                    <input class="form-control" type="password" placeholder="비밀번호 확인" id="pw2" name="password" required>
+                    <div id="pwCheck_result"></div>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="password" placeholder="Confirm Password" required>
+                    <input class="form-control" type="text" placeholder="이름" name="name" required>
                   </div>
-                  <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+                  <div class="form-group">
+                    <input class="form-control" type="text" placeholder="닉네임" id="nickname" name="nickname" required>
+                    <div id="nicknameCheck_result"></div>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="email" placeholder="이메일" name="email" required>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" placeholder="전화번호" name="phone" required>
+                  </div>
+                  <button class="btn btn-primary btn-block" type="submit">회원가입</button>
                   <p class="text-muted text-sm mt-4">OR sign up with your social account</p><a class="media-btn media-facebook" href="#"><i class="socicon-facebook"></i><span>Signup with Facebook</span></a><a class="media-btn media-google" href="#"><i class="socicon-googleplus"></i><span>Signup with Google+</span></a><a class="media-btn media-twitter" href="#"><i class="socicon-twitter"></i><span>Signup with Twitter</span></a>
                 </form>
               </div>
             </div>
           </div>
+          </c:if>
         </div>
       </div>
     </header>
+    
     <!-- Page Title-->
     <div class="page-title">
       <div class="container">
@@ -117,9 +231,9 @@
           <!-- Search-->
           <div class="d-flex flex-wrap-reverse flex-md-nowrap justify-content-center justify-content-sm-between align-items-center mb-30">
             <div class="pt-3 pb-1 pb-sm-3 text-sm text-center text-sm-left"></div>
-            <form class="input-group shop-search-box" method="get"><span class="input-group-btn">
+            <form action="searchRecipe.do" class="input-group shop-search-box" method="get"><span class="input-group-btn">
                 <button type="submit"><i class="material-icons search"></i></button></span>
-              <input class="form-control" type="search" placeholder="Search Recipe">
+              <input class="form-control" type="search" placeholder="레시피명을 입력한 후, 엔터를 누르세요" id="keyword" name="keyword">
             </form>
           </div>
           <!-- Products Grid-->
@@ -134,7 +248,7 @@
                   </div>
                 </div>
                 <div class="product-card-details">
-                  <h3 class="product-card-title"><a href="getRecipe.do?recipeno=${item.recipeno }&nowPage=${paging.nowPage}">${item.subject }</a></h3>
+                  <h3 class="product-card-title"><a href="getRecipe.do?recipeno=${item.recipeno }&category=${paging.category}">${item.subject }</a></h3>
                 </div>
               </div>
             </div>
@@ -142,28 +256,57 @@
           </div>
           <!-- Pagination-->
           <nav class="pagination">
-          	<div class="column text-left hidden-xs-down">
-          	<c:if test="${paging.prev == true }">
-              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
-            </c:if>  
-            </div>
-          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
-            <div class="column">
-              <ul class="pages">
-                <li><a href="recipePaging.do?nowPage=${i }&category=${paging.category}">${i }</a></li>
-              </ul>
-            </div>
-          </c:forEach>
-            <div class="column text-right hidden-xs-down">
-            <c:if test="${paging.next == true }">
-              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }&category=${paging.category}">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
-            </c:if>
-              <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
-            </div>
+          
+          <c:if test="${empty paging.keyword }">
+	          <div class="column text-left hidden-xs-down">
+	          	<c:if test="${paging.prev == true }">
+	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
+	            </c:if>  
+	          </div>
+	          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
+	            <div class="column">
+	              <ul class="pages">
+	                <li><a href="recipePaging.do?nowPage=${i }&category=${paging.category}">${i }</a></li>
+	              </ul>
+	            </div>
+	          </c:forEach>
+	          <div class="column text-right hidden-xs-down">
+	            <c:if test="${paging.next == true }">
+	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }&category=${paging.category}">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+	            </c:if>
+	            <c:if test="${!empty member}">
+	              <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
+	            </c:if>
+	          </div>
+          </c:if>
+          
+          <c:if test="${!empty paging.keyword }">
+	          <div class="column text-left hidden-xs-down">
+	          	<c:if test="${paging.prev == true }">
+	              <a class="btn btn-outline-secondary btn-sm" href="searchRecipe.do?nowPage=${paging.prevPage }&keyword=${paging.keyword}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
+	            </c:if>  
+	          </div>
+	          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
+	            <div class="column">
+	              <ul class="pages">
+	                <li><a href="searchRecipe.do?nowPage=${i }&keyword=${paging.keyword}">${i }</a></li>
+	              </ul>
+	            </div>
+	          </c:forEach>
+	          <div class="column text-right hidden-xs-down">
+	            <c:if test="${paging.next == true }">
+	              <a class="btn btn-outline-secondary btn-sm" href="searchRecipe.do?nowPage=${paging.nextPage }&keyword=${paging.keyword}">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+	            </c:if>
+	            <c:if test="${!empty member}">
+	              <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
+	            </c:if>
+	          </div>
+          </c:if>
+          
           </nav>
         </div>
         
-        <!-- Sidebar          -->
+        <!-- Sidebar -->
         <div class="col-lg-3 col-md-4 order-md-1">
           <div class="sidebar-toggle position-left"><i class="material-icons filter_list"></i></div>
           <aside class="sidebar sidebar-offcanvas position-left"><span class="sidebar-close"><i class="material-icons icon_close"></i></span>

@@ -66,10 +66,10 @@ public class MemberController {
 		if (vo != null) {
 			System.out.println(vo.getNickname() + "님, 로그인 성공");
 			model.addAttribute("member", vo);
-			return "index";
+			return "redirect:main.do";
 		}else {
 			System.out.println("로그인 실패");
-			return "index";	
+			return "redirect:main.do";	
 		}
 	}
 	

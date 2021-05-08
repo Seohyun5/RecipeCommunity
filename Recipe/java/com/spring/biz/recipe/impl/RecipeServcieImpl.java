@@ -87,4 +87,14 @@ public class RecipeServcieImpl implements RecipeService {
 	public List<RecipeVO> selectCategory(PagingVO vo){
 		return recipeDAO.selectCategory(vo);
 	}
+	
+	@Override
+	public int countSearchTotal(String keyword) {
+		return recipeDAO.countSearchTotal(keyword);
+	}
+	
+	@Override
+	public List<RecipeVO> searchRecipe(PagingVO vo){
+		return recipeDAO.searchRecipe(vo);
+	}
 }
