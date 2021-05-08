@@ -76,7 +76,7 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
 	public String logout(HttpSession session, SessionStatus status) {
 		status.setComplete();
-		return "redirect:index";
+		return "redirect:main.do";
 	}
 	
 	@RequestMapping(value = "updateMember.do")

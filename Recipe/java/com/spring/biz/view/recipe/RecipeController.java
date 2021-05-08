@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -44,6 +45,7 @@ import com.spring.biz.recipe.RecipeVO;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
+@SessionAttributes("recipe")
 public class RecipeController {
 	private static final String RECIPE_IMAGE_REPO = "C:\\gallery\\rfile_repo";
 
@@ -231,7 +233,7 @@ public class RecipeController {
 	
 	@RequestMapping(value = "/getRecipe.do", method=RequestMethod.GET)
 	public String getRecipe(@RequestParam int recipeno, 
-			@RequestParam(value="category", required=false)String category, Model model) {
+			@RequestParam(value="category", required=false)String category, Model model, HttpSession sess) {
 		System.out.println("===Controller의 getRecipe() 실행===");
 		System.out.println("직전 카테고리 : " + category);
 		model.addAttribute("category", category);

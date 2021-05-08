@@ -56,7 +56,7 @@
         <!-- Toolbar Dropdown-->
         <div class="toolbar-dropdown">
           <!-- Account Section-->
-          <!-- 글 수정 화면 : 무조건 로그인 상태-->
+          <!-- 글 작성 화면 : 무조건 로그인 상태-->
           <div class="toolbar-section" id="account">
 	      	<form action="logout.do" method="post">
 	      		<p class="text-muted text-sm mt-4"><h4>${member.nickname }<span>님</span><h4></p>

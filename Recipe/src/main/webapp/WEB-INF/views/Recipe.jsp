@@ -126,8 +126,8 @@
       <!-- Main Navigation-->
       <nav class="site-menu">
         <ul>
-          <li class="active"><a href="main.do"><span>Home</span></a></li>
-          <li><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li><a href="main.do"><span>Home</span></a></li>
+          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
           <li><a href="account-orders.html"><span>Mypage</span></a>
             <ul class="sub-menu">
               <li><a href="account-orders.html">My Recipe</a></li>
@@ -327,9 +327,8 @@
             <section class="widget widget-icon-list">
               <h3 class="widget-title">정렬</h3>
               <ul>
-                <li><a href="recipePaging.do?category=${paging.category} "><i class="material-icons sort"></i>기본</a></li>
+                <li><a href="recipePaging.do?category=${paging.category} "><i class="material-icons sort"></i>최신순</a></li>
                 <li><a href="#"><i class="material-icons vertical_align_top"></i>오래된순</a></li>
-                <li><a href="#"><i class="material-icons sort_by_alpha"></i>가나다순</a></li>
               </ul>
             </section>
           </aside>

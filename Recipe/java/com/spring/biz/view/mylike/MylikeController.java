@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,7 +14,9 @@ import com.spring.biz.mylike.MylikeService;
 import com.spring.biz.mylike.MylikeVO;
 import com.spring.biz.recipe.RecipeVO;
 
+@Controller
 public class MylikeController {
+	
 	@Autowired
 	private MylikeService mylikeService;
 	private MylikeVO lvo;
@@ -27,15 +30,20 @@ public class MylikeController {
 		System.out.println("===Controller의 insertMylike() 실행===");
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
 		RecipeVO rvo = (RecipeVO) sess.getAttribute("recipe");
-		lvo.setId(mvo.getId());
-		lvo.setRecipeno(rvo.getRecipeno());
-		int cnt = mylikeService.selectLike(lvo);
+		String id = mvo.getId();
+		int recipeno = rvo.getRecipeno();
+		System.out.println(id + " & " + recipeno);
+		
+		MylikeVO like = new MylikeVO();
+		like.setId(id);
+		like.setRecipeno(recipeno);
+		int cnt = mylikeService.selectLike(like);
 		if(cnt == 0) {
-			mylikeService.insertLike(lvo);
+			mylikeService.insertLike(like);
 		}else {
-			mylikeService.deleteLike(lvo);
+			mylikeService.deleteLike(like);
 		}
-		return "redirect:recipeSingle";
+		return "redirect:getRecipe.do";
 	}
 	
 	@RequestMapping(value = "/deleteMylike.do")

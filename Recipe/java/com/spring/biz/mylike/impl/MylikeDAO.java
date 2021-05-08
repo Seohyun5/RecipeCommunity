@@ -18,7 +18,7 @@ public class MylikeDAO {
 	}
 	
 	public int selectMylike(MylikeVO lvo) {
-		return mybatis.selectOne("mylikeDAO.selectMylike", lvo);
+		return mybatis.selectOne("mylikeDAO.selectLike", lvo);
 	}
 	
 	public void insertMylike(MylikeVO lvo) {
