@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.biz.member.MemberVO;
 import com.spring.biz.mylike.MylikeService;
@@ -19,24 +20,25 @@ public class MylikeController {
 	
 	@Autowired
 	private MylikeService mylikeService;
-	private MylikeVO lvo;
+	private MylikeVO like;
 	
 	public MylikeController() {
 		System.out.println("===MylikeController() 객체 생성===");
 	}
 	
 	@RequestMapping(value = "/insertMylike.do")
-	public String insertMylike(HttpSession sess) {
+	public String insertMylike(HttpSession sess, 
+			@RequestParam(value="recipeno", required=false)int recipeno) {
 		System.out.println("===Controller의 insertMylike() 실행===");
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
-		RecipeVO rvo = (RecipeVO) sess.getAttribute("recipe");
 		String id = mvo.getId();
-		int recipeno = rvo.getRecipeno();
-		System.out.println(id + " & " + recipeno);
+		System.out.println(mvo);
+		System.out.println(id);
+		System.out.println(recipeno);
 		
-		MylikeVO like = new MylikeVO();
-		like.setId(id);
-		like.setRecipeno(recipeno);
+		like = new MylikeVO(id, recipeno);
+		System.out.println(like);
+		System.out.println(like.getId() + " " + like.getRecipeno());
 		int cnt = mylikeService.selectLike(like);
 		if(cnt == 0) {
 			mylikeService.insertLike(like);

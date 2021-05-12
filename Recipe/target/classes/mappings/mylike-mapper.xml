@@ -19,9 +19,10 @@
 		WHERE ID = #{id} AND RECIPENO = #{recipeno}
 	</delete>
 	
+	<!-- 다중 서브쿼리문에 주의! -->
 	<select id="getMylikeList" parameterType="String" resultType="recipe">
 		SELECT * FROM RECIPE
-		WHERE RECIPENO = (SELECT RECIPENO FROM MYLIKE WHERE ID = #{id}) 
+		WHERE RECIPENO IN (SELECT RECIPENO FROM MYLIKE WHERE ID = #{id}) 
 	</select>
 	
 </mapper>

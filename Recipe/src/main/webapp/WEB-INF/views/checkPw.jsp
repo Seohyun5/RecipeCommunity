@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>My Info</title>
+    <title>Recipe</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Unishop - Universal E-Commerce Template">
     <meta name="keywords" content="shop, e-commerce, modern, flat style, responsive, online store, business, mobile, blog, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
@@ -12,18 +15,18 @@
     <!-- Mobile Specific Meta Tag-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Favicon and Apple Icons-->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
+    <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+    <link rel="icon" type="image/png" href="resources/favicon.png">
+    <link rel="apple-touch-icon" href="resources/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="resources/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="resources/touch-icon-ipad-retina.png">
     <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
-    <link rel="stylesheet" media="screen" href="css/vendor.min.css">
+    <link rel="stylesheet" media="screen" href="resources/css/vendor.min.css">
     <!-- Main Template Styles-->
-    <link id="mainStyles" rel="stylesheet" media="screen" href="css/styles.min.css">
+    <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
-    <script src="js/modernizr.min.js"></script>
+    <script src="resources/js/modernizr.min.js"></script>
   </head>
   <!-- Body-->
   <body>
@@ -31,20 +34,18 @@
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <header class="navbar navbar-sticky">
       <!-- Site Branding-->
-      <div class="site-branding"><a class="site-logo hidden-xs-down" href="index.html"><img src="img/logo/logo.png" alt="Unishop"></a><a class="site-logo logo-sm hidden-sm-up" href="index.html"><img src="img/logo/logo-sm.png" alt="Unishop"></a>
+      <div class="site-branding"><a class="site-logo hidden-xs-down" href="index.html"><img src="resources/img/logo/logo.png" alt="Unishop"></a><a class="site-logo logo-sm hidden-sm-up" href="index.html"><img src="resources/img/logo/logo-sm.png" alt="Unishop"></a>
       </div>
       <!-- Main Navigation-->
       <nav class="site-menu">
         <ul>
-          <li><a href="index.html"><span>Home</span></a></li>
-          <li><a href="shop-boxed-ls.html"><span>Recipe</span></a></li>
-          <li><a href="blog.html"><span>Blog</span></a></li>
-          <li class="active"><a href="account-orders.html"><span>MYPAGE</span></a>
+          <li><a href="main.do"><span>Home</span></a></li>
+          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li><a href="getMylikeList.do"><span>Mypage</span></a>
             <ul class="sub-menu">
-                <li><a href="account-orders.html">My Recipe</a></li>
-                <li><a href="account-wishlist.html">My Blog</a></li>
-                <li><a href="account-wishlist.html">Like</a></li>
-                <li><a href="account-profile.html">My Info</a></li>
+              <li><a href="account-orders.html">My Recipe</a></li>
+              <li><a href="getMylikeList.do">Like</a></li>
+              <li><a href="myinfoCheck.do">My Info</a></li>
             </ul>
           </li>
         </ul>
@@ -55,63 +56,26 @@
         <!-- Toolbar Dropdown-->
         <div class="toolbar-dropdown">
           <!-- Account Section-->
+          <!-- 나의 정보 화면 : 무조건 로그인 상태-->
           <div class="toolbar-section" id="account">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li class="nav-item"><a class="nav-link active" href="#login" data-toggle="tab" role="tab">Log In</a></li>
-              <li class="nav-item"><a class="nav-link" href="#signup" data-toggle="tab" role="tab">Sign Up</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane fade show active" id="login" role="tabpanel">
-                <form autocomplete="off" id="login-form">
-                  <div class="form-group input-group">
-                    <input class="form-control" type="email" placeholder="Email" required><span class="input-group-addon"><i class="material-icons mail"></i></span>
-                  </div>
-                  <div class="form-group input-group">
-                    <input class="form-control" type="password" placeholder="Password" required><span class="input-group-addon"><i class="material-icons lock"></i></span>
-                  </div>
-                  <div class="custom-control custom-checkbox form-group">
-                    <input class="custom-control-input" type="checkbox" id="logged" checked>
-                    <label class="custom-control-label" for="logged">Keep me logged in</label>
-                  </div>
-                  <button class="btn btn-primary btn-block" type="submit">Log In</button>
-                </form>
-              </div>
-              <div class="tab-pane fade" id="signup" role="tabpanel">
-                <form autocomplete="off" id="signup-form">
-                  <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Full Name" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="email" placeholder="Email" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="password" placeholder="Password" required>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="password" placeholder="Confirm Password" required>
-                  </div>
-                  <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
-                  <p class="text-muted text-sm mt-4">OR sign up with your social account</p><a class="media-btn media-facebook" href="#"><i class="socicon-facebook"></i><span>Signup with Facebook</span></a><a class="media-btn media-google" href="#"><i class="socicon-googleplus"></i><span>Signup with Google+</span></a><a class="media-btn media-twitter" href="#"><i class="socicon-twitter"></i><span>Signup with Twitter</span></a>
-                </form>
-              </div>
-            </div>
-          </div>
+	      	<form action="logout.do" method="post">
+	      		<p class="text-muted text-sm mt-4"><h4>${member.nickname }<span>님</span><h4></p>
+	            <p class="text-muted text-sm mt-4">환영합니다</p>
+	            <button class="btn btn-primary" type="submit">Log Out</button>
+	         </form>
+	      </div>
         </div>
       </div>
     </header>
-    <!-- Page Title-->
+    
+        <!-- Page Title-->
     <div class="page-title">
       <div class="container">
         <h1>My Info</h1>
         <ul class="breadcrumbs">
-          <li><a href="index.html">My Recipe</a>
-          </li>
+          <li><a href="index.html">My Recipe</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">My Blog</a>
-          </li>
-          <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">My Like</a>
-          </li>
+          <li><a href="getMylikeList.do">My Like</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
           <li>My Info</li>
         </ul>
@@ -127,9 +91,9 @@
           <form action="checkPw.do" name="checkPw" method="post" class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="account-pass">비밀번호</label>
+                <label for="account-pass">비밀번호 확인</label>
                 <input class="form-control" type="password" id="password" name="password">
-                <input class="btn btn-primary" type="button" value="확인">
+                <input class="btn btn-primary" type="submit" value="확인">
               </div>
             </div>
           </form>

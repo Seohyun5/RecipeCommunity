@@ -131,8 +131,8 @@
           <li><a href="getMylikeList.do"><span>Mypage</span></a>
             <ul class="sub-menu">
               <li><a href="account-orders.html">My Recipe</a></li>
-              <li><a href="account-wishlist.html">Like</a></li>
-              <li><a href="account-profile.html">My Info</a></li>
+              <li><a href="getMylikeList.do">Like</a></li>
+              <li><a href="enterMyinfo.do">My Info</a></li>
             </ul>
           </li>
         </ul>

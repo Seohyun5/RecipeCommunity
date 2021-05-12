@@ -36,6 +36,6 @@
 	</select>
 	
 	<select id="checkPw" parameterType="logvo" resultType="int">
-		SELECT * FROM MEMBER WHERE ID = #{id} and PASSWORD = #{password}
+		SELECT COUNT(ID) FROM MEMBER WHERE ID = #{id} and PASSWORD = #{password}
 	</select>
 </mapper>

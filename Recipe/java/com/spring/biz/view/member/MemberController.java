@@ -78,21 +78,16 @@ public class MemberController {
 		status.setComplete();
 		return "redirect:main.do";
 	}
-	
-	@RequestMapping(value = "updateMember.do")
-	public String updateMember(MemberVO vo) {
-		memberService.updateMember(vo);
-		return "redirect:myInfo";
-	}
-	
-	@RequestMapping(value = "updateMyinfo.do")
+
+	@RequestMapping(value = "/enterMyinfo.do")
 	public String updateMyinfo() {
 		return "checkPw";
 	}
 	
-	@RequestMapping(value = "checkPw.do")
+	@RequestMapping(value = "/checkPw.do")
 	public String checkPw(String password, HttpSession sess) {
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		logvo = new LoginVO();
 		logvo.setId(mvo.getId());
 		logvo.setPassword(password);
 		int chkpw = memberService.checkPw(logvo);
@@ -101,6 +96,12 @@ public class MemberController {
 		}else {
 			return "redirect:checkPw";
 		}
+	}
+
+	@RequestMapping(value = "/updateMember.do")
+	public String updateMember(MemberVO vo) {
+		memberService.updateMember(vo);
+		return "redirect:myInfo";
 	}
 	
 }
