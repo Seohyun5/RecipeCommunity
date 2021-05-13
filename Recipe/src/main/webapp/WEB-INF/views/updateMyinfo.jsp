@@ -7,7 +7,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Recipe</title>
+    <title>Recipe Community</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Unishop - Universal E-Commerce Template">
     <meta name="keywords" content="shop, e-commerce, modern, flat style, responsive, online store, business, mobile, blog, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
@@ -27,6 +27,44 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
     <script src="resources/js/modernizr.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+	$(document).ready(function () {
+		
+		$("#nickname").blur(function () {
+			var nickname = $("#nickname").val();
+			console.log(nickname);
+			if(nickname != ""){
+				checkNickname(nickname);
+			}else{
+				$("#nicknameCheck_result").html("");
+			}
+		});
+	
+		 function checkNickname(nickname) {
+				$.ajax({
+					type : 'POST',
+					url : '${pageContext.request.contextPath}/nicknameCheck.do',
+					data : {"nickname" : nickname}
+				}).done(function (data) {
+					console.log(data);
+					nicknameResult(data);
+				}).fail(function (request,status,error) {
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				})
+		}
+		 
+		function nicknameResult(data) {
+			if(data==0){
+				$("#nicknameCheck_result").html("사용가능한 닉네임입니다.").css("color","green");
+			}else{
+				$("#nicknameCheck_result").html("이미 사용중인 닉네임입니다.").css("color","red");
+			}
+		}
+	});
+	    
+    </script>
   </head>
   <!-- Body-->
   <body>
@@ -93,11 +131,12 @@
         </div>
         <div class="col-lg-8">
           <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-          <form class="row">
+          <form action="updateMember.do" method="post" autocomplete="off" id="updateMember" class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="account-fn">닉네임</label>
                 <input class="form-control" type="text" id="nickname" value=${member.nickname } name="nickname" required>
+                <div id="nicknameCheck_result"></div>
               </div>
             </div>
             <div class="col-md-6">
@@ -114,12 +153,12 @@
             </div>
             <div class="col-12">
               <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <button class="btn btn-primary margin-right-none" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">개인정보 수정</button>
+                <button class="btn btn-primary margin-right-none" type="submit" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">개인정보 수정</button>
               </div>
               <hr class="mt-2 mb-3">
             </div>
-          </form>
-          <form name="updatePw" class="row" action="updatePw.do" method="post">
+          </form> 
+          <form id="updatePw" class="row" action="updatePw.do" method="post">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="account-pass">새 비밀번호</label>
@@ -134,7 +173,7 @@
             </div>
             <div class="col-12">
               <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <button class="btn btn-primary margin-right-none" type="button" onclick="pwCheck()">비밀번호 수정</button>
+                <button class="btn btn-primary margin-right-none" type="submit" onclick="pwCheck()">비밀번호 수정</button>
                 <script type="text/javascript">
                 	function pwCheck(){
                 		var pw = document.getElementById("password").value;

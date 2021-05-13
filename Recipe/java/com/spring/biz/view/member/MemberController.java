@@ -99,8 +99,20 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/updateMember.do")
-	public String updateMember(MemberVO vo) {
+	public String updateMember(MemberVO vo, HttpSession sess) {
+		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		vo.setId(mvo.getId());
+		
+		System.out.println(vo.getId());
+		System.out.println(vo.getNickname());
+		System.out.println(vo.getEmail());
+		System.out.println(vo.getPhone());
 		memberService.updateMember(vo);
+		return "redirect:myInfo";
+	}
+
+	@RequestMapping(value = "/updatePw.do")
+	public String updatePw() {
 		return "redirect:myInfo";
 	}
 	
