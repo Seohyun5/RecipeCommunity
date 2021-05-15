@@ -1,5 +1,7 @@
 package com.spring.biz.member.impl;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,5 +48,9 @@ public class MemberDAO {
 	
 	public int checkNickname(String nickname) {
 		return mybatis.selectOne("memberDAO.checkNickname", nickname);
+	}
+	
+	public void updatePw(Map map) {
+		mybatis.update("memberDAO.updatePw", map);
 	}
 }

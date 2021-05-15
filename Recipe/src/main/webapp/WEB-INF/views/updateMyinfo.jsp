@@ -32,6 +32,26 @@
     
 	$(document).ready(function () {
 		
+		$("#password").blur(function () {
+		 	pwCheck();
+		});
+		$("#password1").blur(function () {
+			pwCheck();
+		});
+		
+		function pwCheck() {
+			var pw1 = $("#password").val();
+  			var pw2 = $("#password1").val();
+			console.log(pw1);
+				if(pw1 == "" || pw2 == ""){
+					$("#pwCheck_result").html("비밀번호는 4자 이상 입력해주세요").css("color","red");
+				}else if(pw1 == pw2){
+					$("#pwCheck_result").html("비밀번호가 일치합니다").css("color","green");
+				}else{
+					$("#pwCheck_result").html("비밀번호가 일치하지 않습니다.").css("color","red");
+				}
+		}
+		
 		$("#nickname").blur(function () {
 			var nickname = $("#nickname").val();
 			console.log(nickname);
@@ -78,12 +98,12 @@
       <nav class="site-menu">
         <ul>
           <li><a href="main.do"><span>Home</span></a></li>
-          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
-          <li><a href="account-orders.html"><span>Mypage</span></a>
+          <li><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li class="active"><a href="getMylikeList.do"><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="account-orders.html">My Recipe</a></li>
-              <li><a href="account-wishlist.html">Like</a></li>
-              <li><a href="account-profile.html">My Info</a></li>
+              <li><a href="getMyrecipeList.do">My Recipe</a></li>
+              <li><a href="getMylikeList.do">My Like</a></li>
+              <li><a href="enterMyinfo.do">My Info</a></li>
             </ul>
           </li>
         </ul>
@@ -111,14 +131,9 @@
       <div class="container">
         <h1>My Info</h1>
         <ul class="breadcrumbs">
-          <li><a href="index.html">My Recipe</a>
-          </li>
+          <li><a href="getMyrecipeList.do">My Recipe</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">My Blog</a>
-          </li>
-          <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">My Like</a>
-          </li>
+          <li><a href="getMylikeList.do">My Like</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
           <li>My Info</li>
         </ul>
@@ -162,19 +177,20 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="account-pass">새 비밀번호</label>
-                <input class="form-control" type="password" id="password" name="password">
+                <input class="form-control" type="password" id="password" name="password" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="account-confirm-pass">새 비밀번호 확인</label>
-                <input class="form-control" type="password" id="password1" name="password1">
+                <input class="form-control" type="password" id="password1" name="password1" required>
+                <div id="pwCheck_result"></div>
               </div>
             </div>
             <div class="col-12">
               <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <button class="btn btn-primary margin-right-none" type="submit" onclick="pwCheck()">비밀번호 수정</button>
-                <script type="text/javascript">
+                <button class="btn btn-primary margin-right-none" type="submit">비밀번호 수정</button>
+                <!-- <script type="text/javascript">
                 	function pwCheck(){
                 		var pw = document.getElementById("password").value;
                 		var pw2 = document.getElementById("password1").value;
@@ -185,6 +201,8 @@
                 		}else if(pw == pw2){
                 			if((pw.length < 4 || pw2.length < 4) || (pw == "" || pw2 == "")){
                 				alert("비밀번호는 최소 4자 이상 입력해주세요.");
+                				pw.focus();
+                				return false;
                 			}else{
                 				document.updatePw.action="updatePw.do"
                 				document.updatePw.method="post"
@@ -193,7 +211,7 @@
                 			}
                 		}
                 	}
-                </script>
+                </script> -->
               </div>
             </div>
           </form>

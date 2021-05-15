@@ -1,9 +1,12 @@
 package com.spring.biz.view.member;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	private LoginVO logvo;
+	private BCryptPasswordEncoder pwEncoder;
 
 	public MemberController() {
 		System.out.println("===MemberController() 객체 생성===");
@@ -47,6 +51,14 @@ public class MemberController {
 	public String insertMember(MemberVO vo, HttpSession session) {
 		System.out.println("===insertMember() 실행===");
 		System.out.println("vo : " + vo);
+		System.out.println(vo.getPassword());
+		String inputPw = vo.getPassword();
+		
+		pwEncoder = new BCryptPasswordEncoder();
+		String pw = pwEncoder.encode(inputPw);
+		System.out.println(pw);
+		vo.setPassword(pw);
+		
 		int result = memberService.insertMember(vo);
 		if(result>0) {
 			System.out.println("회원가입 완료");
@@ -63,7 +75,9 @@ public class MemberController {
 		System.out.println("logvo : " + logvo);
 		System.out.println("id : " + logvo.getId() + " pw : " + logvo.getPassword());
 		MemberVO vo = memberService.login(logvo);
-		if (vo != null) {
+		boolean pwMatch = pwEncoder.matches(logvo.getPassword(), vo.getPassword());
+		
+		if (vo != null && pwMatch == true) {
 			System.out.println(vo.getNickname() + "님, 로그인 성공");
 			model.addAttribute("member", vo);
 			return "redirect:main.do";
@@ -94,12 +108,12 @@ public class MemberController {
 		if(chkpw > 0) {
 			return "updateMyinfo";
 		}else {
-			return "redirect:checkPw";
+			return "redirect:checkPw.do";
 		}
 	}
 
 	@RequestMapping(value = "/updateMember.do")
-	public String updateMember(MemberVO vo, HttpSession sess) {
+	public String updateMember(MemberVO vo, HttpSession sess, Model model) {
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
 		vo.setId(mvo.getId());
 		
@@ -108,12 +122,22 @@ public class MemberController {
 		System.out.println(vo.getEmail());
 		System.out.println(vo.getPhone());
 		memberService.updateMember(vo);
-		return "redirect:myInfo";
+		//getMember를 다시 안 해주면 변경하기 전의 정보, 즉, 로그인했을 때 세션에 저장된 memberVO의 정보가 그대로 남아있다.
+		//ex) 닉네임을 A -> B로 변경했는데도 사이드메뉴를 보면 여전히 A로 나온다. 로그인할 때 저장된 A라는 닉네임이 그대로 남아있는 것.
+		mvo = memberService.getMember(vo.getId());
+		model.addAttribute("member", mvo);
+		return "updateMyinfo";
 	}
 
 	@RequestMapping(value = "/updatePw.do")
-	public String updatePw() {
-		return "redirect:myInfo";
+	public String updatePw(String password, HttpSession sess) {
+		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		String id = mvo.getId();
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("password", password);
+		memberService.updatePw(map);
+		return "updateMyinfo";
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.spring.biz.member.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +55,10 @@ public class MemberServiceImpl implements MemberService {
 	public int checkNickname(String nickname) {
 		return memberDAO.checkNickname(nickname);
 	}
+	
+	@Override
+	public void updatePw(Map map) {
+		memberDAO.updatePw(map);
+	}
+	
 }

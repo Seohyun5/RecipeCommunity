@@ -1,5 +1,7 @@
 package com.spring.biz.member;
 
+import java.util.Map;
+
 public interface MemberService {
 	public int insertMember(MemberVO vo); //회원가입
 	public MemberVO getMember(String id); //회원정보조회
@@ -9,4 +11,5 @@ public interface MemberService {
 	public int checkId(String id); //아이디 중복조회
 	public int checkPw(LoginVO logvo); //비밀번호 확인
 	public int checkNickname(String nickname); //닉네임 중복조회
+	public void updatePw(Map map); //비밀번호 수정
 }

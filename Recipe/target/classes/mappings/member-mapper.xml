@@ -38,4 +38,10 @@
 	<select id="checkPw" parameterType="logvo" resultType="int">
 		SELECT COUNT(ID) FROM MEMBER WHERE ID = #{id} and PASSWORD = #{password}
 	</select>
+	
+	<select id="updatePw" parameterType="Map">
+		UPDATE MEMBER 
+		SET PASSWORD = #{password} 
+		WHERE ID = #{id}
+	</select>
 </mapper>

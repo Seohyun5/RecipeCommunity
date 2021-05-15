@@ -130,9 +130,9 @@
           <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
           <li><a href="getMylikeList.do"><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="account-orders.html">My Recipe</a></li>
-              <li><a href="getMylikeList.do">Like</a></li>
-              <li><a href="myinfoCheck.do">My Info</a></li>
+              <li><a href="getMyrecipeList.do">My Recipe</a></li>
+              <li><a href="getMylikeList.do">My Like</a></li>
+              <li><a href="enterMyinfo.do">My Info</a></li>
             </ul>
           </li>
         </ul>

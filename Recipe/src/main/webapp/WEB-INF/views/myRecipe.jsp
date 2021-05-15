@@ -7,7 +7,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Recipe</title>
+    <title>Recipe Community</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Unishop - Universal E-Commerce Template">
     <meta name="keywords" content="shop, e-commerce, modern, flat style, responsive, online store, business, mobile, blog, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
@@ -40,12 +40,12 @@
       <nav class="site-menu">
         <ul>
           <li><a href="main.do"><span>Home</span></a></li>
-          <li class="active"><a href="recipePaging.do?category="><span>Recipe</span></a></li>
-          <li><a href="getMylikeList.do"><span>Mypage</span></a>
+          <li><a href="recipePaging.do?category="><span>Recipe</span></a></li>
+          <li class="active"><a href="getMylikeList.do"><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="account-orders.html">My Recipe</a></li>
-              <li><a href="getMylikeList.do">Like</a></li>
-              <li><a href="myinfoCheck.do">My Info</a></li>
+              <li><a href="getMyrecipeList.do">My Recipe</a></li>
+              <li><a href="getMylikeList.do">My Like</a></li>
+              <li><a href="enterMyinfo.do">My Info</a></li>
             </ul>
           </li>
         </ul>
@@ -75,14 +75,9 @@
         <ul class="breadcrumbs">
           <li>My Recipe</li>
           <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">My Blog</a>
-          </li>
+          <li><a href="getMylikeList.do">My Like</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">Like</a>
-          </li>
-          <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="myinfoCheck.do">My Info</a>
-          </li>
+          <li><a href="enterMyinfo.do">My Info</a></li>
         </ul>
       </div>
     </div>
