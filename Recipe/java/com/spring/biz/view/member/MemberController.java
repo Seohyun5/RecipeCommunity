@@ -75,6 +75,7 @@ public class MemberController {
 		System.out.println("logvo : " + logvo);
 		System.out.println("id : " + logvo.getId() + " pw : " + logvo.getPassword());
 		MemberVO vo = memberService.login(logvo);
+		pwEncoder = new BCryptPasswordEncoder();
 		boolean pwMatch = pwEncoder.matches(logvo.getPassword(), vo.getPassword());
 		
 		if (vo != null && pwMatch == true) {
