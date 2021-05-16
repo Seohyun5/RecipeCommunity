@@ -39,7 +39,6 @@
       <!-- Main Navigation-->
       <nav class="site-menu">
         <ul>
-          <ul>
           <li><a href="main.do"><span>Home</span></a></li>
           <li><a href="recipePaging.do?category="><span>Recipe</span></a></li>
           <li class="active"><a href="getMylikeList.do"><span>Mypage</span></a>

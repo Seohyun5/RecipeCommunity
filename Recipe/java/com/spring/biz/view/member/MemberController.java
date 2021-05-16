@@ -71,7 +71,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login(LoginVO logvo, Model model, HttpSession session) {
+	public String login(LoginVO logvo, Model model) {
 		System.out.println("logvo : " + logvo);
 		System.out.println("id : " + logvo.getId() + " pw : " + logvo.getPassword());
 		MemberVO vo = memberService.login(logvo);
@@ -101,12 +101,14 @@ public class MemberController {
 	
 	@RequestMapping(value = "/checkPw.do")
 	public String checkPw(String password, HttpSession sess) {
-		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		MemberVO vo = (MemberVO) sess.getAttribute("member");
 		logvo = new LoginVO();
-		logvo.setId(mvo.getId());
-		logvo.setPassword(password);
-		int chkpw = memberService.checkPw(logvo);
-		if(chkpw > 0) {
+		logvo.setId(vo.getId());
+		vo = memberService.login(logvo);
+		pwEncoder = new BCryptPasswordEncoder();
+		boolean pwMatch = pwEncoder.matches(password, vo.getPassword());
+		
+		if(pwMatch == true) {
 			return "updateMyinfo";
 		}else {
 			return "redirect:checkPw.do";
@@ -134,9 +136,14 @@ public class MemberController {
 	public String updatePw(String password, HttpSession sess) {
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
 		String id = mvo.getId();
+		
+		pwEncoder = new BCryptPasswordEncoder();
+		String pw = pwEncoder.encode(password);
+		System.out.println(pw);
+		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
-		map.put("password", password);
+		map.put("password", pw);
 		memberService.updatePw(map);
 		return "updateMyinfo";
 	}
