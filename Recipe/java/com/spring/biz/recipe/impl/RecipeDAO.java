@@ -46,6 +46,14 @@ public class RecipeDAO {
 		mybatis.delete("recipeDAO.deleteRecipe", recipeno);
 	}
 	
+	public void deleteRecipeimg(int recipeno) {
+		mybatis.delete("recipeDAO.deleteRecipeimg", recipeno);
+	}
+	
+	public void deleteLike(int recipeno) {
+		mybatis.delete("recipeDAO.deleteLike", recipeno);
+	}
+	
 	public List<RecipeVO> getRecipeList() {
 		return mybatis.selectList("recipeDAO.getRecipeList");
 	}
@@ -88,5 +96,9 @@ public class RecipeDAO {
 	
 	public List<RecipeVO> searchRecipe(PagingVO vo){
 		return mybatis.selectList("recipeDAO.searchRecipe", vo);
+	}
+	
+	public List<RecipeVO> recentRecipe(){
+		return mybatis.selectList("recipeDAO.recentRecipe");
 	}
 }

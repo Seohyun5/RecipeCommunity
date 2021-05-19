@@ -44,6 +44,16 @@ public class RecipeServcieImpl implements RecipeService {
 	}
 
 	@Override
+	public void deleteRecipeimg(int recipeno) {
+		recipeDAO.deleteRecipeimg(recipeno);
+	}
+	
+	@Override
+	public void deleteLike(int recipeno) {
+		recipeDAO.deleteLike(recipeno);
+	}
+
+	@Override
 	public List<RecipeVO> getRecipeList() {
 		return recipeDAO.getRecipeList();
 	}
@@ -96,5 +106,10 @@ public class RecipeServcieImpl implements RecipeService {
 	@Override
 	public List<RecipeVO> searchRecipe(PagingVO vo){
 		return recipeDAO.searchRecipe(vo);
+	}
+	
+	@Override
+	public List<RecipeVO> recentRecipe(){
+		return recipeDAO.recentRecipe();
 	}
 }

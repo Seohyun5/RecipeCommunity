@@ -37,6 +37,14 @@
 		DELETE FROM RECIPE WHERE RECIPENO = #{recipeno}
 	</delete>
 	
+	<delete id="deleteRecipeimg" parameterType="int">
+		DELETE FROM RECIPEIMG WHERE RECIPENO = #{recipeno}
+	</delete>
+	
+	<delete id="deleteLike" parameterType="int">
+		DELETE FROM MYLIKE WHERE RECIPENO = #{recipeno}
+	</delete>
+	
 	<select id="getRecipeList" resultType="recipe">
 		SELECT * FROM RECIPE
 	</select>
@@ -107,4 +115,14 @@
 			 ) RECIPE
 			 	WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
+	
+	<select id="recentRecipe" resultType="recipe">
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			 FROM RECIPE
+			 ) RECIPE
+			 	WHERE RNUM BETWEEN 1 AND 4
+	</select>
+	
 </mapper>

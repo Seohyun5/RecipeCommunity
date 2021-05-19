@@ -27,6 +27,13 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="resources/css/styles.min.css">
     <!-- Modernizr-->
     <script src="resources/js/modernizr.min.js"></script>
+    <script type="text/javascript">
+	    var cnt=1;
+	    function fn_addFile(){
+	    	$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
+	    	cnt++;
+	    }
+    </script>
   </head>
   <!-- Body-->
   <body>

@@ -259,8 +259,9 @@
           
           <c:if test="${empty paging.keyword }">
 	          <div class="column text-left hidden-xs-down">
+	          <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=1&category=${paging.category}">&nbsp;처음<i class="material-icons keyboard_arrow_right"></i></a>
 	          	<c:if test="${paging.prev == true }">
-	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전페이지</a>
+	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전</a>
 	            </c:if>  
 	          </div>
 	          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
@@ -272,8 +273,9 @@
 	          </c:forEach>
 	          <div class="column text-right hidden-xs-down">
 	            <c:if test="${paging.next == true }">
-	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }&category=${paging.category}">다음페이지&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }&category=${paging.category}">다음&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
 	            </c:if>
+	            <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.lastPage }&category=${paging.category}">마지막&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
 	            <c:if test="${!empty member}">
 	              <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
 	            </c:if>

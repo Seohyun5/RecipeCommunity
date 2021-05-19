@@ -4,6 +4,7 @@ public class PagingVO {
 	
 	//startPage : 한 화면에서 시작하는 페이지 넘버
 	//endPage : 한 화면에서 끝나는 페이지 넘버
+	//keyword : 검색어
 	private int nowPage, startPage, endPage, total, lastPage, start, end;
 	private boolean prev, next;
 	private int prevPage, nextPage;

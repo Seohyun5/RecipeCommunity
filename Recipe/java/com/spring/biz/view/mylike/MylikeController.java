@@ -43,15 +43,15 @@ public class MylikeController {
 		if(cnt == 0) {
 			mylikeService.insertLike(like);
 		}else {
-			mylikeService.deleteLike(like);
+			mylikeService.deleteMylike(like);
 		}
-		return "redirect:getRecipe.do";
+		return "redirect:recipeSingle";
 	}
 	
 	@RequestMapping(value = "/deleteMylike.do")
 	public String deleteMylike(MylikeVO lvo) {
 		System.out.println("===Controller의 deleteMylike() 실행===");
-		mylikeService.deleteLike(lvo);
+		mylikeService.deleteMylike(lvo);
 		return "상세레시피화면.jsp";
 	}
 	

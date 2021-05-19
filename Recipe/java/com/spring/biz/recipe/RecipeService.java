@@ -10,6 +10,8 @@ public interface RecipeService {
 	public String idChk(int recipeno); //글 본인확인
 	int updateRecipe(RecipeVO rvo); //레시피수정
 	void deleteRecipe(int recipeno); //레시피삭제
+	void deleteRecipeimg(int recipeno); //레시피이미지삭제
+	void deleteLike(int recipeno); //레시피 삭제 시, 좋아요 목록에서 일제히 삭제
 	List<RecipeVO> getRecipeList(); //레시피 전체목록
 	List<RecipeVO> getMyrecipeList(String id); //나의 레시피 목록
 	RecipeVO getRecipe(int recipeno); //레시피 상세조회
@@ -21,4 +23,5 @@ public interface RecipeService {
 	List<RecipeVO> selectCategory(PagingVO vo);
 	int countSearchTotal(String keyword); //검색 결과 글 수 조회
 	List<RecipeVO> searchRecipe(PagingVO vo);
+	List<RecipeVO> recentRecipe(); //메인화면 최근레시피 4개
 }

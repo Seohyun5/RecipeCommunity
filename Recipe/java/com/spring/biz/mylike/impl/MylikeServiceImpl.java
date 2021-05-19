@@ -24,10 +24,10 @@ public class MylikeServiceImpl implements MylikeService {
 	}
 
 	@Override
-	public void deleteLike(MylikeVO lvo) {
+	public void deleteMylike(MylikeVO lvo) {
 		mylikeDAO.deleteMylike(lvo);
 	}
-
+	
 	@Override
 	public List<MylikeVO> getLikeList(String id) {
 		return mylikeDAO.getMylikeList(id);

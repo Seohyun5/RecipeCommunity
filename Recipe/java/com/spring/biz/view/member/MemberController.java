@@ -77,7 +77,7 @@ public class MemberController {
 		MemberVO vo = memberService.login(logvo);
 		pwEncoder = new BCryptPasswordEncoder();
 		boolean pwMatch = pwEncoder.matches(logvo.getPassword(), vo.getPassword());
-		
+
 		if (vo != null && pwMatch == true) {
 			System.out.println(vo.getNickname() + "님, 로그인 성공");
 			model.addAttribute("member", vo);
@@ -86,6 +86,7 @@ public class MemberController {
 			System.out.println("로그인 실패");
 			return "redirect:main.do";	
 		}
+		
 	}
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)

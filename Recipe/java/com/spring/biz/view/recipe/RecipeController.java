@@ -34,8 +34,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.spring.biz.blog.BlogImageVO;
-import com.spring.biz.blog.BlogVO;
 import com.spring.biz.member.MemberVO;
 import com.spring.biz.paging.PagingVO;
 import com.spring.biz.recipe.RecipeImageVO;
@@ -208,6 +206,9 @@ public class RecipeController {
 //		}else {
 //			return "redirect:recipeSingle";
 //		}
+		System.out.println("레시피no : " + recipeno);
+		recipeService.deleteRecipeimg(recipeno);
+		recipeService.deleteLike(recipeno);
 		recipeService.deleteRecipe(recipeno);
 		return "redirect:/recipePaging.do?category=";
 	}

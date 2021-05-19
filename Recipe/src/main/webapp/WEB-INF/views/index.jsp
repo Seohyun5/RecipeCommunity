@@ -240,14 +240,16 @@
     <section class="container padding-top-3x padding-bottom-3x">
       <h3 class="text-center mb-30">Recent Recipes</h3>
       <div class="row">
-        <div class="col-md-3 col-sm-6 mb-30"><a class="category-card flex-wrap text-center pt-0" href="shop-boxed-ls.html">
-            <div class="category-card-thumb w-100"><img src="img/shop/categories/02.jpg" alt="Category"></div>
+      	<c:forEach var="item" items="${recipeList}">
+        <div class="col-md-3 col-sm-6 mb-30"><a class="category-card flex-wrap text-center pt-0" href="getRecipe.do?recipeno=${item.recipeno }">
+            <div class="category-card-thumb w-100"><img src="<c:url value='/rthumbnails.do?recipeno=${item.recipeno }' />" alt="Product"></div>
             <div class="category-card-info w-100">
-              <h3 class="category-card-title">Lighting</h3>
-              <h4 class="category-card-subtitle">Starting from $95.99</h4>
-            </div></a></div>
+              <h3 class="category-card-title">${item.subject }</h3>
+            </div>
+        </a></div>
+        </c:forEach>
       </div>
-      <div class="text-center"><a class="btn btn-outline-secondary mb-0" href="shop-categories.html">All Recipes</a></div>
+      <div class="text-center"><a class="btn btn-outline-secondary mb-0" href="recipePaging.do?category=">All Recipes</a></div>
     </section>
     <!-- Site Footer-->
     <footer class="site-footer">
