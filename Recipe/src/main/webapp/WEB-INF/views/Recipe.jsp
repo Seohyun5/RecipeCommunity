@@ -259,23 +259,23 @@
           
           <c:if test="${empty paging.keyword }">
 	          <div class="column text-left hidden-xs-down">
-	          <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=1&category=${paging.category}">&nbsp;처음<i class="material-icons keyboard_arrow_right"></i></a>
+	          <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=1&category=${paging.category}&id=">&nbsp;처음<i class="material-icons keyboard_arrow_right"></i></a>
 	          	<c:if test="${paging.prev == true }">
-	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전</a>
+	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}&id="><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전</a>
 	            </c:if>  
 	          </div>
 	          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
 	            <div class="column">
 	              <ul class="pages">
-	                <li><a href="recipePaging.do?nowPage=${i }&category=${paging.category}">${i }</a></li>
+	                <li><a href="recipePaging.do?nowPage=${i }&category=${paging.category}&id=">${i }</a></li>
 	              </ul>
 	            </div>
 	          </c:forEach>
 	          <div class="column text-right hidden-xs-down">
 	            <c:if test="${paging.next == true }">
-	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }&category=${paging.category}">다음&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.nextPage }&category=${paging.category}&id=">다음&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
 	            </c:if>
-	            <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.lastPage }&category=${paging.category}">마지막&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+	            <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.lastPage }&category=${paging.category}&id=">마지막&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
 	            <c:if test="${!empty member}">
 	              <a class="btn btn-outline-secondary btn-sm" href="writeRecipe.do">글쓰기&nbsp;</a>
 	            </c:if>
@@ -316,20 +316,20 @@
             <section class="widget widget-categories pt-0">
               <h3 class="widget-title">카테고리</h3>
               <ul>
-              	<li><a href="recipePaging.do?category=">전체</a></li>
-                <li><a href="recipePaging.do?category=korean">한식</a></li>
-                <li><a href="recipePaging.do?category=western">양식</a></li>
-                <li><a href="recipePaging.do?category=japanese">일식</a></li>
-                <li><a href="recipePaging.do?category=chinese">중식</a></li>
-                <li><a href="recipePaging.do?category=bread">제과제빵</a></li>
-                <li><a href="recipePaging.do?category=drink">음료</a></li>
+              	<li><a href="recipePaging.do?category=&id=">전체</a></li>
+                <li><a href="recipePaging.do?category=korean&id=">한식</a></li>
+                <li><a href="recipePaging.do?category=western&id=">양식</a></li>
+                <li><a href="recipePaging.do?category=japanese&id=">일식</a></li>
+                <li><a href="recipePaging.do?category=chinese&id=">중식</a></li>
+                <li><a href="recipePaging.do?category=bread&id=">제과제빵</a></li>
+                <li><a href="recipePaging.do?category=drink&id=">음료</a></li>
               </ul>
             </section>
             <!-- Widget Sorting-->
             <section class="widget widget-icon-list">
               <h3 class="widget-title">정렬</h3>
               <ul>
-                <li><a href="recipePaging.do?category=${paging.category} "><i class="material-icons sort"></i>최신순</a></li>
+                <li><a href="recipePaging.do?category=${paging.category}&id="><i class="material-icons sort"></i>최신순</a></li>
                 <li><a href="#"><i class="material-icons vertical_align_top"></i>오래된순</a></li>
               </ul>
             </section>

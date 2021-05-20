@@ -21,6 +21,10 @@ public interface RecipeService {
 	int countCategoryTotal(String category); //카테고리별 글 수 조회
 	List<RecipeVO> selectRecipe(PagingVO vo);
 	List<RecipeVO> selectCategory(PagingVO vo);
+	int countMyrecipe(String id);
+	int countMyrecipeC(Map map);
+	List<RecipeVO> selectMyrecipe(PagingVO vo);
+	List<RecipeVO> selectMyrecipeC(PagingVO vo);
 	int countSearchTotal(String keyword); //검색 결과 글 수 조회
 	List<RecipeVO> searchRecipe(PagingVO vo);
 	List<RecipeVO> recentRecipe(); //메인화면 최근레시피 4개

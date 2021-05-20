@@ -102,6 +102,42 @@
 			 	WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
+	<select id="countMyrecipe" parameterType="String" resultType="int">
+		SELECT COUNT(RECIPENO) FROM RECIPE
+		WHERE ID = #{id}
+	</select>
+	
+	<select id="countMyrecipeC" parameterType="Map" resultType="int">
+		SELECT COUNT(RECIPENO) FROM RECIPE
+		WHERE ID = #{id} AND CATEGORY = #{category}
+	</select>
+	
+	<select id="selectMyrecipe" parameterType="paging" resultType="recipe">
+		<!-- SELECT * FROM 
+			(SELECT ROWNUM RN, A.* FROM  
+				(SELECT * FROM RECIPE ORDER BY REGDATE DESC) A)
+				WHERE RN BETWEEN #{start} AND #{end} -->
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			 FROM RECIPE WHERE ID = #{id}
+			 ) RECIPE
+			 	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectMyrecipeC" parameterType="paging" resultType="recipe">
+		<!-- SELECT * FROM 
+			(SELECT ROWNUM RN, A.* FROM  
+				(SELECT * FROM RECIPE ORDER BY REGDATE DESC) A)
+				WHERE RN BETWEEN #{start} AND #{end} -->
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			 FROM RECIPE WHERE ID = #{id} AND CATEGORY = #{category}
+			 ) RECIPE
+			 	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
 	<select id="countSearchTotal" parameterType="String" resultType="int">
 		SELECT COUNT(RECIPENO) FROM RECIPE
 		WHERE SUBJECT LIKE '%' || #{keyword} || '%'

@@ -11,9 +11,11 @@ public class PagingVO {
 	private int cntPerPage = 9;
 	private String category;
 	private String keyword;
+	private String id;
 	
 	public PagingVO() {}
-
+	
+	//Recipe메뉴
 	public PagingVO(int total, int nowPage) {
 		setTotal(total);
 		setNowPage(nowPage);
@@ -21,6 +23,7 @@ public class PagingVO {
 		calcStartEndPage(nowPage);
 	}
 	
+	//Recipe메뉴 : 카테고리별로 보기
 	public PagingVO(int total, int nowPage, String category) {
 		setTotal(total);
 		setNowPage(nowPage);
@@ -29,8 +32,38 @@ public class PagingVO {
 		calcStartEndPage(nowPage);
 	}
 	
+	//MyRecipe메뉴
+	public PagingVO(int total, String id, int nowPage) {
+		setTotal(total);
+		setNowPage(nowPage);
+		setId(id);
+		calcData(total, nowPage, cntPerPage);
+		calcStartEndPage(nowPage);
+	}
+	
+	//MyRecipe메뉴 : 카테고리별로 보기
+	public PagingVO(int total, int nowPage, String id, String category) {
+		setTotal(total);
+		setNowPage(nowPage);
+		setId(id);
+		setCategory(category);
+		calcData(total, nowPage, cntPerPage);
+		calcStartEndPage(nowPage);
+	}
+	
+	//Recipe메뉴 : 검색
 	public PagingVO(String keyword, int total, int nowPage) {
 		setKeyword(keyword);
+		setTotal(total);
+		setNowPage(nowPage);
+		calcData(total, nowPage, cntPerPage);
+		calcStartEndPage(nowPage);
+	}
+	
+	//MyRecipe메뉴 : 검색
+	public PagingVO(String keyword, String id, int total, int nowPage) {
+		setKeyword(keyword);
+		setId(id);
 		setTotal(total);
 		setNowPage(nowPage);
 		calcData(total, nowPage, cntPerPage);
@@ -176,6 +209,14 @@ public class PagingVO {
 	
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

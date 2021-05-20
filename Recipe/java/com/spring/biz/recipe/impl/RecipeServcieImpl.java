@@ -97,6 +97,26 @@ public class RecipeServcieImpl implements RecipeService {
 	public List<RecipeVO> selectCategory(PagingVO vo){
 		return recipeDAO.selectCategory(vo);
 	}
+
+	@Override
+	public int countMyrecipe(String id) {
+		return recipeDAO.countMyrecipe(id);
+	}
+	
+	@Override
+	public int countMyrecipeC(Map map) {
+		return recipeDAO.countMyrecipeC(map);
+	}
+	
+	@Override
+	public List<RecipeVO> selectMyrecipe(PagingVO vo){
+		return recipeDAO.selectMyrecipe(vo);
+	}
+	
+	@Override
+	public List<RecipeVO> selectMyrecipeC(PagingVO vo){
+		return recipeDAO.selectMyrecipeC(vo);
+	}
 	
 	@Override
 	public int countSearchTotal(String keyword) {
@@ -107,6 +127,7 @@ public class RecipeServcieImpl implements RecipeService {
 	public List<RecipeVO> searchRecipe(PagingVO vo){
 		return recipeDAO.searchRecipe(vo);
 	}
+	
 	
 	@Override
 	public List<RecipeVO> recentRecipe(){

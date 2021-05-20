@@ -229,7 +229,7 @@
         <div class="col-lg-10">
           <!-- Post Meta-->
           <div class="blog-post-meta">
-            <div class="column"><span>by&nbsp;</span>${recipe.written }<span class="divider"></span><span>in&nbsp;</span><a href="recipePaging.do?category=${recipe.category }">${recipe.category }</a></div>
+            <div class="column"><span>by&nbsp;</span>${recipe.written }<span class="divider"></span><span>in&nbsp;</span><a href="recipePaging.do?category=${recipe.category }&id=${member.id}">${recipe.category }</a></div>
             <div class="column"><span><i class="material-icons date_range"></i>&nbsp;${recipe.date }</span></div>
           </div>
           <!-- Post Content -->

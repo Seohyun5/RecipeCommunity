@@ -90,6 +90,22 @@ public class RecipeDAO {
 		return mybatis.selectList("recipeDAO.selectCategory", vo);
 	}
 	
+	public int countMyrecipe(String id) {
+		return mybatis.selectOne("recipeDAO.countMyrecipe", id);
+	}
+	
+	public int countMyrecipeC(Map map) {
+		return mybatis.selectOne("recipeDAO.countMyrecipeC", map);
+	}
+	
+	public List<RecipeVO> selectMyrecipe(PagingVO vo){
+		return mybatis.selectList("recipeDAO.selectMyrecipe", vo);
+	}
+	
+	public List<RecipeVO> selectMyrecipeC(PagingVO vo){
+		return mybatis.selectList("recipeDAO.selectMyrecipeC", vo);
+	}
+	
 	public int countSearchTotal(String keyword) {
 		return mybatis.selectOne("recipeDAO.countSearchTotal", keyword);
 	}
