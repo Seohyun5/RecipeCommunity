@@ -1,5 +1,6 @@
 package com.spring.biz.view.mylike;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -115,6 +116,27 @@ public class MylikeController {
 			
 			return "myLike";
 		}
+	}
+	
+	@RequestMapping(value = "/searchMylike.do")
+	public String searchMylike(Model model, HttpSession sess, 
+			@RequestParam(value="keyword", required=false)String keyword, 
+			@RequestParam(value="nowPage", required=false)String nowPage) {
+		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		String id = mvo.getId();
+		HashMap map = new HashMap();
+		map.put("keyword", keyword);
+		map.put("id", id);
+		
+		int total = mylikeService.countSearchLike(map);
+		if(nowPage==null) {nowPage="1";}
+		
+		pagingVO = new PagingVO(keyword, id, total, nowPage);
+		List<RecipeVO> list = mylikeService.selectSearchLike(pagingVO);
+		model.addAttribute("mylikeList", list);
+		model.addAttribute("paging", pagingVO);
+		
+		return "myLike";
 	}
 }
 

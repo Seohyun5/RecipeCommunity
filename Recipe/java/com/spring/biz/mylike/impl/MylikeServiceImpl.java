@@ -56,4 +56,14 @@ public class MylikeServiceImpl implements MylikeService {
 		return mylikeDAO.selectMylikeC(vo);
 	}
 
+	@Override
+	public int countSearchLike(Map map) {
+		return mylikeDAO.countSearchLike(map);
+	}
+
+	@Override
+	public List<RecipeVO> selectSearchLike(PagingVO vo) {
+		return mylikeDAO.selectSearchLike(vo);
+	}
+
 }

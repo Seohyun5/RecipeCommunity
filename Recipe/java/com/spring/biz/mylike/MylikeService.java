@@ -15,4 +15,6 @@ public interface MylikeService {
 	List<RecipeVO> selectMylike(PagingVO vo);
 	int countMylikeC(Map map);
 	List<RecipeVO> selectMylikeC(PagingVO vo);
+	int countSearchLike(Map map);
+	List<RecipeVO> selectSearchLike(PagingVO vo);
 }

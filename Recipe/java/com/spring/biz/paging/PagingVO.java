@@ -91,6 +91,16 @@ public class PagingVO {
 		calcStartEndPage(nowPage1);
 	}
 	
+	public PagingVO(String keyword, String id, int total, String nowPage) {
+		int nowPage1 = Integer.parseInt(nowPage);
+		setKeyword(keyword);
+		setId(id);
+		setTotal(total);
+		setNowPage(nowPage1);
+		calcData(total, nowPage1, cntPerPage);
+		calcStartEndPage(nowPage1);
+	}
+	
 	public void calcData(int total, int nowPage, int cntPerPage) {
 		setLastPage((int)Math.ceil((double)total/(double)cntPerPage));
 		setEnd(nowPage * cntPerPage);

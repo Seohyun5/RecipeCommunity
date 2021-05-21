@@ -51,4 +51,12 @@ public class MylikeDAO {
 	public List<RecipeVO> selectMylikeC(PagingVO vo) {
 		return mybatis.selectList("mylikeDAO.selectMylikeC", vo);
 	}
+	
+	public int countSearchLike(Map map) {
+		return mybatis.selectOne("mylikeDAO.countSearchLike", map);
+	}
+	
+	public List<RecipeVO> selectSearchLike(PagingVO vo) {
+		return mybatis.selectList("mylikeDAO.selectSearchLike", vo);
+	}
 }
