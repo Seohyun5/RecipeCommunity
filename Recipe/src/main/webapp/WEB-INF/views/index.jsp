@@ -128,10 +128,10 @@
         <ul>
           <li class="active"><a href="main.do"><span>Home</span></a></li>
           <li><a href="recipePaging.do?category=&id="><span>Recipe</span></a></li>
-          <li><a href="getMylikeList.do"><span>Mypage</span></a>
+          <li><a href="mylikePaging.do?category="><span>Mypage</span></a>
             <ul class="sub-menu">
               <li><a href="recipePaging.do?category=&id=${member.id }">My Recipe</a></li>
-              <li><a href="getMylikeList.do">My Like</a></li>
+              <li><a href="mylikePaging.do?category=">My Like</a></li>
               <li><a href="enterMyinfo.do">My Info</a></li>
             </ul>
           </li>

@@ -25,4 +25,32 @@
 		WHERE RECIPENO IN (SELECT RECIPENO FROM MYLIKE WHERE ID = #{id}) 
 	</select>
 	
+	<select id="countMylike" parameterType="String" resultType="int">
+		SELECT COUNT(RECIPENO) FROM MYLIKE
+		WHERE ID = #{id}
+	</select>
+	
+	<select id="selectMylike" parameterType="paging" resultType="recipe">
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			FROM RECIPE WHERE RECIPENO IN (SELECT RECIPENO FROM MYLIKE WHERE ID = #{id})
+			) RECIPE
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="countMylikeC" parameterType="Map" resultType="int">
+		SELECT COUNT(RECIPENO) FROM RECIPE 
+		WHERE CATEGORY = #{category} 
+		AND RECIPENO IN (SELECT RECIPENO FROM MYLIKE WHERE ID = #{id}) 
+	</select>
+	
+	<select id="selectMylikeC" parameterType="paging" resultType="recipe">
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			FROM RECIPE WHERE CATEGORY = #{category} AND RECIPENO IN (SELECT RECIPENO FROM MYLIKE WHERE ID = #{id})
+			) RECIPE
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
 </mapper>

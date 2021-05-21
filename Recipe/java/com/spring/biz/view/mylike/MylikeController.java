@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.spring.biz.member.MemberVO;
 import com.spring.biz.mylike.MylikeService;
 import com.spring.biz.mylike.MylikeVO;
+import com.spring.biz.paging.PagingVO;
 import com.spring.biz.recipe.RecipeVO;
 
 @Controller
@@ -21,6 +22,7 @@ public class MylikeController {
 	@Autowired
 	private MylikeService mylikeService;
 	private MylikeVO like;
+	private PagingVO pagingVO;
 	
 	public MylikeController() {
 		System.out.println("===MylikeController() 객체 생성===");
@@ -63,4 +65,66 @@ public class MylikeController {
 		model.addAttribute("likeList", list);
 		return "myLike";
 	}
+	
+	@RequestMapping(value = "/mylikePaging.do")
+	public String mylikePaging(Model model, HttpSession sess, 
+			@RequestParam(value="nowPage", required=false)String nowPage, 
+			@RequestParam(value="category", required=false)String category) {
+		System.out.println("===Controller의 mylikePaging() 실행===");
+		
+		if(category.equals("")) {
+			System.out.println("===mylike 전체보기===");
+			MemberVO mvo = (MemberVO) sess.getAttribute("member");
+			String id = mvo.getId();
+			int total = mylikeService.countMylike(id);
+			if(nowPage==null) {nowPage = "1";}
+			
+			pagingVO = new PagingVO(total, nowPage, id);
+			List<RecipeVO> list = mylikeService.selectMylike(pagingVO);
+			model.addAttribute("mylikeList", list);
+			model.addAttribute("paging", pagingVO);
+			
+			return "myLike";
+		}else {
+			System.out.println("===mylike 카테고리별 보기===");
+			System.out.println("현재 카테고리 : " + category);
+			
+			if(category.equals("korean")) {
+				category = "한식";
+			}else if(category.equals("western")) {
+				category = "양식";
+			}else if(category.equals("japanese")) {
+				category = "일식";
+			}else if(category.equals("chinese")) {
+				category = "중식";
+			}else if(category.equals("bread")) {
+				category = "제과제빵";
+			}else if(category.equals("drink")) {
+				category = "음료";
+			}
+			
+			MemberVO mvo = (MemberVO) sess.getAttribute("member");
+			String id = mvo.getId();
+			int total = mylikeService.countMylike(id);
+			if(nowPage==null) {nowPage = "1";}
+			
+			pagingVO = new PagingVO(total, nowPage, category, id);
+			List<RecipeVO> list = mylikeService.selectMylikeC(pagingVO);
+			model.addAttribute("mylikeList", list);
+			model.addAttribute("paging", pagingVO);
+			
+			return "myLike";
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

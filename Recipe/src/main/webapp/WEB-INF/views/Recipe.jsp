@@ -259,7 +259,7 @@
           
           <c:if test="${empty paging.keyword }">
 	          <div class="column text-left hidden-xs-down">
-	          <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=1&category=${paging.category}&id=">&nbsp;처음<i class="material-icons keyboard_arrow_right"></i></a>
+	          <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=1&category=${paging.category}&id="><i class="material-icons keyboard_arrow_left"></i>&nbsp;처음</a>
 	          	<c:if test="${paging.prev == true }">
 	              <a class="btn btn-outline-secondary btn-sm" href="recipePaging.do?nowPage=${paging.prevPage }&category=${paging.category}&id="><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전</a>
 	            </c:if>  

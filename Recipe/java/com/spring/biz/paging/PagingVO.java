@@ -70,6 +70,26 @@ public class PagingVO {
 		calcStartEndPage(nowPage);
 	}
 	
+	//MyLike메뉴
+	public PagingVO(int total, String nowPage, String id) {
+		int nowPage1 = Integer.parseInt(nowPage);
+		setTotal(total);
+		setNowPage(nowPage1);
+		setId(id);
+		calcData(total, nowPage1, cntPerPage);
+		calcStartEndPage(nowPage1);
+	}
+	
+	//MyLike메뉴 : 카테고리별로 보기
+	public PagingVO(int total, String nowPage, String category, String id) {
+		int nowPage1 = Integer.parseInt(nowPage);
+		setTotal(total);
+		setNowPage(nowPage1);
+		setCategory(category);
+		setId(id);
+		calcData(total, nowPage1, cntPerPage);
+		calcStartEndPage(nowPage1);
+	}
 	
 	public void calcData(int total, int nowPage, int cntPerPage) {
 		setLastPage((int)Math.ceil((double)total/(double)cntPerPage));

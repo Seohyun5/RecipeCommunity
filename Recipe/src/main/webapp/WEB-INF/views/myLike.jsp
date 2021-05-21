@@ -98,16 +98,16 @@
           <!-- Products Grid-->
           <div class="row mb-2">
             <!-- Item-->
-            <c:forEach var="item" items="${likeList}">
+            <c:forEach var="item" items="${mylikeList}">
             <div class="col-lg-4 col-sm-6">
               <div class="product-card mb-30">
-                <div class="product-card-thumb"> <a class="product-card-link" href="getRecipe.do?recipeno=${item.recipeno }"></a><img src="img/shop/th04.jpg" alt="Product">
+                <div class="product-card-thumb"> <a class="product-card-link" href="getRecipe.do?recipeno=${item.recipeno }"></a><img src="<c:url value='/rthumbnails.do?recipeno=${item.recipeno }' />" alt="Product">
                   <div class="product-card-buttons">
                     <button class="btn btn-white btn-sm btn-wishlist" data-toggle="tooltip" title="Wishlist"><i class="material-icons favorite_border"></i></button>
                   </div>
                 </div>
                 <div class="product-card-details">
-                  <h3 class="product-card-title"><a href="getRecipe.do?recipeno=${item.recipeno }">${item.subject }</a></h3>
+                  <h3 class="product-card-title"><a href="getRecipe.do?recipeno=${item.recipeno }&category=${paging.category}">${item.subject }</a></h3>
                 </div>
               </div>
             </div>
@@ -115,17 +115,25 @@
           </div>
           <!-- Pagination-->
           <nav class="pagination">
-            <div class="column">
-              <ul class="pages">
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li>...</li>
-                <li><a href="#">12</a></li>
-              </ul>
-            </div>
-            <div class="column text-right hidden-xs-down"><a class="btn btn-outline-secondary btn-sm" href="#">Next&nbsp;<i class="material-icons keyboard_arrow_right"></i></a></div>
+            <div class="column text-left hidden-xs-down">
+	          <a class="btn btn-outline-secondary btn-sm" href="mylikePaging.do?nowPage=1&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;처음</a>
+	          	<c:if test="${paging.prev == true }">
+	              <a class="btn btn-outline-secondary btn-sm" href="mylikePaging.do?nowPage=${paging.prevPage }&category=${paging.category}"><i class="material-icons keyboard_arrow_left"></i>&nbsp;이전</a>
+	            </c:if>  
+	          </div>
+	          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
+	            <div class="column">
+	              <ul class="pages">
+	                <li><a href="mylikePaging.do?nowPage=${i }&category=${paging.category}">${i }</a></li>
+	              </ul>
+	            </div>
+	          </c:forEach>
+	          <div class="column text-right hidden-xs-down">
+	            <c:if test="${paging.next == true }">
+	              <a class="btn btn-outline-secondary btn-sm" href="mylikePaging.do?nowPage=${paging.nextPage }&category=${paging.category}">다음&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+	            </c:if>
+	            <a class="btn btn-outline-secondary btn-sm" href="mylikePaging.do?nowPage=${paging.lastPage }&category=${paging.category}">마지막&nbsp;<i class="material-icons keyboard_arrow_right"></i></a>
+	          </div>
           </nav>
         </div>
         <!-- Sidebar -->
@@ -136,12 +144,13 @@
             <section class="widget widget-categories pt-0">
               <h3 class="widget-title">카테고리</h3>
               <ul>
-                <li><a href="#">한식</a></li>
-                <li><a href="#">양식</a></li>
-                <li><a href="#">일식</a></li>
-                <li><a href="#">중식</a></li>
-                <li><a href="#">제과제빵</a></li>
-                <li><a href="#">음료</a></li>
+              	<li><a href="mylikePaging.do?category=">전체</a></li>
+                <li><a href="mylikePaging.do?category=korean">한식</a></li>
+                <li><a href="mylikePaging.do?category=western">양식</a></li>
+                <li><a href="mylikePaging.do?category=japanese">일식</a></li>
+                <li><a href="mylikePaging.do?category=chinese">중식</a></li>
+                <li><a href="mylikePaging.do?category=bread">제과제빵</a></li>
+                <li><a href="mylikePaging.do?category=drink">음료</a></li>
               </ul>
             </section>
             <!-- Widget Sorting-->
