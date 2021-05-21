@@ -213,7 +213,8 @@ public class RecipeController {
 		recipeService.deleteRecipe(recipeno);
 		return "redirect:/recipePaging.do?category=";
 	}
-	
+
+	/* ==========페이징 처리 전, Recipe 전체목록==========
 	@RequestMapping(value = "/getRecipeList.do")
 	public String getRecipeList(Model model) {
 		System.out.println("===Controller의 getRecipeList() 실행===");
@@ -222,7 +223,9 @@ public class RecipeController {
 		model.addAttribute("recipeList", list);
 		return "Recipe";
 	}
+	*/
 	
+	/* ==========페이징 처리 전, myRecipe 전체목록==========
 	@RequestMapping(value = "/getMyrecipeList.do")
 	public String getMyrecipeList(Model model, HttpSession sess) {
 		System.out.println("===Controller의 getMyrecipeList() 실행===");
@@ -232,6 +235,7 @@ public class RecipeController {
 		model.addAttribute("myrecipeList", list);
 		return "myRecipe";
 	}
+	*/
 	
 	@RequestMapping(value = "/getRecipe.do", method=RequestMethod.GET)
 	public String getRecipe(@RequestParam int recipeno, 
@@ -418,7 +422,8 @@ public class RecipeController {
 	@RequestMapping(value = "/searchRecipe.do")
 	public String searchRecipe(Model model, 
 			@RequestParam(value="keyword", required=false)String keyword, 
-			@RequestParam(value="nowPage", required=false)String nowPage) {
+			@RequestParam(value="nowPage", required=false)String nowPage, 
+			@RequestParam(value="id", required=false)String id) {
 		int total = recipeService.countSearchTotal(keyword);
 		if(nowPage==null) {nowPage="1";}
 		pagingVO = new PagingVO(keyword, total, Integer.parseInt(nowPage));
@@ -427,6 +432,26 @@ public class RecipeController {
 		model.addAttribute("recipeList", list);
 		model.addAttribute("paging", pagingVO);
 		return "Recipe";
+	}
+	
+	@RequestMapping(value = "/searchMyrecipe.do")
+	public String searchMyrecipe(Model model, HttpSession sess, 
+			@RequestParam(value="keyword", required=false)String keyword, 
+			@RequestParam(value="nowPage", required=false)String nowPage) {
+		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		String id = mvo.getId();
+		HashMap map = new HashMap();
+		map.put("keyword", keyword);
+		map.put("id", id);
+		
+		int total = recipeService.countSearchMyR(map);
+		if(nowPage==null) {nowPage="1";}
+		pagingVO = new PagingVO(keyword, id, total, Integer.parseInt(nowPage));
+		List<RecipeVO> list = recipeService.searchMyrecipe(pagingVO);
+		
+		model.addAttribute("recipeList", list);
+		model.addAttribute("paging", pagingVO);
+		return "myRecipe";
 	}
 	
 }

@@ -53,15 +53,15 @@ public class RecipeServcieImpl implements RecipeService {
 		recipeDAO.deleteLike(recipeno);
 	}
 
-	@Override
-	public List<RecipeVO> getRecipeList() {
-		return recipeDAO.getRecipeList();
-	}
-
-	@Override
-	public List<RecipeVO> getMyrecipeList(String id) {
-		return recipeDAO.getMyrecipeList(id);
-	}
+//	@Override
+//	public List<RecipeVO> getRecipeList() {
+//		return recipeDAO.getRecipeList();
+//	}
+//
+//	@Override
+//	public List<RecipeVO> getMyrecipeList(String id) {
+//		return recipeDAO.getMyrecipeList(id);
+//	}
 	
 	@Override
 	public RecipeVO getRecipe(int recipeno) {
@@ -128,6 +128,15 @@ public class RecipeServcieImpl implements RecipeService {
 		return recipeDAO.searchRecipe(vo);
 	}
 	
+	@Override
+	public int countSearchMyR(Map map) {
+		return recipeDAO.countSearchMyR(map);
+	}
+	
+	@Override
+	public List<RecipeVO> searchMyrecipe(PagingVO vo){
+		return recipeDAO.searchMyrecipe(vo);
+	}
 	
 	@Override
 	public List<RecipeVO> recentRecipe(){

@@ -152,6 +152,20 @@
 			 	WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
+	<select id="countSearchMyR" parameterType="Map" resultType="int">
+		SELECT COUNT(RECIPENO) FROM RECIPE
+		WHERE SUBJECT LIKE '%' || #{keyword} || '%' AND ID = #{id}
+	</select>
+	
+	<select id="searchMyrecipe" parameterType="paging" resultType="recipe">
+		SELECT * FROM
+			(SELECT RECIPE.*, 
+			 ROW_NUMBER() OVER(ORDER BY RECIPENO DESC) AS RNUM
+			 FROM RECIPE WHERE SUBJECT LIKE '%' || #{keyword} || '%' AND ID = #{id}
+			 ) RECIPE
+			 	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
 	<select id="recentRecipe" resultType="recipe">
 		SELECT * FROM
 			(SELECT RECIPE.*, 

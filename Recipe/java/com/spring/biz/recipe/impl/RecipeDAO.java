@@ -114,6 +114,14 @@ public class RecipeDAO {
 		return mybatis.selectList("recipeDAO.searchRecipe", vo);
 	}
 	
+	public int countSearchMyR(Map map) {
+		return mybatis.selectOne("recipeDAO.countSearchMyR", map);
+	}
+	
+	public List<RecipeVO> searchMyrecipe(PagingVO vo){
+		return mybatis.selectList("recipeDAO.searchMyrecipe", vo);
+	}
+	
 	public List<RecipeVO> recentRecipe(){
 		return mybatis.selectList("recipeDAO.recentRecipe");
 	}

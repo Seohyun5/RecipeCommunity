@@ -231,7 +231,7 @@
           <!-- Search-->
           <div class="d-flex flex-wrap-reverse flex-md-nowrap justify-content-center justify-content-sm-between align-items-center mb-30">
             <div class="pt-3 pb-1 pb-sm-3 text-sm text-center text-sm-left"></div>
-            <form action="searchRecipe.do" class="input-group shop-search-box" method="get"><span class="input-group-btn">
+            <form action="searchRecipe.do?id=" class="input-group shop-search-box" method="get"><span class="input-group-btn">
                 <button type="submit"><i class="material-icons search"></i></button></span>
               <input class="form-control" type="search" placeholder="레시피명을 입력한 후, 엔터를 누르세요" id="keyword" name="keyword">
             </form>
