@@ -48,7 +48,7 @@ public class MylikeController {
 		}else {
 			mylikeService.deleteMylike(like);
 		}
-		return "redirect:recipeSingle";
+		return "redirect:getRecipe.do?recipeno="+recipeno;
 	}
 	
 	@RequestMapping(value = "/deleteMylike.do")
@@ -85,7 +85,7 @@ public class MylikeController {
 			model.addAttribute("mylikeList", list);
 			model.addAttribute("paging", pagingVO);
 			
-			return "myLike";
+			return "mypage/myLike";
 		}else {
 			System.out.println("===mylike 카테고리별 보기===");
 			System.out.println("현재 카테고리 : " + category);
@@ -114,7 +114,7 @@ public class MylikeController {
 			model.addAttribute("mylikeList", list);
 			model.addAttribute("paging", pagingVO);
 			
-			return "myLike";
+			return "mypage/myLike";
 		}
 	}
 	
@@ -136,7 +136,7 @@ public class MylikeController {
 		model.addAttribute("mylikeList", list);
 		model.addAttribute("paging", pagingVO);
 		
-		return "myLike";
+		return "mypage/myLike";
 	}
 }
 

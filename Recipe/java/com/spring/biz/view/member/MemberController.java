@@ -97,7 +97,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/enterMyinfo.do")
 	public String updateMyinfo() {
-		return "checkPw";
+		return "mypage/checkPw";
 	}
 	
 	@RequestMapping(value = "/checkPw.do")
@@ -110,7 +110,7 @@ public class MemberController {
 		boolean pwMatch = pwEncoder.matches(password, vo.getPassword());
 		
 		if(pwMatch == true) {
-			return "updateMyinfo";
+			return "mypage/updateMyinfo";
 		}else {
 			return "redirect:checkPw.do";
 		}
@@ -130,7 +130,7 @@ public class MemberController {
 		//ex) 닉네임을 A -> B로 변경했는데도 사이드메뉴를 보면 여전히 A로 나온다. 로그인할 때 저장된 A라는 닉네임이 그대로 남아있는 것.
 		mvo = memberService.getMember(vo.getId());
 		model.addAttribute("member", mvo);
-		return "updateMyinfo";
+		return "mypage/updateMyinfo";
 	}
 
 	@RequestMapping(value = "/updatePw.do")
@@ -146,7 +146,7 @@ public class MemberController {
 		map.put("id", id);
 		map.put("password", pw);
 		memberService.updatePw(map);
-		return "updateMyinfo";
+		return "mypage/updateMyinfo";
 	}
 	
 }

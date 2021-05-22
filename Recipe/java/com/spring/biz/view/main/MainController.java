@@ -24,6 +24,6 @@ public class MainController {
 	public String main(Model model) {
 		List<RecipeVO> list = recipeService.recentRecipe();
 		model.addAttribute("recipeList", list);
-		return "index";
+		return "main/index";
 	}
 }

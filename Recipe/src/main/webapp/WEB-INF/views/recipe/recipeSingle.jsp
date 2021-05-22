@@ -252,9 +252,12 @@
 	      </div>
           
           <!-- Post Navigation-->
-          <div class="entry-navigation">
-            <div class="column"><a class="btn btn-outline-secondary view-all" href="recipePaging.do?category=${category }" data-toggle="tooltip" data-placement="top" title="목록"><i class="material-icons menu"></i></a></div>
-          </div>
+          <c:if test="${empty paging.id }">
+	          <div class="entry-navigation">
+	            <div class="column"><a class="btn btn-outline-secondary view-all" href="recipePaging.do?category=${paging.category }&nowPage=${paging.nowPage}&id=" data-toggle="tooltip" data-placement="top" title="목록"><i class="material-icons menu"></i></a></div>
+	          </div>
+          </c:if>
+          <c:if test=""></c:if>
           <!-- Comments-->
           <section class="padding-top-3x" id="comments">
             <h3 class="padding-bottom-1x">댓글</h3>

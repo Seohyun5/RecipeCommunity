@@ -156,7 +156,7 @@ public class RecipeController {
 	
 	@RequestMapping(value = "/writeRecipe.do")
 	public String writeRecipe() {
-		return "recipeWrite";
+		return "recipe/recipeWrite";
 	}
 	
 	@RequestMapping(value = "/updateRjsp.do", method=RequestMethod.GET)
@@ -179,7 +179,7 @@ public class RecipeController {
 		
 		RecipeVO rvo = recipeService.getRecipe(recipeno);
 		model.addAttribute("recipe", rvo);
-		return "recipeUpdate";
+		return "recipe/recipeUpdate";
 	}
 	
 	@RequestMapping(value = "/updateRecipe.do")
@@ -189,7 +189,7 @@ public class RecipeController {
 		int result = recipeService.updateRecipe(rvo);
 		RecipeVO recipe = recipeService.getRecipe(rvo.getRecipeno());
 		model.addAttribute("recipe", recipe);
-		return "recipeSingle";
+		return "recipe/recipeSingle";
 	}
 	
 	@RequestMapping(value = "/deleteRecipe.do", method=RequestMethod.GET)
@@ -247,7 +247,7 @@ public class RecipeController {
 		model.addAttribute("recipe", rvo);
 		List<RecipeImageVO> rimageFileList = recipeService.getRimageList(recipeno);
 		model.addAttribute("rimageList", rimageFileList);
-		return "recipeSingle";
+		return "recipe/recipeSingle";
 	}
 	
 	@RequestMapping(value = "/rdownload.do", method = RequestMethod.GET)
@@ -328,7 +328,9 @@ public class RecipeController {
 				System.out.println("===Recipe메뉴 전체보기===");
 				int total = recipeService.countTotal();
 				if(nowPage==null) {nowPage = "1";}
-				
+//				if(Character.isDigit(nowPage)==true) {
+//				String nowPage1 = Integer.toString(nowPage);
+//				}
 				pagingVO = new PagingVO(total, Integer.parseInt(nowPage), category);
 				List<RecipeVO> list = recipeService.selectRecipe(pagingVO);
 				model.addAttribute("recipeList", list);
@@ -339,7 +341,7 @@ public class RecipeController {
 				System.out.println("start : " + pagingVO.getStart() + ", end : " + pagingVO.getEnd());
 				System.out.println("prev : " + pagingVO.getPrev() + ", prevPage : " + pagingVO.getPrevPage());
 				System.out.println("next : " + pagingVO.getNext() + ", nextPage : " + pagingVO.getNextPage());
-				return "Recipe";
+				return "recipe/Recipe";
 			}else {
 				System.out.println("===Recipe메뉴 카테고리별 보기===");
 				System.out.println("현재 카테고리 : " + category);
@@ -365,7 +367,7 @@ public class RecipeController {
 				
 				model.addAttribute("recipeList", list);
 				model.addAttribute("paging", pagingVO);
-				return "Recipe";
+				return "recipe/Recipe";
 			}
 		//id 있는 경우 : MyRecipe메뉴
 		}else {
@@ -385,7 +387,7 @@ public class RecipeController {
 				System.out.println("prev : " + pagingVO.getPrev() + ", prevPage : " + pagingVO.getPrevPage());
 				System.out.println("next : " + pagingVO.getNext() + ", nextPage : " + pagingVO.getNextPage());
 				
-				return "myRecipe";
+				return "mypage/myRecipe";
 			}else {
 				System.out.println("===MyRecipe메뉴 카테고리별 보기===");
 				System.out.println("현재 카테고리 : " + category);
@@ -413,7 +415,7 @@ public class RecipeController {
 				
 				model.addAttribute("recipeList", list);
 				model.addAttribute("paging", pagingVO);
-				return "myRecipe";
+				return "mypage/myRecipe";
 			}
 		}
 		
@@ -431,7 +433,7 @@ public class RecipeController {
 		
 		model.addAttribute("recipeList", list);
 		model.addAttribute("paging", pagingVO);
-		return "Recipe";
+		return "recipe/Recipe";
 	}
 	
 	@RequestMapping(value = "/searchMyrecipe.do")
@@ -451,7 +453,7 @@ public class RecipeController {
 		
 		model.addAttribute("recipeList", list);
 		model.addAttribute("paging", pagingVO);
-		return "myRecipe";
+		return "mypage/myRecipe";
 	}
 	
 }
