@@ -33,6 +33,7 @@
 	    	$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 	    	cnt++;
 	    }
+	   
     </script>
   </head>
   <!-- Body-->
@@ -114,8 +115,8 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="checkout-ln">첨부파일</label>
-              <div class="custom-file" id="d_file" onClick="fn_addFile()">
-                <input name = "main_image" class="custom-file-input" type="button" required>
+              <div class="custom-file" id="d_file">
+                <input name = "main_image" class="custom-file-input" type="button" onClick="fn_addFile()" required>
                 <label class="custom-file-label" for="d_file"></label>
               </div>
           </div>

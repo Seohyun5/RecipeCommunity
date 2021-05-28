@@ -258,49 +258,9 @@
 	          </div>
           </c:if>
           <c:if test=""></c:if>
-          <!-- Comments-->
-          <section class="padding-top-3x" id="comments">
-            <h3 class="padding-bottom-1x">댓글</h3>
-            <!-- Comment-->
-            <div class="comment">
-              <div class="comment-author-ava"><img src="img/reviews/01.jpg" alt="Comment author"></div>
-              <div class="comment-body">
-                <div class="comment-header">
-                  <h4 class="comment-title">Francis Burton</h4>
-                </div>
-                <p class="comment-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-                <div class="comment-footer">
-                  <div class="column"><span class="comment-meta">2 days ago</span></div>
-                  <div class="column"><a class="reply-link" href="#"><i class="material-icons reply"></i>Reply</a></div>
-                </div>
-                <!-- Comment reply-->
-                <div class="comment comment-reply">
-                  <div class="comment-author-ava"><img src="img/reviews/02.jpg" alt="Comment author"></div>
-                  <div class="comment-body">
-                    <div class="comment-header">
-                      <h4 class="comment-title">Maggie Scott</h4>
-                    </div>
-                    <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <div class="comment-footer"><span class="comment-meta">1 day ago</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Comment-->
-            <div class="comment">
-              <div class="comment-author-ava"><img src="img/reviews/03.jpg" alt="Comment author"></div>
-              <div class="comment-body">
-                <div class="comment-header">
-                  <h4 class="comment-title">Jacob Hammond</h4>
-                </div>
-                <p class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                <div class="comment-footer">
-                  <div class="column"><span class="comment-meta">5 days ago</span></div>
-                  <div class="column"><a class="reply-link" href="#"><i class="material-icons reply"></i>Reply</a></div>
-                </div>
-              </div>
-            </div>
-          </section>
+           
+          
+          
           <!-- Comment Form-->
           <form class="row" method="post">
             <div class="col-12">

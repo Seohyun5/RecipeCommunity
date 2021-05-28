@@ -178,6 +178,8 @@ public class RecipeController {
 //		}
 		
 		RecipeVO rvo = recipeService.getRecipe(recipeno);
+		System.out.println("글 제목 : " + rvo.getSubject());
+		System.out.println("글 내용 : " + rvo.getContent());
 		model.addAttribute("recipe", rvo);
 		return "recipe/recipeUpdate";
 	}

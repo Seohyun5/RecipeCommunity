@@ -82,19 +82,19 @@
         <div class="col-sm-12">
           <div class="form-group">
             <label for="comment-name">요리명</label>
-            <input class="form-control" type="text" id="recipetitle" placeholder=${recipe.subject } name="subject" required>
+            <input class="form-control" type="text" id="recipetitle" value=${recipe.subject } name="subject" required>
           </div>
         </div>
         <div class="col-12">
           <div class="form-group">
             <label for="comment-text">내용</label>
-            <textarea class="form-control" rows="17" id="recipecontent" placeholder=${recipe.content } name="content" required></textarea>
+            <textarea class="form-control" rows="17" id="recipecontent" name="content" required>${recipe.content }</textarea>
           </div>
         </div>
         <div class="col-sm-12">
           <div class="form-group">
             <label for="comment-name">첨부파일</label>
-            <input class="form-control" type="text" id="recipetitle" placeholder="제목을 입력하세요" required>
+            <input class="form-control" type="text" id="recipefile" required>
           </div>
         </div>
         <div class="col-12 text-right">
