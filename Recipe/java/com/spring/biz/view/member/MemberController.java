@@ -149,4 +149,23 @@ public class MemberController {
 		return "mypage/updateMyinfo";
 	}
 	
+	@RequestMapping(value = "/deleteMember.do")
+	public String deleteMember(String password, HttpSession sess) {
+		MemberVO mvo = (MemberVO) sess.getAttribute("member");
+		String id = mvo.getId();
+		logvo = new LoginVO();
+		logvo.setId(id);
+		mvo = memberService.login(logvo);
+		pwEncoder = new BCryptPasswordEncoder();
+		boolean pwMatch = pwEncoder.matches(password, mvo.getPassword());
+		
+		if(pwMatch == true) {
+			memberService.deleteMember(id);
+		}else {
+			return "redirect:checkPw.do";
+		}
+		
+		return "main.do";
+	}
+	
 }

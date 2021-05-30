@@ -31,7 +31,9 @@ public class MemberDAO {
 	}
 	
 	public void deleteMember(String id) {
+		mybatis.delete("mylikeDAO.deleteMember", id);
 		mybatis.delete("memberDAO.deleteMember", id);
+		mybatis.insert("memberDAO.insertExMember", id);
 	}
 
 	public MemberVO login(LoginVO logvo) {

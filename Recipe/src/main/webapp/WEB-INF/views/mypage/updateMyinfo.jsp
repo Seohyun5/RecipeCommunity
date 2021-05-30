@@ -190,29 +190,23 @@
             <div class="col-12">
               <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <button class="btn btn-primary margin-right-none" type="submit">비밀번호 수정</button>
-                <!-- <script type="text/javascript">
-                	function pwCheck(){
-                		var pw = document.getElementById("password").value;
-                		var pw2 = document.getElementById("password1").value;
-                		if(pw != pw2){
-                			alert("비밀번호가 다릅니다.");
-                			pw.focus();
-                			return false;
-                		}else if(pw == pw2){
-                			if((pw.length < 4 || pw2.length < 4) || (pw == "" || pw2 == "")){
-                				alert("비밀번호는 최소 4자 이상 입력해주세요.");
-                				pw.focus();
-                				return false;
-                			}else{
-                				document.updatePw.action="updatePw.do"
-                				document.updatePw.method="post"
-                				document.updatePw.submit();
-                				alert("비밀번호가 변경되었습니다.")
-                			}
-                		}
-                	}
-                </script> -->
               </div>
+              <hr class="mt-2 mb-3">
+            </div>
+          </form>
+       	  <form id="deleteMember" class="row" action="deleteMember.do" method="post">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="account-pass">비밀번호 확인</label>
+                <input class="form-control" type="password" id="password" name="password" required>
+              </div>
+            </div>
+            <div class="col-12">
+              <b>탈퇴 시, 작성한 글은 지워지지 않습니다.<br>또한, 해당 아이디로 재가입이 불가능합니다.</b>
+              <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <button class="btn btn-primary margin-right-none" type="submit">회원탈퇴</button>
+              </div>
+              <hr class="mt-2 mb-3">
             </div>
           </form>
         </div>

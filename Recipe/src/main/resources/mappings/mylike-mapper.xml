@@ -71,4 +71,8 @@
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM MYLIKE WHERE ID = #{id}
+	</delete>
+	
 </mapper>

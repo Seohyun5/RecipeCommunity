@@ -20,8 +20,12 @@
 	</update>
 	
 	<delete id="deleteMember" parameterType="String">
-		DELETE * FROM MEMBER WHERE ID = #{id}
+		DELETE FROM MEMBER WHERE ID = #{id}
 	</delete>
+	
+	<insert id="insertExMember" parameterType="String">
+		INSERT INTO EXMEMBER VALUES (#{id})
+	</insert>
 	
 	<!-- 원래는 아이디와 비밀번호가 둘 다 일치하도록 조건문을 달았는데, 암호화 기능을 넣고 나서는 아이디만 일치하도록 조건문을 바꿈 -->
 	<select id="login" parameterType="logvo" resultType="member">
