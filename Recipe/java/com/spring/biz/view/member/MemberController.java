@@ -37,7 +37,9 @@ public class MemberController {
 		System.out.println("idCheck()");
 		String signup_id = request.getParameter("id");
 		System.out.println(signup_id);
-		return memberService.checkId(signup_id);
+		int result1 = memberService.checkId(signup_id);
+		int result2 = memberService.checkId2(signup_id);
+		return result1+result2;
 	}
 	
 	@RequestMapping(value = "/nicknameCheck.do", method = RequestMethod.POST)
@@ -150,7 +152,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/deleteMember.do")
-	public String deleteMember(String password, HttpSession sess) {
+	public String deleteMember(String password, HttpSession sess, SessionStatus status) {
 		MemberVO mvo = (MemberVO) sess.getAttribute("member");
 		String id = mvo.getId();
 		logvo = new LoginVO();
@@ -161,11 +163,12 @@ public class MemberController {
 		
 		if(pwMatch == true) {
 			memberService.deleteMember(id);
+			status.setComplete();
+			return "redirect:main.do";
 		}else {
 			return "redirect:checkPw.do";
 		}
 		
-		return "main.do";
 	}
 	
 }

@@ -36,6 +36,10 @@
 		SELECT COUNT(ID) FROM MEMBER WHERE ID = #{id}
 	</select>
 	
+	<select id="checkId2" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM EXMEMBER WHERE ID = #{id}
+	</select>
+	
 	<select id="checkNickname" parameterType="String" resultType="int">
 		SELECT COUNT(ID) FROM MEMBER WHERE NICKNAME = #{nickname}
 	</select>

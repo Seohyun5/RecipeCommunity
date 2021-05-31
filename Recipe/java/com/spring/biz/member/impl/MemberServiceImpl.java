@@ -47,6 +47,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public int checkId2(String id) {
+		return memberDAO.checkId2(id);
+	}
+	
+	@Override
 	public int checkPw(LoginVO logvo) {
 		return memberDAO.checkPw(logvo);
 	}

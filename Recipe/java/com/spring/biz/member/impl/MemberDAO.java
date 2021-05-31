@@ -44,6 +44,10 @@ public class MemberDAO {
 		return mybatis.selectOne("memberDAO.checkId", id);
 	}
 	
+	public int checkId2(String id) {
+		return mybatis.selectOne("memberDAO.checkId2", id);
+	}
+	
 	public int checkPw(LoginVO logvo) {
 		return mybatis.selectOne("memberDAO.checkPw", logvo);
 	}
