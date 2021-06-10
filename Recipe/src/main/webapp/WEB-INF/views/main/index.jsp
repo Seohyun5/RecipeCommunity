@@ -249,7 +249,7 @@
         </a></div>
         </c:forEach>
       </div>
-      <div class="text-center"><a class="btn btn-outline-secondary mb-0" href="recipePaging.do?category=">All Recipes</a></div>
+      <div class="text-center"><a class="btn btn-outline-secondary mb-0" href="recipePaging.do?category=&id=">All Recipes</a></div>
     </section>
     <!-- Site Footer-->
     <footer class="site-footer">

@@ -36,15 +36,13 @@
       <!-- Main Navigation-->
       <nav class="site-menu">
         <ul>
-          <li><a href="index.html"><span>Home</span></a></li>
-          <li><a href="shop-boxed-ls.html"><span>Recipe</span></a></li>
-          <li><a href="blog.html"><span>Blog</span></a></li>
-          <li class="active"><a href="account-orders.html"><span>MYPAGE</span></a>
+          <li><a href="main.do"><span>Home</span></a></li>
+          <li><a href="recipePaging.do?category=&id="><span>Recipe</span></a></li>
+          <li class="active"><a href="mylikePaging.do?category="><span>Mypage</span></a>
             <ul class="sub-menu">
-                <li><a href="account-orders.html">My Recipe</a></li>
-                <li><a href="account-wishlist.html">My Blog</a></li>
-                <li><a href="account-wishlist.html">Like</a></li>
-                <li><a href="account-profile.html">My Info</a></li>
+              <li><a href="recipePaging.do?category=&id=${member.id }">My Recipe</a></li>
+              <li><a href="mylikePaging.do?category=">My Like</a></li>
+              <li><a href="enterMyinfo.do">My Info</a></li>
             </ul>
           </li>
         </ul>
@@ -104,14 +102,9 @@
       <div class="container">
         <h1>My Info</h1>
         <ul class="breadcrumbs">
-          <li><a href="index.html">My Recipe</a>
-          </li>
+          <li><a href="recipePaging.do?category=&id=${member.id }">My Recipe</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">My Blog</a>
-          </li>
-          <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="account-orders.html">My Like</a>
-          </li>
+          <li><a href="mylikePaging.do?category=">My Like</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
           <li>My Info</li>
         </ul>

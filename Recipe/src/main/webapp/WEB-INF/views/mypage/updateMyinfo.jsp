@@ -98,11 +98,11 @@
       <nav class="site-menu">
         <ul>
           <li><a href="main.do"><span>Home</span></a></li>
-          <li><a href="recipePaging.do?category="><span>Recipe</span></a></li>
-          <li class="active"><a href="getMylikeList.do"><span>Mypage</span></a>
+          <li><a href="recipePaging.do?category=&id="><span>Recipe</span></a></li>
+          <li class="active"><a href="mylikePaging.do?category="><span>Mypage</span></a>
             <ul class="sub-menu">
-              <li><a href="getMyrecipeList.do">My Recipe</a></li>
-              <li><a href="getMylikeList.do">My Like</a></li>
+              <li><a href="recipePaging.do?category=&id=${member.id }">My Recipe</a></li>
+              <li><a href="mylikePaging.do?category=">My Like</a></li>
               <li><a href="enterMyinfo.do">My Info</a></li>
             </ul>
           </li>
@@ -131,9 +131,9 @@
       <div class="container">
         <h1>My Info</h1>
         <ul class="breadcrumbs">
-          <li><a href="getMyrecipeList.do">My Recipe</a></li>
+          <li><a href="recipePaging.do?category=&id=${member.id }">My Recipe</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
-          <li><a href="getMylikeList.do">My Like</a></li>
+          <li><a href="mylikePaging.do?category=">My Like</a></li>
           <li class="separator">&nbsp;/&nbsp;</li>
           <li>My Info</li>
         </ul>
